@@ -11,25 +11,27 @@ class Window(QMainWindow):
 
         #Mindestgröße / Titel definieren
         self.setCentralWidget(QWidget(self))
-        self.setMinimumSize(QSize(400, 500))
-        self.setMaximumSize(QSize(400, 500))
-        self.setWindowTitle('Anmeldeformular')
+        self.setMinimumSize(QSize(500, 600))
+        self.setMaximumSize(QSize(500, 600))
+        self.setWindowTitle('Regestrierungsformular')
 
-        #Fenster im Fenster für das grdlayout erstellen und definieren
+
+
+        #Fenster im Fenster für das gridlayout erstellen und definieren
 
         wid = QWidget(self)
         grid = QGridLayout(wid)
         wid.setLayout(grid)
-        wid.setMinimumSize(QSize(300, 200))
-        wid.setMaximumSize(QSize(300, 200))
-        wid.move(50, 260)
+        wid.setMinimumSize(QSize(380, 200))
+        wid.setMaximumSize(QSize(380, 200))
+        wid.move(round((500/2)-(380/2)), 350)
         txts = []
 
         row = 0
 
         #Dropdownmenu erstellen und im grid plazieren
         cbb = QComboBox(self)
-        cbb.addItems(['Profilfach wählen', 'Informatik', 'Geschtaltung- und Medientechnik', 'Mechatronik'])
+        cbb.addItems(['Profilfach wählen', 'Informatik', 'Gestaltung- und Medientechnik', 'Mechatronik'])
         cbb.resize(cbb.sizeHint())
         grid.addWidget(cbb, row, 2, Qt.AlignmentFlag.AlignLeft)
         txts.append(cbb)
