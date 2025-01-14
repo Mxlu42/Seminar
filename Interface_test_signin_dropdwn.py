@@ -11,17 +11,18 @@ class Window(QMainWindow):
 
         #Mindestgröße / Titel definieren
         self.setCentralWidget(QWidget(self))
-        self.setMinimumSize(QSize(800, 900))
-        self.setMaximumSize(QSize(800, 900))
+        self.setMinimumSize(QSize(400, 500))
+        self.setMaximumSize(QSize(400, 500))
         self.setWindowTitle('Anmeldeformular')
 
         #Fenster im Fenster für das grdlayout erstellen und definieren
+
         wid = QWidget(self)
         grid = QGridLayout(wid)
         wid.setLayout(grid)
-        wid.setMinimumSize(QSize(400, 200))
-        wid.setMaximumSize(QSize(400, 200))
-        wid.move(205, 663)
+        wid.setMinimumSize(QSize(300, 200))
+        wid.setMaximumSize(QSize(300, 200))
+        wid.move(50, 260)
         txts = []
 
         row = 0
