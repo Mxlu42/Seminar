@@ -124,9 +124,14 @@ class Window(QMainWindow):
         print(aus)
 
 # Bringt die Daten aus dem array als object in die Datenbank
+
         data = {'name': aus[1], 'vorname': aus[2], 'profilfach': aus[0], 'password': aus[3]}
 
-        collection.insert_one(data)
+        if collection.find_one({"name": data["name"], "password": data["password"]}):
+            print("You already have an account.")
+        else:
+            collection.insert_one(data)
+
         for document in collection.find():
             print(document)
         
