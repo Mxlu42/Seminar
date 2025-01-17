@@ -87,7 +87,7 @@ class Homepage(QMainWindow):
         ne13 = QPushButton('Noteneingabe Klasse 13', self)
         ne13.resize(ne13.sizeHint())
         ne13.setToolTip('Paltzhalter <br> Erklaertext Noteneingabe 13')
-        ne13.clicked.connect(self.ne12_clicked)
+        ne13.clicked.connect(self.ne13_clicked)
         ne13.move(self.Center(ne13), bmh)
         bmh += 40
 
