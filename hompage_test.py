@@ -32,6 +32,7 @@ class Homepage(QMainWindow):
         bmh += 40
 
         k11 = QLabel('<u>Klasse 11 (Eingangsklasse)</u>', self)
+        k11.setFixedWidth(200)
         k11.setAlignment(Qt.AlignmentFlag.AlignCenter)
         k11.move(self.Center(k11), bmh)
         bmh += 40
@@ -51,6 +52,7 @@ class Homepage(QMainWindow):
         bmh += 40
 
         k12 = QLabel('<u>Klasse 12 (Jahrgangsstufe 1)</u>', self)
+        k12.setFixedWidth(200)
         k12.setAlignment(Qt.AlignmentFlag.AlignCenter)
         k12.move(self.Center(k12), bmh)
         bmh += 40
@@ -70,6 +72,7 @@ class Homepage(QMainWindow):
         bmh += 40
 
         k13 = QLabel('<u>Klasse 13 (Jahrgangsstufe 2)</u>', self)
+        k13.setFixedWidth(200)
         k13.setAlignment(Qt.AlignmentFlag.AlignCenter)
         k13.move(self.Center(k13), bmh)
         bmh += 40
