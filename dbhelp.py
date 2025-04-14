@@ -80,7 +80,7 @@ class DBHelp(object):
         students = db["students"]
 
         
-        halbjahre = students.get("halbjahre", [])
+        halbjahre = students.find("halbjahre", [])
         for halbjahr in halbjahre:
-            if halbjahr.get("jahr") == jahr and halbjahr.get("angegeben") == "true":
+            if halbjahr("jahr") == jahr and halbjahr("angegeben") == "true":
                 return True
