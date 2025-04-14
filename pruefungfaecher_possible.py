@@ -14,12 +14,15 @@ class PruefungsfaecherPossible(object):
             self.a = "Katholisch"
         else:
             self.a = "Ethik"
+        
         self.pr1 = DBHelp.get_faecher_by_fachart("Hauptfach")
         self.setFachtype(self.pr1)
+        self.pr2 = []
         if DBHelp.pruefe_halbjahr_angegeben(1) == True:
-            self.pr2 = DBHelp.get_faecher_by_fachart("EAN")
+            self.pr2.append(DBHelp.get_faecher_by_fachart("EAN"))
         else:
-            self.pr2 = self.setPruefungsfachZwei()
+            self.pr2.append(self.setPruefungsfachZwei())
+        
         self.FachblockPR2 = self.setFachblockPR2()
         self.pr3 = []
         self.setPruefungsfachDrei()
