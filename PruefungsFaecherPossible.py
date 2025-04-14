@@ -59,23 +59,23 @@ class PruefungsfaecherPossible(object):
             return 2
         
     def setFachblockPR3(self):
-        if self.FachblockPR2 == 1 and self.pr3 == "Deutsch GAN":
+        if self.FachblockPR2 == 1 and self.prp3 == "Deutsch":
             return 1
-        elif self.FachblockPR2 == 1 and (self.pr3 == "Englisch" or self.pr3 == "Spanisch"):
+        elif self.FachblockPR2 == 1 and (self.prp3 == "Englisch" or self.prp3 == "Spanisch"):
             return 2
-        elif self.FachblockPR2 == 2 and self.pr3 == "Mathe GAN":
+        elif self.FachblockPR2 == 2 and self.prp3 == "Mathe":
             return 3
-        elif self.FachblockPR2 == 2 and (self.pr3 == "Englisch" or self.pr3 == "Spanisch"):
+        elif self.FachblockPR2 == 2 and (self.prp3 == "Englisch" or self.prp3 == "Spanisch"):
             return 4
 
     def setFachblockPR4(self):
-        if (self.FachblockPR2 == 1 and (self.FachblockPR3  == 1 or self.FachblockPR3 == 2) or (self.FachblockPR2 == 2 and self.FachblockPR3 == 3)) and (self.pr4 == "GGK" or self.pr4 == "ReliKat" or self.pr4 == "ReliEva" or self.pr4 == "Ethik" or self.pr4 == "Wirtschaft"):
+        if (self.FachblockPR2 == 1 and (self.FachblockPR3  == 1 or self.FachblockPR3 == 2) or (self.FachblockPR2 == 2 and self.FachblockPR3 == 3)) and (self.prp4 == "GGK" or self.prp4 == "ReliKat" or self.prp4 == "ReliEva" or self.prp4 == "Ethik" or self.prp4 == "Wirtschaft"):
             return 1
-        elif (self.FachblockPR2 == 1 and (self.FachblockPR3  == 1 and (self.pr4 == "Chemie" or self.pr4 == "Physik" or self.pr4 == "Englisch" or self.pr4 == "Spanisch")) or (self.FachblockPR3 == 2 and self.pr3 == "Englisch" (self.pr4 == "Chemie" or self.pr4 == "Physik" or self.pr4 == "Deutsch GAN" or self.pr4 == "Spanisch")) or self.FachblockPR3 == 3 and (self.pr4 == "Chemie" or self.pr4 == "Physik" or self.pr4 == "Englisch" or self.pr4 == "Spanisch")):
+        elif (self.FachblockPR2 == 1 and (self.FachblockPR3  == 1 and (self.prp4 == "Chemie" or self.prp4 == "Physik" or self.prp4 == "Englisch" or self.prp4 == "Spanisch")) or (self.FachblockPR3 == 2 and self.prp3 == "Englisch" (self.prp4 == "Chemie" or self.prp4 == "Physik" or self.prp4 == "Deutsch GAN" or self.prp4 == "Spanisch")) or self.FachblockPR3 == 3 and (self.prp4 == "Chemie" or self.prp4 == "Physik" or self.prp4 == "Englisch" or self.prp4 == "Spanisch")):
             return 2
-        elif self.FachblockPR2 == 1 and self.FachblockPR3 == 4 and (self.pr4 == "GGK" or self.pr4 == "ReliKat" or self.pr4 == "ReliEva" or self.pr4 == "Ethik" or self.pr4 == "Wirtschaft"):
+        elif self.FachblockPR2 == 1 and self.FachblockPR3 == 4 and (self.prp4 == "GGK" or self.prp4 == "ReliKat" or self.prp4 == "ReliEva" or self.prp4 == "Ethik" or self.prp4 == "Wirtschaft"):
             return 3
-        elif self.FachblockPR2 == 1 and self.FachblockPR3 == 4 and (self.pr4 == "Chemie" or self.pr4 == "Physik" or self.pr4 == "Mathe GAN"):
+        elif self.FachblockPR2 == 1 and self.FachblockPR3 == 4 and (self.prp4 == "Chemie" or self.prp4 == "Physik" or self.prp4 == "Mathe GAN"):
             return 4
 
 
@@ -146,7 +146,7 @@ class PruefungsfaecherPossible(object):
             self.pr3.append("Englisch")
         if DBHelp.FachBelegt("SpanischN") == True or DBHelp.FachBelegt("SpanischF") == True:      #Letzter ich schwöre
             block1.append("Spanisch")
-        if self.pr2 == "Deutsch EAN" or self.pr3 == "Deutsch GAN":
+        if self.prp2 == "Deutsch EAN" or self.prp3 == "Deutsch GAN":
             block1.remove("Deutsch GAN")
         if self.pr3 == "Englisch":
             block1.remove("Englisch")
@@ -154,11 +154,11 @@ class PruefungsfaecherPossible(object):
             block1.remove("Spanisch")
         if self.pr4 == "GGK":
             block1.remove("GGK")
-        if self.pr4 == "ReliKat" or self.pr4 == "ReliEva" or self.pr4 == "Ethik":
+        if self.prp4 == "ReliKat" or self.prp4 == "ReliEva" or self.prp4 == "Ethik":
             block1.remove("ReliKat")
             block1.remove("ReliEva")
             block1.remove("Ethik")
-        if self.pr4 == "Wirtschaft":
+        if self.prp4 == "Wirtschaft":
             block1.remove("Wirtschaft")
         if self.FachblockPR4 == 1:
             return block1
