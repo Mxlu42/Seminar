@@ -146,7 +146,7 @@ class PruefungsfaecherPossible(object):
             self.pr3.append("Englisch")
         if DBHelp.FachBelegt("SpanischN") == True or DBHelp.FachBelegt("SpanischF") == True:      #Letzter ich schwöre
             block1.append("Spanisch")
-        if self.prp2 == "Deutsch EAN" or self.prp3 == "Deutsch GAN":
+        if self.pr2 == "Deutsch EAN" or self.prp3 == "Deutsch GAN":
             block1.remove("Deutsch GAN")
         if self.pr3 == "Englisch":
             block1.remove("Englisch")
