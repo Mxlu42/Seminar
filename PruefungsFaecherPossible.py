@@ -15,7 +15,6 @@ class PruefungsfaecherPossible(object):
         else:
             self.a = "Ethik"
         self.pr1 = DBHelp.get_faecher_by_fachart("Hauptfach")
-        self.setFachtype(self.pr1)
         self.pr2 = DBHelp.get_faecher_by_fachart("EAN")
         self.FachblockPR2 = self.setFachblockPR2()
         self.prp3 = []
