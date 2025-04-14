@@ -118,7 +118,7 @@ class PruefungsfaecherPossible(object):
             block2.append("Englisch")
             block2.append("Spanisch")
         if DBHelp.FachBelegt("Englisch") == True: #and englisch.KS.belegt == True:                     #Noah schau, mal db sachen
-            self.pr3.append("Englisch")
+            block1.append("Englisch")
         if DBHelp.FachBelegt("SpanischN") == True or DBHelp.FachBelegt("SpanischF") == True:      #Bitti mach ganz <OoO>
             block2.append("Spanisch")
         if self.pr3 == "Deutsch GAN":
@@ -136,9 +136,9 @@ class PruefungsfaecherPossible(object):
 
     def setPruefungsfachFuenf(self):
         block2 = ["GGK", "ReliKat", "ReliEva", "Ethik", "Wirtschaft", "SeminarGGK"]
-        block3 = ["Chemie", "Physik", "Mathe GAN"]
+        block3 = ["Chemie", "Physik", "Mathe"]
         block4 = block2
-        block1 = ["SeminarGGK", "SeminarProfil", "GGk", "ReliKat", "ReliEva", "Ethik", "Wirtschaft", "Chemie", "Physik", "Inforkatik", "Deutscch GAN", "Sport"]
+        block1 = ["SeminarGGK", "SeminarProfil", "GGk", "ReliKat", "ReliEva", "Ethik", "Wirtschaft", "Chemie", "Physik", "Inforkatik", "Deutscch", "Sport"]
         if DBHelp.pruefe_halbjahr_angegeben(1) == False:
             block1.append("Englisch")
             block1.append("Spanisch")
@@ -146,8 +146,8 @@ class PruefungsfaecherPossible(object):
             self.pr3.append("Englisch")
         if DBHelp.FachBelegt("SpanischN") == True or DBHelp.FachBelegt("SpanischF") == True:      #Letzter ich schwöre
             block1.append("Spanisch")
-        if self.pr2 == "Deutsch EAN" or self.prp3 == "Deutsch GAN":
-            block1.remove("Deutsch GAN")
+        if self.pr2 == "Deutsch" or self.prp3 == "Deutsch":
+            block1.remove("Deutsch")
         if self.pr3 == "Englisch":
             block1.remove("Englisch")
         if self.pr3 == "Spanisch":
@@ -160,12 +160,13 @@ class PruefungsfaecherPossible(object):
             block1.remove("Ethik")
         if self.prp4 == "Wirtschaft":
             block1.remove("Wirtschaft")
+        
         if self.FachblockPR4 == 1:
             return block1
-        if self.FachblockPR4 == 2:
+        elif self.FachblockPR4 == 2:
             return block2
-        if self.FachblockPR4 == 3:
+        elif self.FachblockPR4 == 3:
             return block3
-        if self.FachblockPR4 == 4:
+        elif self.FachblockPR4 == 4:
             return block4
         
