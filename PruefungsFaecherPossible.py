@@ -91,24 +91,24 @@ class PruefungsfaecherPossible(object):
 
     def setPruefungsfachDrei(self):
         if self.FachblockPR2 == 1:
-            self.pr3.append("Deutsch GAN")
+            self.prp3.append("Deutsch GAN")
             if DBHelp.pruefe_halbjahr_angegeben(1) == False:                                                 #Hier schau dir das mal an noah
-                self.pr3.append("Englisch")
-                self.pr3.append("Spanisch")
+                self.prp3.append("Englisch")
+                self.prp3.append("Spanisch")
             if DBHelp.FachBelegt("Englisch") == True: #and englisch.KS.belegt == True:                     #NOAH was das?
-                self.pr3.append("Englisch")
+                self.prp3.append("Englisch")
             if DBHelp.FachBelegt("SpanischN") == True or DBHelp.FachBelegt("SpanischF") == True:        #HEY SÜßI
-                self.pr3.append("Spanisch")
+                self.prp3.append("Spanisch")
 
         elif self.FachblockPR2 == 2:
-            self.pr3.append("Mathe GAN")
+            self.prp3.append("Mathe GAN")
             if DBHelp.pruefe_halbjahr_angegeben(1) == False:                                                 #Willst du dir das mal anschauen
-                self.pr3.append("Englisch")
-                self.pr3.append("Spanisch")
+                self.prp3.append("Englisch")
+                self.prp3.append("Spanisch")
             if DBHelp.FachBelegt("Englisch") == True: #and englisch.KS.belegt == True:                     #Noah schau, mal db sachen
-                self.pr3.append("Englisch")
+                self.prp3.append("Englisch")
             if DBHelp.FachBelegt("SpanischN") == True or DBHelp.FachBelegt("SpanischF") == True:        #Da fehlt was
-                self.pr3.append("Spanisch")
+                self.prp3.append("Spanisch")
             
 
     def setPruefungsfachVier(self):
