@@ -3,44 +3,52 @@ from PyQt6 import QtCore, QtWidgets
 from PyQt6.QtWidgets import QMainWindow, QWidget, QPushButton, QGridLayout, QLabel, QLineEdit, QMessageBox, QComboBox
 from PyQt6.QtCore import QSize, Qt
 import time
+from pymongo import MongoClient
+
+client = MongoClient('localhost', 27017)
+db = client['school']
+collection = db['students']
 
 class Window(QMainWindow):
     def __init__(self):
         global txts, txt1, txt2, txt3, txt4, cbb, grid
         super().__init__()
 
-        #Mindestgröße / Titel definieren
+        # Mindestgröße / Titel definieren
         self.setCentralWidget(QWidget(self))
-        self.setMinimumSize(QSize(800, 900))
-        self.setMaximumSize(QSize(800, 900))
-        self.setWindowTitle('Anmeldeformular')
+        self.setMinimumSize(QSize(500, 600))
+        self.setMaximumSize(QSize(500, 600))
+        self.setWindowTitle('Regestrierungsformular')
 
-        #Fenster im Fenster für das grdlayout erstellen und definieren
+
+
+        # Fenster im Fenster für das gridlayout erstellen und definieren
+
         wid = QWidget(self)
         grid = QGridLayout(wid)
         wid.setLayout(grid)
-        wid.setMinimumSize(QSize(400, 200))
-        wid.setMaximumSize(QSize(400, 200))
-        wid.move(205, 663)
+        wid.setMinimumSize(QSize(380, 200))
+        wid.setMaximumSize(QSize(380, 200))
+        wid.move(round((500/2)-(380/2)), 350)
         txts = []
 
         row = 0
 
-        #Dropdownmenu erstellen und im grid plazieren
+        # Dropdownmenu erstellen und im grid plazieren
         cbb = QComboBox(self)
-        cbb.addItems(['Profilfach wählen', 'Informatik', 'Geschtaltung- und Medientechnik', 'Mechatronik'])
+        cbb.addItems(['Profilfach wählen', 'Informatik', 'Gestaltung- und Medientechnik', 'Mechatronik'])
         cbb.resize(cbb.sizeHint())
         grid.addWidget(cbb, row, 2, Qt.AlignmentFlag.AlignLeft)
         txts.append(cbb)
 
-        #gesamte Breschriftung der Zeilen 1 - 5
+        # gesamte Breschriftung der Zeilen 1 - 5
         for s in ['Profilfach', 'Name', 'Vorname', 'Passwort', 'Passwort wiederholen']:
             lbl = QLabel(s)
             lbl.resize(lbl.sizeHint())
             grid.addWidget(lbl, row, 1,  Qt.AlignmentFlag.AlignRight)
             row += 1
 
-        #Textfelder in der 2/3 Zeile erstellen
+        # Textfelder in der 2/3 Zeile erstellen
         txt1 = QLineEdit()
         grid.addWidget(txt1, 1, 2)
         txts += [txt1]
@@ -49,41 +57,41 @@ class Window(QMainWindow):
         grid.addWidget(txt2, 2, 2)
         txts += [txt2]
 
-        #Passwort Eingabefeld in Zeile 4
+        # Passwort Eingabefeld in Zeile 4
         txt3 = QLineEdit()
         txt3.setEchoMode(QLineEdit.EchoMode.Password)
         grid.addWidget(txt3, 3, 2)
         txts += [txt3]
 
-        #Passwort wiederholung Feld in Zeile 5
+        # Passwort wiederholung Feld in Zeile 5
         txt4 = QLineEdit()
         txt4.setEchoMode(QLineEdit.EchoMode.Password)
         grid.addWidget(txt4, 4, 2)
         txts += [txt4]
 
 
-        #WIP Button zum schliesen des Programms
+        # WIP Button zum schliesen des Programms
         cancel = QPushButton('Beenden')
         cancel.clicked.connect(self.cancel)
         cancel.resize(cancel.sizeHint())
         cancel.move(300, 300)
 
-        #Button zum Speichern der daten
+        # Button zum Speichern der daten
         save = QPushButton('Speichern')
         save.clicked.connect(self.save)
         grid.addWidget(save, 5, 2, Qt.AlignmentFlag.AlignLeft)
         
-        #Button zum anzeigen des Passworts beim gedrückt halten
+        # Button zum anzeigen des Passworts beim gedrückt halten
         sp = QPushButton('Passwort zeigen')
         sp.pressed.connect(self.sp_p)
         sp.released.connect(self.sp_r)
         grid.addWidget(sp, 3, 3, Qt.AlignmentFlag.AlignRight)
 
-    #Funktion des 'Beenden' Buttons
+    # Funktion des 'Beenden' Buttons
     def cancel(self):
         app.quit()
 
-    #Funktion des 'Speichern' Buttons mit Speicher benachrichtigung / Überprüfung auf Eingabefehler
+    # Funktion des 'Speichern' Buttons mit Speicher benachrichtigung / Überprüfung auf Eingabefehler
     def save(self, const):   
         if txts[0].currentText() == 'Profilfach wählen':
             QMessageBox.about(self, 'Fehler', 'Bitte wählen Sie ein Profilfach!')
@@ -114,6 +122,18 @@ class Window(QMainWindow):
         aus.append(txts[2].text())
         aus.append(txts[3].text())
         print(aus)
+
+# Bringt die Daten aus dem array als object in die Datenbank
+
+        data = {'name': aus[1], 'vorname': aus[2], 'profilfach': aus[0], 'password': aus[3]}
+
+        if collection.find_one({"name": data["name"], "password": data["password"]}):
+            print("You already have an account.")
+        else:
+            collection.insert_one(data)
+
+        for document in collection.find():
+            print(document)
         
         cbb.setCurrentIndex(0)
         txt1.clear()
@@ -125,7 +145,7 @@ class Window(QMainWindow):
         
 
 
-    #Funktion des 'Passwort anzeigen' Buttons
+    # Funktion des 'Passwort anzeigen' Buttons
     def sp_p(self):
         txt3.setEchoMode(QLineEdit.EchoMode.Normal)
 
@@ -134,7 +154,7 @@ class Window(QMainWindow):
         
         
 
-#Anzeigen / Ausführen des Programms als sepeates Fenster
+# Anzeigen / Ausführen des Programms als seperrates Fenster
 app = QtWidgets.QApplication(sys.argv)
 win = Window()
 win.show()
