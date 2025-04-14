@@ -79,8 +79,13 @@ class DBHelp(object):
         db = client['schule']
         students = db["students"]
 
-        
-        halbjahre = students.find("halbjahre", [])
-        for halbjahr in halbjahre:
-            if halbjahr("jahr") == jahr and halbjahr("angegeben") == "true":
-                return True
+        result = students.find_one({
+            "halbjahre": {
+                "$elemMatch": {
+                    "jahr": jahr,
+                    "angegeben": True
+                }
+            }
+        })
+
+        return result is not None
