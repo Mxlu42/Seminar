@@ -60,7 +60,7 @@ class DBHelp(object):
         db = client['schule']
         students = db['students']
 
-        gefundene_faecher = []
+        gefundene_faecher = [] 
 
         students_list = students.find({
             "halbjahre.normal_faecher.fachArt": fachart_suche
@@ -71,7 +71,7 @@ class DBHelp(object):
                 for fach in halbjahr["normal_faecher"]:
                     if fach["fachArt"] == fachart_suche:
                         gefundene_faecher.append(fach["fach"])
-                        return gefundene_faecher
+        return gefundene_faecher
     
 
     def pruefe_halbjahr_angegeben(jahr):
