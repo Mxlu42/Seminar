@@ -27,7 +27,7 @@ class Pruefungsfaecherwahl(QMainWindow):
         wid1.setMaximumSize(QSize(170, 280))
         wid1.move(171, 295)
 
-        lbl1 = QLabel('1. Prüfungsfach')
+        lbl1 = QLabel('<u>1. Prüfungsfach</u>')
         lbl1.resize(lbl1.sizeHint())
         box1.addWidget(lbl1)
 
@@ -38,7 +38,7 @@ class Pruefungsfaecherwahl(QMainWindow):
         box1.addWidget(self.cbb1)
         self.cbb1.currentIndexChanged.connect(self.update_cbb_1)
 
-        lbl2 = QLabel('2. Prüfungsfach')
+        lbl2 = QLabel('<u>2. Prüfungsfach</u>')
         lbl2.resize(lbl2.sizeHint())
         box1.addWidget(lbl2)
         
@@ -49,7 +49,7 @@ class Pruefungsfaecherwahl(QMainWindow):
         box1.addWidget(self.cbb2)
         self.cbb2.currentIndexChanged.connect(self.update_cbb_2)
 
-        lbl3 = QLabel('3. Prüfungsfach')
+        lbl3 = QLabel('<u>3. Prüfungsfach</u>')
         lbl3.resize(lbl3.sizeHint())
         box1.addWidget(lbl3)
 
@@ -60,7 +60,7 @@ class Pruefungsfaecherwahl(QMainWindow):
         box1.addWidget(self.cbb3)
         self.cbb3.currentIndexChanged.connect(self.update_cbb_3)
 
-        lbl4 = QLabel('4. Prüfungsfach')
+        lbl4 = QLabel('<u>4. Prüfungsfach</u>')
         lbl4.resize(lbl4.sizeHint())
         box1.addWidget(lbl4)
 
@@ -71,7 +71,7 @@ class Pruefungsfaecherwahl(QMainWindow):
         box1.addWidget(self.cbb4)
         self.cbb4.currentIndexChanged.connect(self.update_cbb_4)
 
-        lbl5 = QLabel('5. Prüfungsfach')
+        lbl5 = QLabel('<u>5. Prüfungsfach</u>')
         lbl5.resize(lbl5.sizeHint())
         box1.addWidget(lbl5)
 
@@ -105,10 +105,8 @@ class Pruefungsfaecherwahl(QMainWindow):
     def update_cbb_2(self):
         self.cbb2.blockSignals(True)
         self.cbb3.blockSignals(True)
-        print("abhier")
         self.pfc.setPF2(self.cbb2.currentText())  
         new_items = self.pfc.getPFP3()
-        print("new_items", new_items)
         self.cbb3.clear()
         self.cbb3.addItem("Bitte wählen")
         self.cbb3.addItems(new_items)
@@ -118,10 +116,8 @@ class Pruefungsfaecherwahl(QMainWindow):
     def update_cbb_3(self):
         self.cbb3.blockSignals(True)
         self.cbb4.blockSignals(True)
-        print("abhier")
         self.pfc.setPF3(self.cbb3.currentText())  
         new_items = self.pfc.getPFP4()
-        print("new_items", new_items)
         self.cbb4.clear()
         self.cbb4.addItem("Bitte wählen")
         self.cbb4.addItems(new_items)
