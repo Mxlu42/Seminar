@@ -6,7 +6,7 @@ class Launcher:
     def __init__(self, script_name: str):
         self.script_name = self._normalize(script_name)
         self.base_path = os.path.dirname(sys.executable) if getattr(sys, 'frozen', False) else os.path.dirname(os.path.abspath(__file__))
-        self.scripts_path = os.path.join(self.base_path)
+        self.scripts_path = os.path.join(self.base_path, 'interface')
 
     def _normalize(self, name):
         return name.lower().replace('_', '').replace('-', '').replace(' ', '')

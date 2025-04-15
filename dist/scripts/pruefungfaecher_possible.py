@@ -1,5 +1,5 @@
 from pymongo import MongoClient
-from scripts.dbhelp import *
+from dbhelp import *
 client = MongoClient('localhost', 27017)
 db = client['school']
 collection = db['students']

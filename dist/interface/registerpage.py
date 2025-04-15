@@ -4,7 +4,7 @@ from PyQt6.QtWidgets import QMainWindow, QWidget, QPushButton, QGridLayout, QLab
 from PyQt6.QtCore import QSize, Qt
 import time
 from pymongo import MongoClient
-from heart import Launcher
+from scripts.heart import Launcher
 
 helpi = False
 client = MongoClient('localhost', 27017)

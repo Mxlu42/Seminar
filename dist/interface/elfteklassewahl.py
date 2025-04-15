@@ -2,7 +2,7 @@ import sys
 from PyQt6 import QtCore, QtWidgets
 from PyQt6.QtWidgets import QMainWindow, QWidget, QPushButton, QVBoxLayout, QLabel, QLineEdit, QMessageBox, QComboBox, QRadioButton
 from PyQt6.QtCore import QSize, Qt
-from heart import Launcher
+from scripts.heart import Launcher
 class SubjectChoice11(QMainWindow):
     def __init__(self):
         global r_cp, r_cl, r_pl, r_dsms, r_ds, r_ms, r_sgsef, r_sg, r_se, r_f, r_erkre, r_er, r_kr, r_e

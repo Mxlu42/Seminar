@@ -2,7 +2,8 @@ import sys
 from PyQt6 import QtCore, QtWidgets
 from PyQt6.QtWidgets import QMainWindow, QWidget, QPushButton, QVBoxLayout, QLabel, QLineEdit, QMessageBox, QComboBox, QRadioButton
 from PyQt6.QtCore import QSize, Qt
-from PruefungsFaecherPossible import *
+from scripts.PruefungsFaecherPossible import *
+from scripts.heart import Launcher
 
 class Pruefungsfaecherwahl(QMainWindow):
     def __init__(self):

@@ -2,7 +2,7 @@ import sys
 from PyQt6 import QtCore, QtWidgets
 from PyQt6.QtWidgets import QMainWindow, QWidget, QPushButton, QGridLayout, QLabel, QLineEdit, QMessageBox, QComboBox
 from PyQt6.QtCore import QSize, Qt
-from heart import Launcher
+from scripts.heart import Launcher
 
 class Homepage(QMainWindow):
     def __init__(self):
@@ -97,25 +97,37 @@ class Homepage(QMainWindow):
 
     def nb_clicked(self):
         print('Weiterleitung zur Seite "Notenberechnung"')
+        lnh = Launcher('elfteklassewahl')
+        lnh.launch()
 
     def fw11_clicked(self):
-        pipi = Launcher('elfteklassewahl')
-        pipi.launch()
+        lnh = Launcher('elfteklassewahl')
+        lnh.launch()
 
     def ne11_clicked(self):
         print('Weiterleitung zur Seite "Noterneingabe 11"')
+        lnh = Launcher('elfteklassewahl')
+        lnh.launch()
 
     def fw12_clicked(self):
         print('Weiterleitung zur Seite "Faecherwahl 12"')
+        lnh = Launcher('elfteklassewahl')
+        lnh.launch()
 
     def ne12_clicked(self):
         print('Weiterleitung zur Seite "Noterneingabe 12"')
+        lnh = Launcher('elfteklassewahl')
+        lnh.launch()
 
     def fw13_clicked(self):
         print('Weiterleitung zur Seite "Faecherwahl 13"')
+        lnh = Launcher('prufae_interface')
+        lnh.launch()
 
     def ne13_clicked(self):
         print('Weiterleitung zur Seite "Noterneingabe 13"')
+        lnh = Launcher('elfteklassewahl')
+        lnh.launch()
 
 
 
