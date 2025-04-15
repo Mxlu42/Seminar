@@ -1,6 +1,6 @@
 import sys
 from PyQt6 import QtCore, QtWidgets
-from PyQt6.QtWidgets import QMainWindow, QWidget, QPushButton, QGridLayout, QLabel, QLineEdit, QMessageBox, QComboBox
+from PyQt6.QtWidgets import QMainWindow, QWidget, QPushButton, QGridLayout, QLabel, QLineEdit, QMessageBox, QComboBox, QVBoxLayout
 from PyQt6.QtCore import QSize, Qt
 import time
 from pymongo import MongoClient
@@ -69,13 +69,6 @@ class Window(QMainWindow):
         grid.addWidget(txt4, 4, 2)
         txts += [txt4]
 
-
-        # WIP Button zum schliesen des Programms
-        cancel = QPushButton('Beenden')
-        cancel.clicked.connect(self.cancel)
-        cancel.resize(cancel.sizeHint())
-        cancel.move(300, 300)
-
         # Button zum Speichern der daten
         save = QPushButton('Speichern')
         save.clicked.connect(self.save)
@@ -87,9 +80,20 @@ class Window(QMainWindow):
         sp.released.connect(self.sp_r)
         grid.addWidget(sp, 3, 3, Qt.AlignmentFlag.AlignRight)
 
+        backwid = QWidget(self)
+        backbox = QVBoxLayout(backwid)
+        backwid.setMinimumSize(100, 50)
+        backwid.setMaximumSize(100, 50)
+        backwid.move(10, 540)
+
+        backb = QPushButton('Zurück')
+        backb.resize(backb.sizeHint())
+        backb.clicked.connect(self.back)
+        backbox.addWidget(backb)
+
     # Funktion des 'Beenden' Buttons
-    def cancel(self):
-        app.quit()
+    def back(self):
+        print('man kommt dann halt zurück auf die homepage')
 
     # Funktion des 'Speichern' Buttons mit Speicher benachrichtigung / Überprüfung auf Eingabefehler
     def save(self, const):   

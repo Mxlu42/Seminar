@@ -86,6 +86,17 @@ class Pruefungsfaecherwahl(QMainWindow):
         saveb.clicked.connect(self.save)
         box1.addWidget(saveb)
 
+        backwid = QWidget(self)
+        backbox = QVBoxLayout(backwid)
+        backwid.setMinimumSize(100, 50)
+        backwid.setMaximumSize(100, 50)
+        backwid.move(10, 540)
+
+        backb = QPushButton('Zurück')
+        backb.resize(backb.sizeHint())
+        backb.clicked.connect(self.back)
+        backbox.addWidget(backb)
+
     def update_cbb_1(self):
         self.cbb1.blockSignals(True)                                                            #Benötigt daten aus der db
         self.cbb1.blockSignals(False)
@@ -163,6 +174,8 @@ class Pruefungsfaecherwahl(QMainWindow):
 
             QMessageBox.about(self, 'Speicherbenachrichtigung', 'Ihre Eingabe wurde gespeichert!')
 
+    def back(self):
+        print('man kommt dann halt zurück auf die homepage')
 
 
 
