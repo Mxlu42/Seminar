@@ -104,10 +104,8 @@ class Pruefungsfaecherwahl(QMainWindow):
     def update_cbb_2(self):
         self.cbb2.blockSignals(True)
         self.cbb3.blockSignals(True)
-        print("abhier")
         self.pfc.setPF2(self.cbb2.currentText())  
         new_items = self.pfc.getPFP3()
-        print("new_items", new_items)
         self.cbb3.clear()
         self.cbb3.addItem("Bitte wählen")
         self.cbb3.addItems(new_items)
@@ -117,10 +115,8 @@ class Pruefungsfaecherwahl(QMainWindow):
     def update_cbb_3(self):
         self.cbb3.blockSignals(True)
         self.cbb4.blockSignals(True)
-        print("abhier")
         self.pfc.setPF3(self.cbb3.currentText())  
         new_items = self.pfc.getPFP4()
-        print("new_items", new_items)
         self.cbb4.clear()
         self.cbb4.addItem("Bitte wählen")
         self.cbb4.addItems(new_items)
