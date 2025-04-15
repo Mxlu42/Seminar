@@ -1,8 +1,10 @@
 import sys
+import os
 from PyQt6 import QtCore, QtWidgets
 from PyQt6.QtWidgets import QMainWindow, QWidget, QPushButton, QGridLayout, QLabel, QLineEdit, QMessageBox, QComboBox
 from PyQt6.QtCore import QSize, Qt
-from scripts.heart import Launcher
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from heart import Launcher
 
 class Homepage(QMainWindow):
     def __init__(self):
@@ -121,16 +123,13 @@ class Homepage(QMainWindow):
 
     def fw13_clicked(self):
         print('Weiterleitung zur Seite "Faecherwahl 13"')
-        lnh = Launcher('prufae_interface')
+        lnh = Launcher('pruefae_interface')
         lnh.launch()
 
     def ne13_clicked(self):
         print('Weiterleitung zur Seite "Noterneingabe 13"')
         lnh = Launcher('elfteklassewahl')
         lnh.launch()
-
-
-
 
 app = QtWidgets.QApplication(sys.argv)
 win = Homepage()

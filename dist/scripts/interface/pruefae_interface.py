@@ -2,8 +2,10 @@ import sys
 from PyQt6 import QtCore, QtWidgets
 from PyQt6.QtWidgets import QMainWindow, QWidget, QPushButton, QVBoxLayout, QLabel, QLineEdit, QMessageBox, QComboBox, QRadioButton
 from PyQt6.QtCore import QSize, Qt
-from scripts.PruefungsFaecherPossible import *
-from scripts.heart import Launcher
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from PruefungsFaecherPossible import *
+from heart import Launcher
 
 class Pruefungsfaecherwahl(QMainWindow):
     def __init__(self):
@@ -173,7 +175,8 @@ class Pruefungsfaecherwahl(QMainWindow):
             QMessageBox.about(self, 'Speicherbenachrichtigung', 'Ihre Eingabe wurde gespeichert!')
 
     def back(self):
-        print('man kommt dann halt zurück auf die homepage')
+        pipi = Launcher('homepage')
+        pipi.launch()
 
 
 
