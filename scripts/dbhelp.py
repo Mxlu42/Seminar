@@ -60,7 +60,7 @@ class DBHelp(object):
         db = client['schule']
         students = db['students']
 
-        gefundene_faecher = set()
+        gefundene_faecher = [] 
 
         students_list = students.find({
             "halbjahre.normal_faecher.fachArt": fachart_suche
@@ -70,8 +70,8 @@ class DBHelp(object):
             for halbjahr in student["halbjahre"]:
                 for fach in halbjahr["normal_faecher"]:
                     if fach["fachArt"] == fachart_suche:
-                        gefundene_faecher.add(fach["fach"])
-                        return gefundene_faecher
+                        gefundene_faecher.append(fach["fach"])
+        return gefundene_faecher
     
 
     def pruefe_halbjahr_angegeben(jahr):
@@ -79,8 +79,13 @@ class DBHelp(object):
         db = client['schule']
         students = db["students"]
 
-        
-        halbjahre = students.get("halbjahre", [])
-        for halbjahr in halbjahre:
-            if halbjahr.get("jahr") == jahr and halbjahr.get("angegeben") == "true":
-                return True
+        result = students.find_one({
+            "halbjahre": {
+                "$elemMatch": {
+                    "jahr": jahr,
+                    "angegeben": True
+                }
+            }
+        })
+
+        return result is not None

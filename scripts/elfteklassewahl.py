@@ -99,6 +99,16 @@ class SubjectChoice11(QMainWindow):
         grid4.addWidget(r_kr)
         grid4.addWidget(r_e)
 
+        backwid = QWidget(self)
+        backbox = QVBoxLayout(backwid)
+        backwid.setMinimumSize(100, 50)
+        backwid.setMaximumSize(100, 50)
+        backwid.move(10, 540)
+
+        backb = QPushButton('Zurück')
+        backb.resize(backb.sizeHint())
+        backb.clicked.connect(self.back)
+        backbox.addWidget(backb)
 
 
 
@@ -192,6 +202,9 @@ class SubjectChoice11(QMainWindow):
             print(r_erkre[0])
         else:
             return
+        
+    def back(self):
+        print('man kommt dann halt zurück auf die homepage')
 
 
 
