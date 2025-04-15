@@ -5,13 +5,12 @@ from PyQt6.QtCore import QSize, Qt
 from PruefungsFaecherPossible import *
 class Pruefungsfaecherwahl(QMainWindow):
     def __init__(self):
-        global pfc
-        pfc = PruefungsfaecherPossible()
-        PFP1 = pfc.getPFP1()
-        PFP2 = pfc.getPFP2()
-        PFP3 = pfc.getPFP3()
-        PFP4 = pfc.getPFP4()
-        PFP5 = pfc.getPFP5()
+        self.pfc = PruefungsfaecherPossible()
+        self.PFP1 = self.pfc.getPFP1()
+        self.PFP2 = self.pfc.getPFP2()
+        self.PFP3 = self.pfc.getPFP3()
+        self.PFP4 = self.pfc.getPFP4()
+        self.PFP5 = self.pfc.getPFP5()
         super().__init__()
         #Mindestgröße / Titel definieren
         self.setCentralWidget(QWidget(self))
@@ -35,71 +34,92 @@ class Pruefungsfaecherwahl(QMainWindow):
         lbl1.resize(lbl1.sizeHint())
         box1.addWidget(lbl1)
 
-        cbb1 = QComboBox(self)
-        cbb1.addItem('Bitte wählen')
-        cbb1.addItems(PFP1)
-        cbb1.resize(cbb1.sizeHint())
-        box1.addWidget(cbb1)
+        self.cbb1 = QComboBox(self)
+        self.cbb1.addItem('Bitte wählen')
+        self.cbb1.addItems(self.PFP1)
+        self.cbb1.resize(self.cbb1.sizeHint())
+        box1.addWidget(self.cbb1)
         #cbb1.currentIndexChanged.connect(self.update_cbb_1())
 
         lbl2 = QLabel('2. Prüfungsfach')
         lbl2.resize(lbl2.sizeHint())
         box1.addWidget(lbl2)
         
-        cbb2 = QComboBox(self)
-        cbb2.addItem('Bitte wählen')
-        cbb2.addItems(PFP2)
-        cbb2.resize(cbb2.sizeHint())
-        box1.addWidget(cbb2)
+        self.cbb2 = QComboBox(self)
+        self.cbb2.addItem('Bitte wählen')
+        self.cbb2.addItems(self.PFP2)
+        self.cbb2.resize(self.cbb2.sizeHint())
+        box1.addWidget(self.cbb2)
         #cbb2.currentIndexChanged.connect(self.update_cbb_2())
 
         lbl3 = QLabel('3. Prüfungsfach')
         lbl3.resize(lbl3.sizeHint())
         box1.addWidget(lbl3)
 
-        cbb3 = QComboBox(self)
-        cbb3.addItem('Bitte wählen')
-        cbb3.addItems(PFP3)
-        cbb3.resize(cbb3.sizeHint())
-        box1.addWidget(cbb3)
-        cbb3.currentIndexChanged.connect(self.update_cbb_3)
+        self.cbb3 = QComboBox(self)
+        self.cbb3.addItem('Bitte wählen')
+        self.cbb3.addItems(self.PFP3)
+        self.cbb3.resize(self.cbb3.sizeHint())
+        box1.addWidget(self.cbb3)
+        self.cbb3.currentIndexChanged.connect(self.update_cbb_3)
 
         lbl4 = QLabel('4. Prüfungsfach')
         lbl4.resize(lbl4.sizeHint())
         box1.addWidget(lbl4)
 
-        cbb4 = QComboBox(self)
-        cbb4.addItem('Bitte wählen')
-        cbb4.addItems(PFP4)
-        cbb4.resize(cbb4.sizeHint())
-        box1.addWidget(cbb4)
-        cbb4.currentIndexChanged.connect(self.update_cbb_4)
+        self.cbb4 = QComboBox(self)
+        self.cbb4.addItem('Bitte wählen')
+        self.cbb4.addItems(self.PFP4)
+        self.cbb4.resize(self.cbb4.sizeHint())
+        box1.addWidget(self.cbb4)
+        self.cbb4.currentIndexChanged.connect(self.update_cbb_4)
 
         lbl5 = QLabel('5. Prüfungsfach')
         lbl5.resize(lbl5.sizeHint())
         box1.addWidget(lbl5)
 
-        cbb5 = QComboBox(self)
-        cbb5.addItem('Bitte wählen')
-        cbb5.addItems(['PFP5 placeholder'])
-        cbb5.resize(cbb5.sizeHint())
-        box1.addWidget(cbb5)
-        cbb5.currentIndexChanged.connect(self.update_cbb_5)
+        self.cbb5 = QComboBox(self)
+        self.cbb5.addItem('Bitte wählen')
+        self.cbb5.addItems(['PFP5 placeholder'])
+        self.cbb5.resize(self.cbb5.sizeHint())
+        box1.addWidget(self.cbb5)
+        self.cbb5.currentIndexChanged.connect(self.update_cbb_5)
 
-    def update_cbb_1():
+    def update_cbb_1(self):
         pass
 
-    def update_cbb_2():
+    def update_cbb_2(self):
         pass
 
-    def update_cbb_3():
-        pfc.setPruefungsfachDrei()
+    def update_cbb_3(self):
+        self.cbb3.blockSignals(True)
+        self.cbb4.blockSignals(True)
+        print("abhier")
+        self.pfc.setPF3(self.cbb3.currentText())  
+        new_items = self.pfc.getPFP4()
+        print("new_items", new_items)
+        self.cbb4.clear()
+        self.cbb4.addItem("Bitte wählen")
+        self.cbb4.addItems(new_items)
+        self.cbb4.blockSignals(False)
+        self.cbb3.blockSignals(False)
+        print(self.cbb3.currentText())
 
-    def update_cbb_4():
-        pfc.setPruefungsfachVier()
+    def update_cbb_4(self):
+        self.cbb4.blockSignals(True)
+        self.cbb5.blockSignals(True)
+        self.pfc.setPF4(self.cbb4.currentText())  
+        new_items = self.pfc.getPFP5()
+        self.cbb5.clear()
+        self.cbb5.addItem("Bitte wählen")
+        self.cbb5.addItems(new_items)
+        self.cbb5.blockSignals(False)
+        self.cbb4.blockSignals(False)
+        print(self.cbb4.currentText())
 
-    def update_cbb_5():
-        pfc.setPruefungsfachFuenf()
+
+    def update_cbb_5(self):
+        print(self.cbb5.currentText())
 
 #Anzeigen / Ausführen des Programms als sepeates Fenster
 app = QtWidgets.QApplication(sys.argv)
