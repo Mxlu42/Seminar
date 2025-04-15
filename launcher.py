@@ -23,8 +23,8 @@ if getattr(sys, 'frozen', False):
 else:
     register_path = os.path.dirname(os.path.abspath(__file__))
 
-register_script = os.path.join(register_path,'scripts', 'registerpage.py')
-register_script_python = os.path.join(register_path, 'dist','scripts', 'registerpage.py')
+register_script = os.path.join(register_path,'scripts','interface', 'registerpage.py')
+register_script_python = os.path.join(register_path, 'dist','scripts', 'interface', 'registerpage.py')
 
 print("Using path:", register_path)
 print("Launching:", register_script)
