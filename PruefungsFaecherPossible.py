@@ -204,5 +204,5 @@ class PruefungsfaecherPossible(object):
         elif self.FachblockPR4 == 4:
             return block4
         else:
-            return "Was los hier"
+            return block1 + block2 + block3 + block4
         

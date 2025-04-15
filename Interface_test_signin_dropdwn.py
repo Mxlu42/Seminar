@@ -141,7 +141,7 @@ class Window(QMainWindow):
         txt3.clear()
         txt4.clear()
         
-        QMessageBox.about(self, 'Speicherbenachrichtigung', 'Deine Daten Wurden gespeichert!')
+        QMessageBox.about(self, 'Speicherbenachrichtigung', 'Ihre Daten Wurden gespeichert!')
         
 
 

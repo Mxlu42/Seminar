@@ -6,11 +6,7 @@ from PruefungsFaecherPossible import *
 class Pruefungsfaecherwahl(QMainWindow):
     def __init__(self):
         self.pfc = PruefungsfaecherPossible()
-        self.PFP1 = self.pfc.getPFP1()
-        self.PFP2 = self.pfc.getPFP2()
-        self.PFP3 = self.pfc.getPFP3()
-        self.PFP4 = self.pfc.getPFP4()
-        self.PFP5 = self.pfc.getPFP5()
+        self.savearr = []
         super().__init__()
         #Mindestgröße / Titel definieren
         self.setCentralWidget(QWidget(self))
@@ -26,9 +22,9 @@ class Pruefungsfaecherwahl(QMainWindow):
 
         wid1 = QWidget(self)
         box1 = QVBoxLayout(wid1)
-        wid1.setMinimumSize(QSize(150, 300))
-        wid1.setMaximumSize(QSize(150, 300))
-        wid1.move(200, 250)
+        wid1.setMinimumSize(QSize(170, 280))
+        wid1.setMaximumSize(QSize(170, 280))
+        wid1.move(171, 295)
 
         lbl1 = QLabel('1. Prüfungsfach')
         lbl1.resize(lbl1.sizeHint())
@@ -36,7 +32,7 @@ class Pruefungsfaecherwahl(QMainWindow):
 
         self.cbb1 = QComboBox(self)
         self.cbb1.addItem('Bitte wählen')
-        self.cbb1.addItems(self.PFP1)
+        self.cbb1.addItems(self.pfc.getPFP1())
         self.cbb1.resize(self.cbb1.sizeHint())
         box1.addWidget(self.cbb1)
         self.cbb1.currentIndexChanged.connect(self.update_cbb_1)
@@ -47,7 +43,7 @@ class Pruefungsfaecherwahl(QMainWindow):
         
         self.cbb2 = QComboBox(self)
         self.cbb2.addItem('Bitte wählen')
-        self.cbb2.addItems(self.PFP2)
+        self.cbb2.addItems(self.pfc.getPFP2())
         self.cbb2.resize(self.cbb2.sizeHint())
         box1.addWidget(self.cbb2)
         self.cbb2.currentIndexChanged.connect(self.update_cbb_2)
@@ -58,7 +54,7 @@ class Pruefungsfaecherwahl(QMainWindow):
 
         self.cbb3 = QComboBox(self)
         self.cbb3.addItem('Bitte wählen')
-        self.cbb3.addItems(self.PFP3)
+        self.cbb3.addItems(self.pfc.getPFP3())
         self.cbb3.resize(self.cbb3.sizeHint())
         box1.addWidget(self.cbb3)
         self.cbb3.currentIndexChanged.connect(self.update_cbb_3)
@@ -69,7 +65,7 @@ class Pruefungsfaecherwahl(QMainWindow):
 
         self.cbb4 = QComboBox(self)
         self.cbb4.addItem('Bitte wählen')
-        self.cbb4.addItems(self.PFP4)
+        self.cbb4.addItems(self.pfc.getPFP4())
         self.cbb4.resize(self.cbb4.sizeHint())
         box1.addWidget(self.cbb4)
         self.cbb4.currentIndexChanged.connect(self.update_cbb_4)
@@ -80,15 +76,19 @@ class Pruefungsfaecherwahl(QMainWindow):
 
         self.cbb5 = QComboBox(self)
         self.cbb5.addItem('Bitte wählen')
-        self.cbb5.addItems(['PFP5 placeholder'])
+        self.cbb5.addItems(self.pfc.getPFP5())
         self.cbb5.resize(self.cbb5.sizeHint())
         box1.addWidget(self.cbb5)
         self.cbb5.currentIndexChanged.connect(self.update_cbb_5)
 
+        saveb = QPushButton('Speichern')
+        saveb.resize(saveb.sizeHint())
+        saveb.clicked.connect(self.save)
+        box1.addWidget(saveb)
+
     def update_cbb_1(self):
         self.cbb1.blockSignals(True)                                                            #Benötigt daten aus der db
         self.cbb1.blockSignals(False)
-        print(self.cbb1.currentText())
 
     def update_cbb_2(self):
         self.cbb2.blockSignals(True)
@@ -102,7 +102,6 @@ class Pruefungsfaecherwahl(QMainWindow):
         self.cbb3.addItems(new_items)
         self.cbb3.blockSignals(False)
         self.cbb2.blockSignals(False)
-        print(self.cbb2.currentText())                                                              #Benötigt daten aus der db
 
     def update_cbb_3(self):
         self.cbb3.blockSignals(True)
@@ -116,7 +115,6 @@ class Pruefungsfaecherwahl(QMainWindow):
         self.cbb4.addItems(new_items)
         self.cbb4.blockSignals(False)
         self.cbb3.blockSignals(False)
-        print(self.cbb3.currentText())                                    #db Schnittstelle 3. Prüfungsfach
 
     def update_cbb_4(self):
         self.cbb4.blockSignals(True)
@@ -128,11 +126,48 @@ class Pruefungsfaecherwahl(QMainWindow):
         self.cbb5.addItems(new_items)
         self.cbb5.blockSignals(False)
         self.cbb4.blockSignals(False)
-        print(self.cbb4.currentText())                                    #db Schnittstelle 4. Prüfungsfach
-
 
     def update_cbb_5(self):
-        print(self.cbb5.currentText())                                    #db Schnittstelle 5. Prüfungsfach
+        pass
+
+    def save(self):
+        if self.cbb1.currentText() == 'Bitte wählen':
+            QMessageBox.about(self, 'Fehler', 'Bitte Wählen Sie Ihr erstes Prüfungsfach')
+            return
+        if self.cbb2.currentText() == 'Bitte wählen':
+            QMessageBox.about(self, 'Fehler', 'Bitte Wählen Sie Ihr zweites Prüfungsfach')
+            return
+        if self.cbb3.currentText() == 'Bitte wählen':
+            QMessageBox.about(self, 'Fehler', 'Bitte Wählen Sie Ihr drittes Prüfungsfach')
+            return
+        if self.cbb4.currentText() == 'Bitte wählen':
+            QMessageBox.about(self, 'Fehler', 'Bitte Wählen Sie Ihr viertes Prüfungsfach')
+            return
+        if self.cbb5.currentText() == 'Bitte wählen': 
+            QMessageBox.about(self, 'Fehler', 'Bitte Wählen Sie Ihr fünftes Prüfungsfach')
+            return
+        else:
+            self.savearr.append(self.cbb1.currentText())
+            self.savearr.append(self.cbb2.currentText())
+            self.savearr.append(self.cbb3.currentText())
+            self.savearr.append(self.cbb4.currentText())
+            self.savearr.append(self.cbb5.currentText())
+            
+            print(self.savearr)
+
+            self.cbb1.setCurrentIndex(0)
+            self.cbb2.setCurrentIndex(0)
+            self.cbb3.setCurrentIndex(0)
+            self.cbb4.setCurrentIndex(0)
+            self.cbb5.setCurrentIndex(0)
+
+            QMessageBox.about(self, 'Speicherbenachrichtigung', 'Ihre Eingabe wurde gespeichert!')
+
+
+
+
+
+
 
 app = QtWidgets.QApplication(sys.argv)
 win = Pruefungsfaecherwahl()
