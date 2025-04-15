@@ -16,7 +16,11 @@ class PruefungsfaecherPossible(object):
             self.a = "Ethik"
         
         self.pr1 = DBHelp.get_faecher_by_fachart("Hauptfach")
+        self.prp2 = None
+
         self.pr2 = DBHelp.get_faecher_by_fachart("EAN")
+        self.prp2 = None
+            
         self.FachblockPR2 = self.setFachblockPR2()
         self.prp3 = self.setPruefungsfachDrei()
         self.FachblockPR3 = 0
@@ -28,12 +32,13 @@ class PruefungsfaecherPossible(object):
         self.pr5 = None
         self.FachblockPR5 = 0
 
+    def setPF2(self, fach):
+        self.pr2 = fach
+    
     def setPF3(self, fach):
-        print("PF3", fach)
         self.pr3 = fach
 
     def setPF4(self, fach):
-        print("PF4", fach)
         self.pr4 = fach
 
     def setPF5(self,fach):
@@ -41,24 +46,29 @@ class PruefungsfaecherPossible(object):
         self.pr5 = fach
 
     def getPFP1(self):
-        return self.pr1
+        if self.pr1 == []:
+            self.prp1 = self.setPrufungsfachEins()
+        else:
+            self.prp1 = self.pr1
+        return self.prp1
     
     def getPFP2(self):
-        return self.pr2
+        if self.pr2 == []:
+            self.prp2 = self.setPrufungsfachZwei()
+        else:
+            self.prp2 = self.pr2
+        return self.prp2
     
     def getPFP3(self):
         self.prp3 = self.setPruefungsfachDrei()
         return self.prp3
     
     def getPFP4(self):
-        print("get pfp4 start")
         self.prp4 = self.setPruefungsfachVier()
-        print("lol", self.prp4)
         return self.prp4
     
     def getPFP5(self):
         self.prp5 = self.setPruefungsfachFuenf()
-        print(self.prp5)
         return self.prp5
 
     def setFachblockPR2(self):
@@ -78,8 +88,6 @@ class PruefungsfaecherPossible(object):
             return 4
 
     def setFachblockPR4(self):
-        print("set FachblockPR4 start")
-        print("FB2", self.FachblockPR2, "FB3", self.FachblockPR3, "PF3", self.pr3, "PF4", self.pr4)
         if (self.FachblockPR2 == 1 and (self.FachblockPR3  == 1 or self.FachblockPR3 == 2) or (self.FachblockPR2 == 2 and self.FachblockPR3 == 3)) and (self.pr4 == "GGK" or self.pr4 == self.a or self.pr4 == "Wirtschaft"):
             return 1
         elif (self.FachblockPR2 == 1 and (self.FachblockPR3  == 1 and (self.pr4 == "Chemie" or self.pr4 == "Physik" or self.pr4 == "Englisch" or self.pr4 == "Spanisch")) or (self.FachblockPR3 == 2 and self.pr3 == "Englisch" (self.pr4 == "Chemie" or self.pr4 == "Physik" or self.pr4 == "Deutsch" or self.pr4 == "Spanisch")) or self.FachblockPR3 == 3 and (self.pr4 == "Chemie" or self.pr4 == "Physik" or self.pr4 == "Englisch" or self.pr4 == "Spanisch")):
@@ -99,15 +107,24 @@ class PruefungsfaecherPossible(object):
             return 3
         elif self.FachblockPR4 == 4:
             return 4
+        
+    def setPrufungsfachEins(self):
+        block = ["Informationstechnik", "Mechatronik", "Gestaltung_Medien"]
+        return block
+        
+    def setPrufungsfachZwei(self):
+        block = ["Mathe", "Deutsch"]
+        return block
 
     def setPruefungsfachDrei(self):
+        self.FachblockPR2 = self.setFachblockPR2()
         block = []
         if self.FachblockPR2 == 1:
             block.append("Deutsch")
-            if DBHelp.pruefe_halbjahr_angegeben(1) == False:                                                 #Hier schau dir das mal an noah
+            if DBHelp.pruefe_halbjahr_angegeben(1) == False:                                            #Hier schau dir das mal an noah
                 block.append("Englisch")
                 block.append("Spanisch")
-            if DBHelp.FachBelegt("Englisch") == True: #and englisch.KS.belegt == True:                     #NOAH was das?
+            if DBHelp.FachBelegt("Englisch") == True: #and englisch.KS.belegt == True:                  #NOAH was das?
                 block.append("Englisch")
             if DBHelp.FachBelegt("SpanischN") == True or DBHelp.FachBelegt("SpanischF") == True:        #HEY SÜßI
                 block.append("Spanisch")
@@ -125,9 +142,7 @@ class PruefungsfaecherPossible(object):
             
 
     def setPruefungsfachVier(self):
-        print("setPuefungfachVier start")
         self.FachblockPR3 = self.setFachblockPR3()
-
         block1 = ["GGK", self.a, "Wirtschaft"]
         block2 = ["Chemie", "Physik", "Deutsch"]
         if DBHelp.pruefe_halbjahr_angegeben(1) == False:                                                     #>_<
@@ -156,11 +171,10 @@ class PruefungsfaecherPossible(object):
 
     def setPruefungsfachFuenf(self):
         self.FachblockPR4 = self.setFachblockPR4()
-        print("das hier", self.FachblockPR4)
         block2 = ["GGK", self.a, "Wirtschaft", "SeminarGGK"]
         block3 = ["Chemie", "Physik", "Mathe"]
         block4 = block2
-        block1 = ["SeminarGGK", "SeminarProfil", "GGK", self.a, "Wirtschaft", "Chemie", "Physik", "Inforkatik", "Deutscch", "Sport"]
+        block1 = ["SeminarGGK", "SeminarProfil", "GGK", self.a, "Wirtschaft", "Chemie", "Physik", "Inforkatik", "Deutsch", "Sport"]
         if DBHelp.pruefe_halbjahr_angegeben(1) == False:
             block1.append("Englisch")
             block1.append("Spanisch")

@@ -39,7 +39,7 @@ class Pruefungsfaecherwahl(QMainWindow):
         self.cbb1.addItems(self.PFP1)
         self.cbb1.resize(self.cbb1.sizeHint())
         box1.addWidget(self.cbb1)
-        #cbb1.currentIndexChanged.connect(self.update_cbb_1())
+        self.cbb1.currentIndexChanged.connect(self.update_cbb_1)
 
         lbl2 = QLabel('2. Prüfungsfach')
         lbl2.resize(lbl2.sizeHint())
@@ -50,7 +50,7 @@ class Pruefungsfaecherwahl(QMainWindow):
         self.cbb2.addItems(self.PFP2)
         self.cbb2.resize(self.cbb2.sizeHint())
         box1.addWidget(self.cbb2)
-        #cbb2.currentIndexChanged.connect(self.update_cbb_2())
+        self.cbb2.currentIndexChanged.connect(self.update_cbb_2)
 
         lbl3 = QLabel('3. Prüfungsfach')
         lbl3.resize(lbl3.sizeHint())
@@ -86,10 +86,23 @@ class Pruefungsfaecherwahl(QMainWindow):
         self.cbb5.currentIndexChanged.connect(self.update_cbb_5)
 
     def update_cbb_1(self):
-        pass
+        self.cbb1.blockSignals(True)                                                            #Benötigt daten aus der db
+        self.cbb1.blockSignals(False)
+        print(self.cbb1.currentText())
 
     def update_cbb_2(self):
-        pass
+        self.cbb2.blockSignals(True)
+        self.cbb3.blockSignals(True)
+        print("abhier")
+        self.pfc.setPF2(self.cbb2.currentText())  
+        new_items = self.pfc.getPFP3()
+        print("new_items", new_items)
+        self.cbb3.clear()
+        self.cbb3.addItem("Bitte wählen")
+        self.cbb3.addItems(new_items)
+        self.cbb3.blockSignals(False)
+        self.cbb2.blockSignals(False)
+        print(self.cbb2.currentText())                                                              #Benötigt daten aus der db
 
     def update_cbb_3(self):
         self.cbb3.blockSignals(True)
@@ -103,7 +116,7 @@ class Pruefungsfaecherwahl(QMainWindow):
         self.cbb4.addItems(new_items)
         self.cbb4.blockSignals(False)
         self.cbb3.blockSignals(False)
-        print(self.cbb3.currentText())
+        print(self.cbb3.currentText())                                    #db Schnittstelle 3. Prüfungsfach
 
     def update_cbb_4(self):
         self.cbb4.blockSignals(True)
@@ -115,13 +128,12 @@ class Pruefungsfaecherwahl(QMainWindow):
         self.cbb5.addItems(new_items)
         self.cbb5.blockSignals(False)
         self.cbb4.blockSignals(False)
-        print(self.cbb4.currentText())
+        print(self.cbb4.currentText())                                    #db Schnittstelle 4. Prüfungsfach
 
 
     def update_cbb_5(self):
-        print(self.cbb5.currentText())
+        print(self.cbb5.currentText())                                    #db Schnittstelle 5. Prüfungsfach
 
-#Anzeigen / Ausführen des Programms als sepeates Fenster
 app = QtWidgets.QApplication(sys.argv)
 win = Pruefungsfaecherwahl()
 win.show()
