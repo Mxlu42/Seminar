@@ -16,6 +16,7 @@ class NotenschnnittBerechnen(object):
 
     def setSchnitt(self):
         a = len(self.FaecherNoten)
+        all = DBHelp.getArrayAusAllenFaechernAndFaechertypseAndGesamtnoteInBestimmtemHalbJahr(self.Halbjahr)
         counter = 0
         for i in range (0, a):
             counter += i

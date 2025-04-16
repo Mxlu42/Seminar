@@ -139,3 +139,19 @@ class DBHelp(object):
                                 "gesamtnote": fach.get("note", "")
                             })
         return ergebnis
+    
+    def getArrayAusAllenFaechernAndFaechertypseAndGesamtnoteInBestimmtemHalbJahr(self, halbjahr_name):
+        ergebnis = []
+        results = self.students.find()
+
+        for student in results:
+            for halbjahr in student.get("halbjahre", []):
+                if halbjahr.get("name") == halbjahr_name:
+                    for fach in halbjahr.get("normal_faecher", []):
+                        if fach.get("belegt") == "true":
+                            ergebnis.append({
+                                "fach": fach.get("fach", ""),
+                                "fachart": fach.get("fachart", ""),
+                                "gesamtnote": fach.get("note", "")
+                            })
+        return ergebnis
