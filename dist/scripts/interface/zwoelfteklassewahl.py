@@ -8,11 +8,19 @@ from heart import Launcher
 
 class SubjectChoice11(QMainWindow):
     def __init__(self):
-        global r_dm, r_cl, r_pl, r_dsms, r_ds, r_ms, r_sgsef, r_sg, r_se, r_f, r_erkre, r_er, r_kr, r_e
+        global r_dm, r_de, r_me, r_sparr, r_sgarr, r_sp, r_sg, r_warr, r_ltarr, r_mparr, r_mp, r_w, r_lt, r_erkre, r_er, r_kr, r_e
         r_dm = []
-        r_dsms = []
-        r_sgsef = []
+        r_sparr = []
+        r_sgarr = []
+        r_warr = []
+        r_ltarr = []
+        r_mparr = []
         r_erkre = []
+        self.controll = 0
+        self.controll0 = 0
+        self.controll1 = 0
+        self.controll2 = 0
+        self.controll3 = 0
         super().__init__()
         
         #Mindestgröße / Titel definieren
@@ -32,12 +40,12 @@ class SubjectChoice11(QMainWindow):
         wid1.setLayout(grid1)
         wid1.setMinimumSize(QSize(155, 62))
         wid1.setMaximumSize(QSize(155, 62))
-        wid1.move(100, 342)
+        wid1.move(100, 257)
 
         r_de = QRadioButton('Deutsch eAn / Mathe gAn')
         r_de.toggled.connect(self.r_det)
 
-        r_me = QRadioButton('Mathe erhobenes Aforderungsniveau')
+        r_me = QRadioButton('Mathe eAn / Deutsch gAn')
         r_me.toggled.connect(self.r_met)
 
         grid1.addWidget(r_de)
@@ -49,45 +57,58 @@ class SubjectChoice11(QMainWindow):
         wid2.setLayout(grid2)
         wid2.setMinimumSize(QSize(155, 62))
         wid2.setMaximumSize(QSize(155, 62))
-        wid2.move(300, 342)
+        wid2.move(300, 257)
 
-        r_ds = QRadioButton('Deutsch stütz')
-        r_ds.toggled.connect(self.r_dst)
+        r_sp = QRadioButton('Seminarkurs Profil')
+        r_sp.toggled.connect(self.r_spt)
 
-        r_ms = QRadioButton('Mathe stütz')
-        r_ms.toggled.connect(self.r_mst)
-
-        grid2.addWidget(r_ds)
-        grid2.addWidget(r_ms)
-
-
-        wid3 = QWidget(self)
-        grid3 = QVBoxLayout(wid3)
-        wid3.setLayout(grid3)
-        wid3.setMinimumSize(QSize(205, 85))
-        wid3.setMaximumSize(QSize(205, 85))
-        wid3.move(100, 402)
-
-        r_sg = QRadioButton('Spanisch gAn')
+        r_sg = QRadioButton('Seminarkurs GGK')
         r_sg.toggled.connect(self.r_sgt)
 
-        r_se = QRadioButton('Spanisch eAn')
-        r_se.toggled.connect(self.r_set)
+        grid2.addWidget(r_sp)
+        grid2.addWidget(r_sg)
 
-        r_f = QRadioButton('3. Fremdsprache bereits belegt')
-        r_f.toggled.connect(self.r_ft)
 
-        grid3.addWidget(r_sg)
-        grid3.addWidget(r_se)
-        grid3.addWidget(r_f)
+        wid_w = QWidget(self)
+        grid_w = QVBoxLayout(wid_w)
+        wid_w.setLayout(grid_w)
+        wid_w.setMinimumSize(QSize(205, 35))
+        wid_w.setMaximumSize(QSize(205, 35))
+        wid_w.move(300, 317)
 
+        wid_lt = QWidget(self)
+        grid_lt = QVBoxLayout(wid_lt)
+        wid_lt.setLayout(grid_lt)
+        wid_lt.setMinimumSize(QSize(205, 35))
+        wid_lt.setMaximumSize(QSize(205, 35))
+        wid_lt.move(300, 341)
+
+        wid_mp = QWidget(self)
+        grid_mp = QVBoxLayout(wid_mp)
+        wid_mp.setLayout(grid_mp)
+        wid_mp.setMinimumSize(QSize(205, 35))
+        wid_mp.setMaximumSize(QSize(205, 35))
+        wid_mp.move(300, 365)
+
+        r_w = QRadioButton('Wirtschaft')
+        r_w.toggled.connect(self.r_wt)
+
+        r_lt = QRadioButton('Litheratur und Theater')
+        r_lt.toggled.connect(self.r_ltt)
+
+        r_mp = QRadioButton('Mathe plus')
+        r_mp.toggled.connect(self.r_mpt)
+
+        grid_w.addWidget(r_w)
+        grid_lt.addWidget(r_lt)
+        grid_mp.addWidget(r_mp)
 
         wid4 = QWidget(self)
         grid4 = QVBoxLayout(wid4)
-        wid4.setLayout(grid3)
+        wid4.setLayout(grid4)
         wid4.setMinimumSize(QSize(205, 85))
         wid4.setMaximumSize(QSize(205, 85))
-        wid4.move(300, 402)
+        wid4.move(100, 317)
 
         r_er = QRadioButton('evangelische Religion')
         r_er.toggled.connect(self.r_ert)
@@ -101,6 +122,31 @@ class SubjectChoice11(QMainWindow):
         grid4.addWidget(r_er)
         grid4.addWidget(r_kr)
         grid4.addWidget(r_e)
+
+        wid_en = QWidget(self)
+        grid_en = QVBoxLayout(wid_en)
+        wid_en.setLayout(grid_en)
+        wid_en.setMinimumSize(QSize(205, 35))
+        wid_en.setMaximumSize(QSize(205, 35))
+        wid_en.move(100, 402)
+
+        wid_s = QWidget(self)
+        grid_s = QVBoxLayout(wid_s)
+        wid_s.setLayout(grid_s)
+        wid_s.setMinimumSize(QSize(205, 35))
+        wid_s.setMaximumSize(QSize(205, 35))
+        wid_s.move(100, 426)
+
+        r_en = QRadioButton('Englisch')
+        #r_en.toggled.connect(self.r_ent)
+
+        r_s = QRadioButton('Spanisch')
+        #r_s.toggled.connect(self.r_st)
+
+        grid_en.addWidget(r_en)
+        grid_s.addWidget(r_s)
+
+
 
         backwid = QWidget(self)
         backbox = QVBoxLayout(backwid)
@@ -127,54 +173,65 @@ class SubjectChoice11(QMainWindow):
 
 
 
-    def r_clt(self):
-        if r_cl.isChecked() == True:
-            r_cp.clear()
-            r_cp.append('Chemie Labor')
+    def r_det(self):
+        if r_de.isChecked() == True:
+            r_dm.clear()
+            r_dm.append('Deutsch eAn')
         else:
             return
         
-    def r_plt(self):
-        if r_pl.isChecked() == True:
-            r_cp.clear()
-            r_cp.append('Physik Labor')
+    def r_met(self):
+        if r_me.isChecked() == True:
+            r_dm.clear()
+            r_dm.append('Mathe eAn')
         else:
             return
         
-    def r_dst(self):
-        if r_ds.isChecked() == True:
-            r_dsms.clear()
-            r_dsms.append('Deutsch stütz')
-        else:
-            return
+    def r_spt(self):
+        if r_sp.isChecked() == True:
+            self.controll = 1
+            r_sparr.clear()
+            r_sparr.append('Seminarkurs Profilfach')
+        elif r_sp.isChecked() == False:
+            r_sparr.clear()
+            self.controll = 0
         
-    def r_mst(self):
-        if r_ms.isChecked() == True:
-            r_dsms.clear()
-            r_dsms.append('Mathe stütz')
-        else:
-            return
-    
     def r_sgt(self):
         if r_sg.isChecked() == True:
-            r_sgsef.clear()
-            r_sgsef.append('Spanisch gAn')
-        else:
-            return
+            self.controll0 = 1
+            r_sgarr.clear()
+            r_sgarr.append('Seminarkurs GGK')
+        elif r_sg.isChecked() == False:
+            r_sgarr.clear()
+            self.controll0 = 0
     
-    def r_set(self):
-        if r_se.isChecked() == True:
-            r_sgsef.clear()
-            r_sgsef.append('Spanisch eAn')
-        else:
-            return
+    def r_wt(self):
+        if r_w.isChecked() == True:
+            self.controll1 = 1
+            r_warr.clear()
+            r_warr.append('Wirtschaft')
+        elif r_w.isChecked() == False:
+            r_warr.clear()
+            self.controll1 = 0
+    
+    def r_ltt(self):
+        if r_lt.isChecked() == True:
+            self.controll2 = 1
+            r_ltarr.clear()
+            r_ltarr.append('Litheratur und Theater')
+        elif r_lt.isChecked() == False:
+            r_ltarr.clear()
+            self.controll2 = 0
         
-    def r_ft(self):
-        if r_f.isChecked() == True:
-            r_sgsef.clear()
-            r_sgsef.append('3. Fremdsprache bereits belegt')
-        else:
-            return
+    def r_mpt(self):
+        
+        if r_mp.isChecked() == True:
+            self.controll3 = 1
+            r_mparr.clear()
+            r_mparr.append('Mathe plus')
+        elif r_mp.isChecked() == False:
+            r_mparr.clear()
+            self.controll3 = 0
         
     def r_ert(self):
         if r_er.isChecked() == True:
@@ -198,14 +255,8 @@ class SubjectChoice11(QMainWindow):
             return
         
     def save(self):
-        if r_cl.isChecked() == False and r_pl.isChecked() == False:
-            QMessageBox.about(self, 'Fehler', 'Bitte Wählen Sie Pysik Labor oder Chemie Labor')
-            return
-        if r_ds.isChecked() == False and r_ms.isChecked() == False:
-            QMessageBox.about(self, 'Fehler', 'Bitte Wählen Sie Mathe stütz oder Deutsch stütz')
-            return
-        if r_sg.isChecked() == False and r_se.isChecked() == False and r_f.isChecked() == False:
-            QMessageBox.about(self, 'Fehler', 'Bitte Wählen Sie Spanisch eAn, Spanisch gAn oder ob Sie bereits<br> eine dritte Fremdsprache belegt haben')
+        if r_de.isChecked() == False and r_me.isChecked() == False:
+            QMessageBox.about(self, 'Fehler', 'Bitte Wählen Sie Deutsch eAn oder Mathe eAn')
             return
         if r_kr.isChecked() == False and r_er.isChecked() == False and r_e.isChecked() == False:
             QMessageBox.about(self, 'Fehler', 'Bitte Wählen Sie katholische Religion, evangelische Religion oder Ethik')
@@ -213,39 +264,55 @@ class SubjectChoice11(QMainWindow):
         else:
             finalsavearr = []
 
-            finalsavearr.append(r_cp[0])
-            finalsavearr.append(r_dsms[0])
-            finalsavearr.append(r_sgsef[0])
+            finalsavearr.append(r_dm[0])
+            if self.controll == 1:
+                finalsavearr.append(r_sparr[0])
+
+            if self.controll0 == 1:
+                finalsavearr.append(r_sgarr[0])
+
+            if self.controll1 == 1:
+                finalsavearr.append(r_warr[0])
+                
+            if self.controll2 == 1:
+                finalsavearr.append(r_ltarr[0])
+                
+            if self.controll3 == 1:
+                finalsavearr.append(r_mparr[0])
+                
             finalsavearr.append(r_erkre[0])
             print(finalsavearr)
 
-            r_cl.setAutoExclusive(False)
-            r_cl.setChecked(False)
-            r_cl.setAutoExclusive(True)
+            finalsavearr.clear()
 
-            r_pl.setAutoExclusive(False)
-            r_pl.setChecked(False)
-            r_pl.setAutoExclusive(True)
+            r_de.setAutoExclusive(False)
+            r_de.setChecked(False)
+            r_de.setAutoExclusive(True)
 
-            r_ds.setAutoExclusive(False)
-            r_ds.setChecked(False)
-            r_ds.setAutoExclusive(True)
+            r_me.setAutoExclusive(False)
+            r_me.setChecked(False)
+            r_me.setAutoExclusive(True)
 
-            r_ms.setAutoExclusive(False)
-            r_ms.setChecked(False)
-            r_ms.setAutoExclusive(True)
+            r_sp.setAutoExclusive(False)
+            r_sp.setChecked(False)
+            r_sp.setAutoExclusive(True)
 
             r_sg.setAutoExclusive(False)
             r_sg.setChecked(False)
             r_sg.setAutoExclusive(True)
 
-            r_se.setAutoExclusive(False)
-            r_se.setChecked(False)
-            r_se.setAutoExclusive(True)
+            r_w.setAutoExclusive(False)
+            r_w.setChecked(False)
+            r_w.setAutoExclusive(True)
 
-            r_f.setAutoExclusive(False)
-            r_f.setChecked(False)
-            r_f.setAutoExclusive(True)
+            r_lt.setAutoExclusive(False)
+            r_lt.setChecked(False)
+            r_lt.setAutoExclusive(True)
+
+            r_mp.setAutoExclusive(False)
+            r_mp.setChecked(False)
+            r_mp.setAutoExclusive(True)
+            
 
             r_er.setAutoExclusive(False)
             r_er.setChecked(False)
