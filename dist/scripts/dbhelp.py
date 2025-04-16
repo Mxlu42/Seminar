@@ -46,7 +46,7 @@ class DBHelp(object):
                 updated_halbjahre.append(halbjahr)
 
             # Update das gesamte halbjahre-Array
-            students.update_one(
+            self.students.update_one(
                 {"_id": student["_id"]},
                 {"$set": {"halbjahre": updated_halbjahre}}
             )
