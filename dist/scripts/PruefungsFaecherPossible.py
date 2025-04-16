@@ -8,12 +8,22 @@ collection = db['students']
 
 class PruefungsfaecherPossible(object):
     def __init__(self):
-        if DBHelp.FachBelegt("Evangelisch") == True:
-            self.a = "Evangelisch"
-        elif DBHelp.FachBelegt("Katholisch") == True:
-            self.a = "Katholisch"
+        if DBHelp.pruefe_halbjahr_angegeben(1) == True:
+            if DBHelp.FachBelegt("Evangelisch", 1) == True and DBHelp.FachBelegt("Evangelisch", 3) == True:
+                self.a = "Evangelisch"
+                self.aState = True
+            elif DBHelp.FachBelegt("Katholisch", 1) == True and DBHelp.FachBelegt("Katholisch", 3) == True:
+                self.a = "Katholisch"
+                self.aState = True
+            elif DBHelp.FachBelegt("Ethik", 1) == True and DBHelp.FachBelegt("Ethik", 3) == True:
+                self.a = "Ethik"
+                self.aState = True
+            else:
+                self.a = ""
+                self.aState = False
         else:
             self.a = "Ethik"
+            self.aState = True
         
         self.pr1 = DBHelp.get_faecher_by_fachart("Hauptfach")
         self.prp2 = None
@@ -171,10 +181,15 @@ class PruefungsfaecherPossible(object):
 
     def setPruefungsfachFuenf(self):
         self.FachblockPR4 = self.setFachblockPR4()
-        block2 = ["GGK", self.a, "Wirtschaft", "SeminarGGK"]
+        block2 = ["GGK", "Wirtschaft", "SeminarGGK"]
         block3 = ["Chemie", "Physik", "Mathe"]
         block4 = block2
-        block1 = ["SeminarGGK", "SeminarProfil", "GGK", self.a, "Wirtschaft", "Chemie", "Physik", "Inforkatik", "Deutsch", "Sport"]
+        block1 = ["SeminarGGK", "SeminarProfil", "GGK", "Wirtschaft", "Chemie", "Physik", "Inforkatik", "Deutsch", "Sport"]
+        if self.aState == True:
+            block2.append(self.a)
+            block1.append(self.a)
+            if self.pr4 == self.a:
+                block1.remove(self.a)
         if DBHelp.pruefe_halbjahr_angegeben(3) == False:
             if DBHelp.FachBelegt("SeminarProfil", 3):
                 block1.remove("SeminarProfil")
@@ -193,8 +208,6 @@ class PruefungsfaecherPossible(object):
             block1.remove("Spanisch")
         if self.pr4 == "GGK":
             block1.remove("GGK")
-        if self.pr4 == self.a:
-            block1.remove(self.a)
         if self.pr4 == "Wirtschaft":
             block1.remove("Wirtschaft")
         
