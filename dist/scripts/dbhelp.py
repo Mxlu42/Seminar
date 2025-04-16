@@ -1,13 +1,14 @@
 from pymongo import MongoClient
 
 class DBHelp(object):
-    def FachBelegt(fachname):
-        client = MongoClient('mongodb://localhost:27017/')
-        db = client['schule']
-        students = db['students']
+    def __init__(self):
+        self.client = MongoClient("mongodb://localhost:27017/")
+        self.db = self.client["schule"]
+        self.students = self.db["students"]
 
+    def FachBelegt(self, fachname, halbjahr_seartch):
         # Suche nur Schüler, die das Fach irgendwo belegt haben
-        results = students.find({
+        results = self.students.find({
             "halbjahre.normal_faecher.fach": fachname
         })
 
@@ -15,20 +16,17 @@ class DBHelp(object):
             print(f"\n{student['name']} - {student['vorname']}")
 
             for halbjahr in student["halbjahre"]:
-                for fach in halbjahr["normal_faecher"]:
-                    if fach["fach"] == fachname:
-                        status = fach["belegt"]
-                        if status == "true":
-                            return True
-                        else:
-                            return False
+                if halbjahr["name"] == halbjahr_seartch:
+                    for fach in halbjahr["normal_faecher"]:
+                        if fach["fach"] == fachname:
+                            status = fach["belegt"]
+                            if status == "true":
+                                return True
+                            else:
+                                return False
                         
-    def ChangeAttributes(fachname, fachart, note):
-        client = MongoClient('mongodb://localhost:27017/')
-        db = client['schule']
-        students = db['students']
-
-        students_list = students.find({
+    def ChangeAttributes(self, fachname, fachart, note):
+        students_list = self.students.find({
             "halbjahre.normal_faecher.fach": fachname
         })
 
@@ -48,21 +46,16 @@ class DBHelp(object):
                 updated_halbjahre.append(halbjahr)
 
             # Update das gesamte halbjahre-Array
-            students.update_one(
+            self.students.update_one(
                 {"_id": student["_id"]},
                 {"$set": {"halbjahre": updated_halbjahre}}
             )
-
             print(f"✅ Aktualisiert: {student['name']} - {student['vorname']}")
 
-    def get_faecher_by_fachart(fachart_suche):
-        client = MongoClient('mongodb://localhost:27017/')
-        db = client['schule']
-        students = db['students']
-
+    def get_faecher_by_fachart(self, fachart_suche):
         gefundene_faecher = [] 
 
-        students_list = students.find({
+        students_list = self.students.find({
             "halbjahre.normal_faecher.fachArt": fachart_suche
         })
 
@@ -74,12 +67,8 @@ class DBHelp(object):
         return gefundene_faecher
     
 
-    def pruefe_halbjahr_angegeben(jahr):
-        client = MongoClient('mongodb://localhost:27017/')
-        db = client['schule']
-        students = db["students"]
-
-        result = students.find_one({
+    def pruefe_halbjahr_angegeben(self, jahr):
+        result = self.students.find_one({
             "halbjahre": {
                 "$elemMatch": {
                     "jahr": jahr,
@@ -87,5 +76,82 @@ class DBHelp(object):
                 }
             }
         })
-
         return result is not None
+    
+    def GetAlleAusgefülltenNotenAlsArrayMitAngabeFach(self, fachname, halbjahr_name):
+        noten_liste = []
+
+        results = self.students.find({
+            "halbjahre.normal_faecher.fach": fachname
+        })
+
+        for student in results:
+            for halbjahr in student["halbjahre"]:
+                if halbjahr.get("name") == halbjahr_name:
+                    for fach in halbjahr["normal_faecher"]:
+                        if fach["fach"] == fachname:
+                            note = fach.get("note", "").strip()
+                            if note != "":
+                                noten_liste.append({
+                                    "schueler": f"{student['vorname']} {student['name']}",
+                                    "halbjahr": halbjahr_name,
+                                    "note": note
+                                })
+        return noten_liste
+    
+    def setNoteInDBEsterFreierPlatzMitDemNotentypeDerNichtBelegtIst(self, fachname, halbjahr_name, notentyp, note):
+        results = self.students.find({
+            "halbjahre.normal_faecher.fach": fachname
+        })
+
+        for student in results:
+            aktualisiert = False
+            for h_index, halbjahr in enumerate(student["halbjahre"]):
+                if halbjahr.get("name") == halbjahr_name:
+                    for f_index, fach in enumerate(halbjahr["normal_faecher"]):
+                        if fach["fach"] == fachname and fach.get("belegt") == "true":
+                            # Überprüfen, ob der Notentyp leer oder nicht vorhanden ist
+                            aktueller_wert = fach.get(notentyp, "").strip()
+                            if aktueller_wert == "":
+                                feldpfad = f"halbjahre.{h_index}.normal_faecher.{f_index}.{notentyp}"
+                                self.students.update_one(
+                                    {"_id": student["_id"]},
+                                    {"$set": {feldpfad: note}}
+                                )
+                                aktualisiert = True
+                                print(f"Note gesetzt für {student['vorname']} {student['name']}")
+            if not aktualisiert:
+                print(f"Keine freie Stelle für {student['vorname']} {student['name']}")
+
+    
+    def getArrayAusHalpjahrMitFachFachartGesamtnote(self, gesuchtesHJ):
+        ergebnis = []
+        results = self.students.find()
+
+        for student in results:
+            for halbjahr in student.get("halbjahre", []):
+                if halbjahr.get("name") == gesuchtesHJ:
+                    for fach in halbjahr.get("normal_faecher", []):
+                        if fach.get("belegt") == "true":
+                            ergebnis.append({
+                                "fach": fach.get("fach", ""),
+                                "fachart": fach.get("fachart", ""),
+                                "gesamtnote": fach.get("note", "")
+                            })
+        return ergebnis
+    
+    def getArrayAusAllenFaechernAndFaechertypseAndGesamtnoteInBestimmtemHalbJahr(self, halbjahr_name):
+        ergebnis = []
+        results = self.students.find()
+
+        for student in results:
+            for halbjahr in student.get("halbjahre", []):
+                if halbjahr.get("name") == halbjahr_name:
+                    for fach in halbjahr.get("normal_faecher", []):
+                        if fach.get("belegt") == "true":
+                            ergebnis.append({
+                                "fach": fach.get("fach", ""),
+                                "fachart": fach.get("fachart", ""),
+                                "gesamtnote": fach.get("note", "")
+                            })
+        return ergebnis
