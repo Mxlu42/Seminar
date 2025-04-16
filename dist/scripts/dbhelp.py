@@ -101,3 +101,27 @@ class DBHelp(object):
                                 })
 
         return noten_liste
+    
+    def setNoteInDBEsterFreierPlatzMitDemNotentypeDerNichtBelegtIst(self, fachname, halbjahr_name, notentyp, note):
+        results = self.students.find({
+            "halbjahre.normal_faecher.fach": fachname
+        })
+
+        for student in results:
+            aktualisiert = False
+            for h_index, halbjahr in enumerate(student["halbjahre"]):
+                if halbjahr.get("name") == halbjahr_name:
+                    for f_index, fach in enumerate(halbjahr["normal_faecher"]):
+                        if fach["fach"] == fachname and fach.get("belegt") == "true":
+                            # Überprüfen, ob der Notentyp leer oder nicht vorhanden ist
+                            aktueller_wert = fach.get(notentyp, "").strip()
+                            if aktueller_wert == "":
+                                feldpfad = f"halbjahre.{h_index}.normal_faecher.{f_index}.{notentyp}"
+                                self.students.update_one(
+                                    {"_id": student["_id"]},
+                                    {"$set": {feldpfad: note}}
+                                )
+                                aktualisiert = True
+                                print(f"Note gesetzt für {student['vorname']} {student['name']}")
+            if not aktualisiert:
+                print(f"Keine freie Stelle für {student['vorname']} {student['name']}")
