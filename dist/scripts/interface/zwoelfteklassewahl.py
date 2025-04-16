@@ -8,7 +8,7 @@ from heart import Launcher
 
 class SubjectChoice11(QMainWindow):
     def __init__(self):
-        global r_dm, r_de, r_me, r_sparr, r_sgarr, r_sp, r_sg, r_warr, r_ltarr, r_mparr, r_mp, r_w, r_lt, r_erkre, r_er, r_kr, r_e
+        global r_dm, r_de, r_me, r_sparr, r_sgarr, r_sp, r_sg, r_warr, r_ltarr, r_mparr, r_mp, r_w, r_lt, r_erkre, r_er, r_kr, r_e, r_en, r_s, r_enarr, r_sarr
         r_dm = []
         r_sparr = []
         r_sgarr = []
@@ -16,11 +16,15 @@ class SubjectChoice11(QMainWindow):
         r_ltarr = []
         r_mparr = []
         r_erkre = []
+        r_enarr = []
+        r_sarr = []
         self.controll = 0
         self.controll0 = 0
         self.controll1 = 0
         self.controll2 = 0
         self.controll3 = 0
+        self.controll4 = 0
+        self.controll5 = 0
         super().__init__()
         
         #Mindestgröße / Titel definieren
@@ -40,7 +44,7 @@ class SubjectChoice11(QMainWindow):
         wid1.setLayout(grid1)
         wid1.setMinimumSize(QSize(155, 62))
         wid1.setMaximumSize(QSize(155, 62))
-        wid1.move(100, 257)
+        wid1.move(100, 307)
 
         r_de = QRadioButton('Deutsch eAn / Mathe gAn')
         r_de.toggled.connect(self.r_det)
@@ -57,7 +61,7 @@ class SubjectChoice11(QMainWindow):
         wid2.setLayout(grid2)
         wid2.setMinimumSize(QSize(155, 62))
         wid2.setMaximumSize(QSize(155, 62))
-        wid2.move(300, 257)
+        wid2.move(300, 307)
 
         r_sp = QRadioButton('Seminarkurs Profil')
         r_sp.toggled.connect(self.r_spt)
@@ -74,21 +78,21 @@ class SubjectChoice11(QMainWindow):
         wid_w.setLayout(grid_w)
         wid_w.setMinimumSize(QSize(205, 35))
         wid_w.setMaximumSize(QSize(205, 35))
-        wid_w.move(300, 317)
+        wid_w.move(300, 367)
 
         wid_lt = QWidget(self)
         grid_lt = QVBoxLayout(wid_lt)
         wid_lt.setLayout(grid_lt)
         wid_lt.setMinimumSize(QSize(205, 35))
         wid_lt.setMaximumSize(QSize(205, 35))
-        wid_lt.move(300, 341)
+        wid_lt.move(300, 391)
 
         wid_mp = QWidget(self)
         grid_mp = QVBoxLayout(wid_mp)
         wid_mp.setLayout(grid_mp)
         wid_mp.setMinimumSize(QSize(205, 35))
         wid_mp.setMaximumSize(QSize(205, 35))
-        wid_mp.move(300, 365)
+        wid_mp.move(300, 415)
 
         r_w = QRadioButton('Wirtschaft')
         r_w.toggled.connect(self.r_wt)
@@ -108,7 +112,7 @@ class SubjectChoice11(QMainWindow):
         wid4.setLayout(grid4)
         wid4.setMinimumSize(QSize(205, 85))
         wid4.setMaximumSize(QSize(205, 85))
-        wid4.move(100, 317)
+        wid4.move(100, 367)
 
         r_er = QRadioButton('evangelische Religion')
         r_er.toggled.connect(self.r_ert)
@@ -128,23 +132,45 @@ class SubjectChoice11(QMainWindow):
         wid_en.setLayout(grid_en)
         wid_en.setMinimumSize(QSize(205, 35))
         wid_en.setMaximumSize(QSize(205, 35))
-        wid_en.move(100, 402)
+        wid_en.move(100, 452)
 
         wid_s = QWidget(self)
         grid_s = QVBoxLayout(wid_s)
         wid_s.setLayout(grid_s)
         wid_s.setMinimumSize(QSize(205, 35))
         wid_s.setMaximumSize(QSize(205, 35))
-        wid_s.move(100, 426)
+        wid_s.move(100, 476)
 
         r_en = QRadioButton('Englisch')
-        #r_en.toggled.connect(self.r_ent)
+        r_en.toggled.connect(self.r_ent)
 
         r_s = QRadioButton('Spanisch')
-        #r_s.toggled.connect(self.r_st)
+        r_s.toggled.connect(self.r_st)
 
         grid_en.addWidget(r_en)
         grid_s.addWidget(r_s)
+
+        wpfwid = QWidget(self)
+        wpfbox = QVBoxLayout(wpfwid)
+        wpfwid.setMinimumSize(150, 50)
+        wpfwid.setMaximumSize(150, 50)
+        wpfwid.move(100, 267)
+
+        wfwid = QWidget(self)
+        wfbox = QVBoxLayout(wfwid)
+        wfwid.setMinimumSize(100, 50)
+        wfwid.setMaximumSize(100, 50)
+        wfwid.move(300, 267)
+
+        wpflbl = QLabel('<u>Wahlpflichtfächer:</u>')
+        wpflbl.resize(wpflbl.sizeHint())
+
+        wflbl = QLabel('<u>Wahlfächer:</u>')
+        wflbl.resize(wpflbl.sizeHint())
+
+        wpfbox.addWidget(wpflbl)
+        wfbox.addWidget(wflbl)
+
 
 
 
@@ -254,6 +280,24 @@ class SubjectChoice11(QMainWindow):
         else:
             return
         
+    def r_ent(self):
+        if r_en.isChecked() == True:
+            self.controll4 = 1
+            r_enarr.clear()
+            r_enarr.append('Englisch')
+        elif r_en.isChecked() == False:
+            r_enarr.clear()
+            self.controll4 = 0
+
+    def r_st(self):
+        if r_s.isChecked() == True:
+            self.controll5 = 1
+            r_sarr.clear()
+            r_sarr.append('Spanisch')
+        elif r_s.isChecked() == False:
+            r_sarr.clear()
+            self.controll5 = 0
+        
     def save(self):
         if r_de.isChecked() == False and r_me.isChecked() == False:
             QMessageBox.about(self, 'Fehler', 'Bitte Wählen Sie Deutsch eAn oder Mathe eAn')
@@ -261,8 +305,12 @@ class SubjectChoice11(QMainWindow):
         if r_kr.isChecked() == False and r_er.isChecked() == False and r_e.isChecked() == False:
             QMessageBox.about(self, 'Fehler', 'Bitte Wählen Sie katholische Religion, evangelische Religion oder Ethik')
             return
+        if r_en.isChecked() == False and r_s.isChecked() == False:
+            QMessageBox.about(self, 'Fehler', 'Bitte Wählen Sie katholische Englisch oder Spanisch')
+            return
         else:
             finalsavearr = []
+            finalsavearr.append('alle Fächer die man auf jedenfall hat (Sport usw.)')
 
             finalsavearr.append(r_dm[0])
             if self.controll == 1:
@@ -281,6 +329,13 @@ class SubjectChoice11(QMainWindow):
                 finalsavearr.append(r_mparr[0])
                 
             finalsavearr.append(r_erkre[0])
+
+            if self.controll4 == 1:
+                finalsavearr.append(r_enarr[0])
+
+            if self.controll5 == 1:
+                finalsavearr.append(r_sarr[0])
+
             print(finalsavearr)
 
             finalsavearr.clear()
@@ -325,6 +380,14 @@ class SubjectChoice11(QMainWindow):
             r_e.setAutoExclusive(False)
             r_e.setChecked(False)
             r_e.setAutoExclusive(True)
+
+            r_en.setAutoExclusive(False)
+            r_en.setChecked(False)
+            r_en.setAutoExclusive(True)
+
+            r_s.setAutoExclusive(False)
+            r_s.setChecked(False)
+            r_s.setAutoExclusive(True)
 
 
             QMessageBox.about(self, 'Speicherbenachrichtigung', 'Ihre Eingabe wurde gespeichert!')
