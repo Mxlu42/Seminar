@@ -1,13 +1,14 @@
 from pymongo import MongoClient
 
 class DBHelp(object):
-    def FachBelegt(fachname, halbjahr_seartch):
-        client = MongoClient('mongodb://localhost:27017/')
-        db = client['schule']
-        students = db['students']
+    def __init__(self):
+        self.client = MongoClient("mongodb://localhost:27017/")
+        self.db = self.client["schule"]
+        self.students = self.db["students"]
 
+    def FachBelegt(self, fachname, halbjahr_seartch):
         # Suche nur Schüler, die das Fach irgendwo belegt haben
-        results = students.find({
+        results = self.students.find({
             "halbjahre.normal_faecher.fach": fachname
         })
 
@@ -24,12 +25,8 @@ class DBHelp(object):
                             else:
                                 return False
                         
-    def ChangeAttributes(fachname, fachart, note):
-        client = MongoClient('mongodb://localhost:27017/')
-        db = client['schule']
-        students = db['students']
-
-        students_list = students.find({
+    def ChangeAttributes(self, fachname, fachart, note):
+        students_list = self.students.find({
             "halbjahre.normal_faecher.fach": fachname
         })
 
@@ -56,14 +53,10 @@ class DBHelp(object):
 
             print(f"✅ Aktualisiert: {student['name']} - {student['vorname']}")
 
-    def get_faecher_by_fachart(fachart_suche):
-        client = MongoClient('mongodb://localhost:27017/')
-        db = client['schule']
-        students = db['students']
-
+    def get_faecher_by_fachart(self, fachart_suche):
         gefundene_faecher = [] 
 
-        students_list = students.find({
+        students_list = self.students.find({
             "halbjahre.normal_faecher.fachArt": fachart_suche
         })
 
@@ -75,12 +68,8 @@ class DBHelp(object):
         return gefundene_faecher
     
 
-    def pruefe_halbjahr_angegeben(jahr):
-        client = MongoClient('mongodb://localhost:27017/')
-        db = client['schule']
-        students = db["students"]
-
-        result = students.find_one({
+    def pruefe_halbjahr_angegeben(self, jahr):
+        result = self.students.find_one({
             "halbjahre": {
                 "$elemMatch": {
                     "jahr": jahr,
@@ -90,3 +79,25 @@ class DBHelp(object):
         })
 
         return result is not None
+    
+    def GetAlleAusgefülltenNotenAlsArrayMitAngabeFach(self, fachname, halbjahr_name):
+        noten_liste = []
+
+        results = self.students.find({
+            "halbjahre.normal_faecher.fach": fachname
+        })
+
+        for student in results:
+            for halbjahr in student["halbjahre"]:
+                if halbjahr.get("name") == halbjahr_name:
+                    for fach in halbjahr["normal_faecher"]:
+                        if fach["fach"] == fachname:
+                            note = fach.get("note", "").strip()
+                            if note != "":
+                                noten_liste.append({
+                                    "schueler": f"{student['vorname']} {student['name']}",
+                                    "halbjahr": halbjahr_name,
+                                    "note": note
+                                })
+
+        return noten_liste
