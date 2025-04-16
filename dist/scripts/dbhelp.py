@@ -50,7 +50,6 @@ class DBHelp(object):
                 {"_id": student["_id"]},
                 {"$set": {"halbjahre": updated_halbjahre}}
             )
-
             print(f"✅ Aktualisiert: {student['name']} - {student['vorname']}")
 
     def get_faecher_by_fachart(self, fachart_suche):
@@ -77,7 +76,6 @@ class DBHelp(object):
                 }
             }
         })
-
         return result is not None
     
     def GetAlleAusgefülltenNotenAlsArrayMitAngabeFach(self, fachname, halbjahr_name):
@@ -99,7 +97,6 @@ class DBHelp(object):
                                     "halbjahr": halbjahr_name,
                                     "note": note
                                 })
-
         return noten_liste
     
     def setNoteInDBEsterFreierPlatzMitDemNotentypeDerNichtBelegtIst(self, fachname, halbjahr_name, notentyp, note):
@@ -125,3 +122,20 @@ class DBHelp(object):
                                 print(f"Note gesetzt für {student['vorname']} {student['name']}")
             if not aktualisiert:
                 print(f"Keine freie Stelle für {student['vorname']} {student['name']}")
+
+    
+    def getArrayAusHalpjahrMitFachFachartGesamtnote(self, gesuchtesHJ):
+        ergebnis = []
+        results = self.students.find()
+
+        for student in results:
+            for halbjahr in student.get("halbjahre", []):
+                if halbjahr.get("name") == gesuchtesHJ:
+                    for fach in halbjahr.get("normal_faecher", []):
+                        if fach.get("belegt") == "true":
+                            ergebnis.append({
+                                "fach": fach.get("fach", ""),
+                                "fachart": fach.get("fachart", ""),
+                                "gesamtnote": fach.get("note", "")
+                            })
+        return ergebnis

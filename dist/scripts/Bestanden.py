@@ -9,7 +9,7 @@ class Bestanden(object):
 
     def ElfteBestanden(self):
         self.gesuchtesHJ = self.HJG.getGesuchtesHalbjahr()
-        self.all = DBHelp.getArrayAusHalpjahrMitFachFachartNote(self.gesuchtesHJ)       #zurückgegebenes Array: [[fach, fachart, Note],[fach, fachart, Note],...]
+        self.all = DBHelp.getArrayAusHalpjahrMitFachFachartGesamtnote(self.gesuchtesHJ)       #zurückgegebenes Array: [[fach, fachart, Note],[fach, fachart, Note],...]
         a = len(self.all)
         counterHF5 = 0
         counterNF5 = 0
