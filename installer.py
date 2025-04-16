@@ -3,6 +3,7 @@ import subprocess
 import sys
 import urllib.request
 import zipfile
+import time
 
 # Vorgegebene Installationspfade
 BASE_DIR = r"C:\Tools"
@@ -48,13 +49,14 @@ def open_launcher():
 
     if os.path.exists(launcher_script):
         print("✅ Found launcher.exe, launching...")
+        time.sleep(3)
         subprocess.Popen(launcher_script, shell=True)
     elif os.path.exists(launcher_script_python):
         print("⚠️ Fallback: Found launcher_script_python.py in dist, launching...")
+        time.sleep(3)
         subprocess.Popen(launcher_script_python, shell=True)
     else:
         print("❌ No script found to launch.")
-
 
 def main():
     print("Starte Installation...")

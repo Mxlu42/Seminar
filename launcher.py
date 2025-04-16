@@ -2,6 +2,7 @@ import subprocess
 import sys
 import os
 from pymongo import MongoClient
+import time
 
 def install(package):
     subprocess.check_call([sys.executable, '-m', 'pip', 'install', package])
@@ -39,11 +40,14 @@ db = client['school']
 collection = db['students']
 
 def check_data():
-    print('in here')
+    print('🔍 checking for database...')
+    time.sleep(5)
     if collection.find_one():
-        print('its true')
+        print('✅ Found database')
         return True
-    print('its false')
+    print('❌ Didnt find a database')
+    print('Starting Registerpage')
+    time.sleep(2)
     return False
 
 if check_data():
@@ -64,4 +68,3 @@ else:
         subprocess.Popen([sys.executable, register_script_python], shell=True)
     else:
         print("❌ No script found to launch.")
-

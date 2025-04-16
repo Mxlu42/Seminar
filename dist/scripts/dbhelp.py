@@ -1,7 +1,7 @@
 from pymongo import MongoClient
 
 class DBHelp(object):
-    def FachBelegt(fachname):
+    def FachBelegt(fachname, halbjahr_seartch):
         client = MongoClient('mongodb://localhost:27017/')
         db = client['schule']
         students = db['students']
@@ -15,13 +15,14 @@ class DBHelp(object):
             print(f"\n{student['name']} - {student['vorname']}")
 
             for halbjahr in student["halbjahre"]:
-                for fach in halbjahr["normal_faecher"]:
-                    if fach["fach"] == fachname:
-                        status = fach["belegt"]
-                        if status == "true":
-                            return True
-                        else:
-                            return False
+                if halbjahr["name"] == halbjahr_seartch:
+                    for fach in halbjahr["normal_faecher"]:
+                        if fach["fach"] == fachname:
+                            status = fach["belegt"]
+                            if status == "true":
+                                return True
+                            else:
+                                return False
                         
     def ChangeAttributes(fachname, fachart, note):
         client = MongoClient('mongodb://localhost:27017/')
