@@ -2,9 +2,7 @@ import sys
 from PyQt6 import QtCore, QtWidgets
 from PyQt6.QtWidgets import QMainWindow, QWidget, QPushButton, QGridLayout, QLabel, QLineEdit, QMessageBox, QComboBox
 from PyQt6.QtCore import QSize, Qt
-import time
 from pymongo import MongoClient
-
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from heart import Launcher
@@ -24,6 +22,12 @@ class Window(QMainWindow):
         self.setMinimumSize(QSize(500, 600))
         self.setMaximumSize(QSize(500, 600))
         self.setWindowTitle('Regestrierungsformular')
+
+        lbl = QLabel('Platzhalter für den Erklärtext')
+        lbl.resize(lbl.sizeHint())
+        lbl.setAlignment(Qt.AlignmentFlag.AlignHCenter)
+        lbl.setMargin(30)
+        self.setCentralWidget(lbl)
 
 
 
@@ -92,9 +96,6 @@ class Window(QMainWindow):
         sp.released.connect(self.sp_r)
         grid.addWidget(sp, 3, 3, Qt.AlignmentFlag.AlignRight)
 
-    # Funktion des 'Beenden' Buttons
-    def cancel(self):
-        app.quit()
 
     # Funktion des 'Speichern' Buttons mit Speicher benachrichtigung / Überprüfung auf Eingabefehler
     def save(self):   
