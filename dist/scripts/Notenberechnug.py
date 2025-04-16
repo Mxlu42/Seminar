@@ -23,8 +23,9 @@ class Notenberechnung(object):
         a = len(self.einzelnoten)
         gesamt = 0
         for i in range (0, a):
-            if self.einzelnoten(i)(2) == "Schriftlich" or self.einzelnoten(i)(2) == "GSF":
-                gesamt += self.einzelnoten(i)(1)
+            if self.einzelnoten[i][2] == "Schriftlich" or self.einzelnoten[i][2] == "GSF":
+                gesamt += self.einzelnoten[i][1]
             else:
-                gesamt += 0.5*self.einzelnoten(i)(1)
-        self.gesamtNote = gesamt / a
+                gesamt += 0.5*self.einzelnoten[i][1]
+        erg = int(gesamt / a)
+        DBHelp.setNoteInDBEsterFreierPlatzMitDemNotentypeDerNichtBelegtIst(self.fach, 7, "gesamt", erg)

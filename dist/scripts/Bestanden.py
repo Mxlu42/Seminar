@@ -20,23 +20,23 @@ class Bestanden(object):
         counterHF2 = 0
         counterNF2 = 0
         for i in range(0, a):
-            if self.all(i)(1) == "Hauptfach":
-                if self.all(i)(2) == 5:
+            if self.all[i][1] == "Hauptfach":
+                if self.all[i][2] == 5:
                     counterHF5 += 1
-                elif self.all(i)(2) == 6:
+                elif self.all[i][2] == 6:
                     counterHF6 += 1
-                elif self.all(i)(2) == 1:
+                elif self.all[i][2] == 1:
                     counterHF1 += 1
-                elif self.all(i)(2) == 2:
+                elif self.all[i][2] == 2:
                     counterHF2 += 1
             else:
-                if self.all(i)(2) == 5:
+                if self.all[i][2] == 5:
                     counterNF5 += 1
-                elif self.all(i)(2) == 6:
+                elif self.all[i][2] == 6:
                     counterNF6 += 1
-                elif self.all(i)(2) == 1:
+                elif self.all[i][2] == 1:
                     counterNF1 += 1
-                elif self.all(i)(2) == 2:
+                elif self.all[i][2] == 2:
                     counterNF2 += 1
         if counterHF6 >= 2:
             return False
