@@ -95,6 +95,8 @@ class Window(QMainWindow):
         sp.released.connect(self.sp_r)
         grid.addWidget(sp, 3, 3, Qt.AlignmentFlag.AlignRight)
 
+    def cancel(self):
+        self.close
 
     # Funktion des 'Speichern' Buttons mit Speicher benachrichtigung / Überprüfung auf Eingabefehler
     def save(self):   

@@ -1,4 +1,4 @@
-from Bewertung import *
+from bewertung import *
 from dbhelp import *
 
 class Notenberechnung(object):
