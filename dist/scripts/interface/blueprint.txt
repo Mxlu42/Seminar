@@ -1,0 +1,819 @@
+ db.students.insertOne({
+ name: '{name}',
+ vorname: '{vorname}',
+ regristrations_datum: new Date(),
+ halbjahre: [
+ {
+ jahr: 1, angegeben:'false', Notenschnitt: null,
+ normal_faecher: [
+ {fach: 'Mathe', belegt:'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Deutsch', belegt:'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Informationstechnik', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Gestaltung_Medien', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Mechatronik', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'GGK', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Englisch', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Sport', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Chemie', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Physik', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Informatik', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Ethik', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Evangelisch', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Katholisch', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'SpanischN', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'SpanischF', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Wirtschaft', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Chemie-L', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Physik-L', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Literatur_Theater', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'MathePlus', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Seminarkurs', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ ],
+ },
+  {
+ jahr: 2, angegeben:'false', Notenschnitt: null,
+ normal_faecher: [
+ {fach: 'Mathe', belegt:'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Deutsch', belegt:'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Informationstechnik', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Gestaltung_Medien', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Mechatronik', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'GGK', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Englisch', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Sport', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Chemie', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Physik', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Informatik', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Ethik', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Evangelisch', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Katholisch', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'SpanischN', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'SpanischF', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Wirtschaft', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Chemie-L', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Physik-L', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Literatur_Theater', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'MathePlus', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Seminarkurs', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ ],
+ },
+ {
+ jahr: 3, angegeben:'false', Notenschnitt: null,
+ normal_faecher: [
+ {fach: 'Mathe', belegt:'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Deutsch', belegt:'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Informationstechnik', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Gestaltung_Medien', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Mechatronik', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'GGK', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Englisch', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Sport', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Chemie', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Physik', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Informatik', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Ethik', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Evangelisch', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Katholisch', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'SpanischN', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Wirtschaft', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Chemie-L', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Physik-L', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Literatur_Theater', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'MathePlus', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Seminarkurs', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ ],
+ },
+ {
+ jahr: 4, angegeben:'false', Notenschnitt: null,
+ normal_faecher: [
+ {fach: 'Mathe', belegt:'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Deutsch', belegt:'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Informationstechnik', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Gestaltung_Medien', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Mechatronik', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'GGK', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Englisch', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Sport', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Chemie', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Physik', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Informatik', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Ethik', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Evangelisch', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Katholisch', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'SpanischN', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Wirtschaft', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Chemie-L', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Physik-L', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Literatur_Theater', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'MathePlus', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Seminarkurs', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ ],
+ },
+ {
+ jahr: 5, angegeben:'false', Notenschnitt: null,
+ normal_faecher: [
+ {fach: 'Mathe', belegt:'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Deutsch', belegt:'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Informationstechnik', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Gestaltung_Medien', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Mechatronik', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'GGK', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Englisch', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Sport', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Chemie', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Physik', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Informatik', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Ethik', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Evangelisch', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Katholisch', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'SpanischN', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Wirtschaft', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Chemie-L', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Physik-L', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Literatur_Theater', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'MathePlus', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Seminarkurs', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ ],
+ },
+ {
+ jahr: 6, angegeben:'false', Notenschnitt: null,
+ normal_faecher: [
+ {fach: 'Mathe', belegt:'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Deutsch', belegt:'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Informationstechnik', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Gestaltung_Medien', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Mechatronik', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'GGK', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Englisch', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Sport', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Chemie', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Physik', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Informatik', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Ethik', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Evangelisch', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Katholisch', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'SpanischN', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Wirtschaft', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Chemie-L', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Physik-L', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Literatur_Theater', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'MathePlus', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'Seminarkurs', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ ],
+ },
+ {
+ jahr: 7, angegeben: 'false', Notenschnitt: null,
+ faecher: [
+ {fach: null, note: null, PruefungsfachNr: '1'},
+ {fach: null, note: null, PruefungsfachNr: '2'},
+ {fach: null, note: null, PruefungsfachNr: '3'},
+ {fach: null, note: null, PruefungsfachNr: '4'},
+ {fach: null, note: null, PruefungsfachNr: '5'}
+ ],
+ },
+ {
+ jahr: 8, angegeben: 'false', Notenschnitt: null, Unterkurse: null,
+ gesamtKurse: null, 
+ },
+ ]
+ })
