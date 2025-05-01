@@ -18,10 +18,12 @@ class CreateData:
 
         with open(actual_data_path, 'w', encoding='utf-8') as file:
             file.write(replaced)
+            print('🛠️ creating new blueprint...')
     
         return replaced
 
     def creationdb(self, replaced):
+        print('🛠️ creating database with blueprint...')
         command = replaced
         process = subprocess.Popen(
         [MONGOSH_PATH],
