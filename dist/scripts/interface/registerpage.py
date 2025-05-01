@@ -139,7 +139,7 @@ class Window(QMainWindow):
         if collection.find_one({"name": data["name"], "password": data["password"]}):
             print("You already have an account.")
         else:
-            print('Creating your account')
+            print('🛠️ Creating your account...')
             txt_data = CreateData()
             replaced_content = txt_data.replace_data(aus[1],aus[2])
             txt_data.creationdb(replaced_content)
