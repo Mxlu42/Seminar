@@ -3,7 +3,7 @@ from pymongo import MongoClient
 class DBHelp(object):
     def __init__(self):
         self.client = MongoClient("mongodb://localhost:27017/")
-        self.db = self.client["schule"]
+        self.db = self.client["test"]
         self.students = self.db["students"]
 
     def FachBelegt(self, fachname, halbjahr_seartch):

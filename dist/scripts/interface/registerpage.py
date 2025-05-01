@@ -10,7 +10,7 @@ from heart import Launcher
 from init_db import CreateData
 
 client = MongoClient('localhost', 27017)
-db = client['school']
+db = client['test']
 collection = db['students']
 
 class Window(QMainWindow):

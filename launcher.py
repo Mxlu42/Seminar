@@ -36,7 +36,7 @@ print("Working dir:", os.getcwd())
 print("Executable path:", sys.executable)
 
 client = MongoClient('localhost', 27017)
-db = client['school']
+db = client['test']
 collection = db['students']
 
 def check_data():
