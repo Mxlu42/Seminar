@@ -4,8 +4,10 @@ from PyQt6.QtWidgets import QMainWindow, QWidget, QPushButton, QGridLayout, QLab
 from PyQt6.QtCore import QSize, Qt
 from pymongo import MongoClient
 import os
+
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from heart import Launcher
+from init_db import CreateData
 
 client = MongoClient('localhost', 27017)
 db = client['school']
@@ -137,7 +139,11 @@ class Window(QMainWindow):
         if collection.find_one({"name": data["name"], "password": data["password"]}):
             print("You already have an account.")
         else:
-            collection.insert_one(data)
+            print('Creating your account')
+            txt_data = CreateData()
+            replaced_content = txt_data.replace_data(aus[1],aus[2])
+            txt_data.creationdb(replaced_content)
+
 
         for document in collection.find():
             print(document)
@@ -149,8 +155,8 @@ class Window(QMainWindow):
         txt4.clear()
         
         QMessageBox.about(self, 'Speicherbenachrichtigung', 'Deine Daten Wurden gespeichert!')
-        pipi = Launcher('homepage')
-        pipi.launch()
+        launch = Launcher('homepage')
+        launch.launch()
 
     # Funktion des 'Passwort anzeigen' Buttons
     def sp_p(self):

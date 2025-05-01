@@ -1,6 +1,6 @@
  db.students.insertOne({
- name: '%name%',
- vorname: '%vorname%',
+ name: 'lisewski',
+ vorname: 'noah',
  regristrations_datum: new Date(),
  halbjahre: [
  {
