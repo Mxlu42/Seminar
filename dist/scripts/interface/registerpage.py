@@ -97,6 +97,26 @@ class Window(QMainWindow):
         sp.released.connect(self.sp_r)
         grid.addWidget(sp, 3, 3, Qt.AlignmentFlag.AlignRight)
 
+        logwid = QWidget(self)
+        logbox = QGridLayout(logwid)
+        logwid.setLayout(logbox)
+        logwid.setMinimumSize(QSize(145, 65))
+        logwid.setMaximumSize(QSize(145, 65))
+        logwid.move(350, 525)
+
+        loglbl = QLabel('<u>bestehender Account:</u>')
+        loglbl.resize(loglbl.sizeHint())
+        loglbl.setAlignment(Qt.AlignmentFlag.AlignLeft)
+        logbox.addWidget(loglbl)
+
+        logb = QPushButton('Anmelden')
+        logb.resize(logb.sizeHint())
+        logb.clicked.connect(self.directtologinpage)
+        logbox.addWidget(logb)
+
+    def directtologinpage(self):
+        pass
+
     def cancel(self):
         self.close
 
