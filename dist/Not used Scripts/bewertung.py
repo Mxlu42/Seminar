@@ -1,4 +1,4 @@
-#importe DBHelp
+#from dbhelp import *
 
 
 class Halbjahrgetten(object):

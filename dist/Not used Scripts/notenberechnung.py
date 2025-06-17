@@ -17,7 +17,8 @@ class Notenberechnung(object):
         self.HJ = self.HJG.getGesuchtesHalbjahr()
 
     def geteinzelnoten(self):
-        self.einzelnoten = DBHelp.GetAlleAusgefülltenNotenAlsArrayMitAngabeFach(self.fach)          #Alle Note in denen nicht "-" steht und mit Notentype. nichts mit den Notentype "Gesamt"
+        pass
+ #       self.einzelnoten = DBHelp.GetAlleAusgefülltenNotenAlsArrayMitAngabeFach(self.fach)          #Alle Note in denen nicht "-" steht und mit Notentype. nichts mit den Notentype "Gesamt"
 
     def BerechneHalbJahrFachGesamtNote(self):
         a = len(self.einzelnoten)

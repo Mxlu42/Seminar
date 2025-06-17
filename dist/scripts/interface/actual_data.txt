@@ -1,6 +1,12 @@
+<<<<<<< HEAD
  db.students.insertOne({
  name: 'Brandwein',
  vorname: 'Felix',
+=======
+db.students.insertOne({
+ name: 'noaa',
+ vorname: 'lisewski',
+>>>>>>> 00b3cebc6483e8814a5c35c4185bb544bda479c0
  regristrations_datum: new Date(),
  halbjahre: [
  {
@@ -126,7 +132,13 @@
  {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
  {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
  },
- {fach: 'MathePlus', belegt: 'false', fachArt: null, note: [
+ {fach: 'MatheStuetz', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'DeutschStuetz', belegt: 'false', fachArt: null, note: [
  {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
  {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
  {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
@@ -263,7 +275,13 @@
  {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
  {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
  },
- {fach: 'MathePlus', belegt: 'false', fachArt: null, note: [
+ {fach: 'MatheStuetz', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'DeutschStuetz', belegt: 'false', fachArt: null, note: [
  {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
  {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
  {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 

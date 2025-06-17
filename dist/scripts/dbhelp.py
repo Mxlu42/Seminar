@@ -80,6 +80,48 @@ class DBHelp(object):
             return False
         return True
     
+    def istJahrgangVollständigAngegeben(self, jahrgang_werte: list[int]):
+    
+        results = self.students.find()
+        for student in results:
+            jahr_status = {jahr: False for jahr in jahrgang_werte}
+
+            for halbjahr in student.get("halbjahre", []):
+                jahr = halbjahr.get("jahr")
+                angegeben = halbjahr.get("angegeben")
+
+                if jahr in jahrgang_werte and str(angegeben).lower() == "true":
+                    jahr_status[jahr] = True
+
+            if all(jahr_status.values()):
+                print(f"✅ Jahrgang mit Jahren {jahrgang_werte} ist vollständig angegeben.")
+                return True
+
+        print(f"❌ Jahrgang mit Jahren {jahrgang_werte} ist NICHT vollständig angegeben.")
+        return False
+    
+    def setzeFaecherBelegtTrue(self, fachnamen: list[str], jahrgang: int):
+        results = self.students.find()
+
+        for student in results:
+            updated = False
+
+            for halbjahr in student.get("halbjahre", []):
+                if halbjahr.get("jahr") == jahrgang:
+                    for fach in halbjahr.get("normal_faecher", []):
+                        if fach.get("fach") in fachnamen:
+                            if fach.get("belegt") != "true":
+                                fach["belegt"] = "true"
+                                updated = True
+
+            if updated:
+                self.students.update_one(
+                    {"_id": student["_id"]},
+                    {"$set": {"halbjahre": student["halbjahre"]}}
+                )
+                print(f"✅ Fächer {fachnamen} in Jahrgang {jahrgang} auf 'belegt = true' gesetzt für Schüler {student.get('name')}.")
+
+
     def GetAlleAusgefülltenNotenAlsArrayMitAngabeFach(self, fachname, halbjahr_name):
         noten_liste = []
 

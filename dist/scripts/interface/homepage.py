@@ -5,6 +5,7 @@ from PyQt6.QtWidgets import QMainWindow, QWidget, QPushButton, QGridLayout, QLab
 from PyQt6.QtCore import QSize, Qt
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from heart import Launcher
+from dbhelp import *
 
 class Homepage(QMainWindow):
     def __init__(self):
@@ -117,8 +118,12 @@ class Homepage(QMainWindow):
 
     def ne11_clicked(self):
         print('Weiterleitung zur Seite "Noterneingabe 11"')
-        lnh = Launcher('elfteklassewahl')
-        lnh.launch()
+        db = DBHelp()
+        if db.istJahrgangVollständigAngegeben([1, 2]):
+            lnh = Launcher('elfteklassewahl')
+            lnh.launch()
+        else:
+            print('Du musst zuerst Fächer angeben') # hier pop up
 
     def fw12_clicked(self):
         print('Weiterleitung zur Seite "Faecherwahl 12"')
@@ -127,8 +132,10 @@ class Homepage(QMainWindow):
 
     def ne12_clicked(self):
         print('Weiterleitung zur Seite "Noterneingabe 12"')
-        lnh = Launcher('elfteklassewahl')
-        lnh.launch()
+        db = DBHelp()
+        if db.istJahrgangVollständigAngegeben([3,4]):
+            lnh = Launcher('elfteklassewahl')
+            lnh.launch()
 
     def fw13_clicked(self):
         print('Weiterleitung zur Seite "Faecherwahl 13"')
@@ -137,8 +144,10 @@ class Homepage(QMainWindow):
 
     def ne13_clicked(self):
         print('Weiterleitung zur Seite "Noterneingabe 13"')
-        lnh = Launcher('elfteklassewahl')
-        lnh.launch()
+        db = DBHelp()
+        if db.istJahrgangVollständigAngegeben([5,6]):
+            lnh = Launcher('elfteklassewahl')
+            lnh.launch()
 
     def k_clicked(self):
         print('Weiterleitung zur Seite "Klammerung"')

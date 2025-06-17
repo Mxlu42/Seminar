@@ -1,9 +1,7 @@
-from Bewertung import *
-#Importe DBHelp
+from dbhelp import *
 
 class Bestanden(object):
     def __init__(self):
-        self.HJG = Halbjahrgetten()      # type: ignore #kein plan was das ist
         self.all = []
 
     def ElfteBestanden(self):
@@ -39,6 +37,46 @@ class Bestanden(object):
                     counterNF2 += 1
         if counterHF6 >= 2:
             return False
-        elif counterHF6 == 1 and counterHF1 > 1:
-            return True
-        #usw
+        elif counterHF5 > 2:
+            return False
+        elif counterHF5 == 2 and (counterHF1 + counterHF2) < 2:
+            return False
+        elif counterHF5 == 1 and (counterHF1 == 0 or counterHF2 == 0 or counterHF3 == 0):
+            return False
+        elif counterNF6 == 2 and (counterHF1 >= 2 and (counterNF1 == 1 and counterNF2 < 2) and counterNF2 < 4): #Nicht correct ig   #https://thg-relaunch.jimdofree.com/unterricht/regeln/versetzungsordnung/#:~:text=Durchschnitt%20aus%20den%20Noten%20aller%20f%C3%BCr%20die,5%20oder%206%20k%C3%B6nnen%20nicht%20ausgeglichen%20werden):
+            return False
+        
+    def FachhochschulreifeBestanden(self):
+        return True
+
+    def AbiJahreBestanden(self):
+        if DBHelp.CountFaecherBelegt()  < 36:             #in hj 3,4,5,6
+            return False
+        if self.spanischbelegt == 0 and DBHelp.coutFachBelegt('Englisch') != 4:
+            return False
+        if (self.spanischbelegt > 0 and DBHelp.coutFachBelegt('Englisch') < 4 and DBHelp.coutFachBelegt('Spanisch') < 2) or self.spanischbelegt > 0 and DBHelp.coutFachBelegt('Spanisch') < 4:
+            return False
+        if DBHelp.ZaehleAllePunkte() < 300:
+            return False
+        if DBHelp.BetegpflichtigNullCount() > 0:
+            return False
+        return True
+    
+    def AbiPruefungBestanden(self):
+        prfa = DBHelp.getallePruefungsfaecher(7)        #fach, note PruefNR
+        countPunkte = 0
+        countunter = 0
+        for i in prfa:
+            countPunkte += i(2)
+            if i(2) == 0:
+                return False
+            if (i(3) == 1 and i(2) < 5) or (i(3) == 2 and i(2) < 5):
+                return False
+            if (i(3) == 3 or i(3) == 4 or i(3) == 5) and i(2) < 5:
+                countunter += 1
+        if countPunkte < 20:
+            return False
+        if countunter > 2:
+            return False
+        
+        return True

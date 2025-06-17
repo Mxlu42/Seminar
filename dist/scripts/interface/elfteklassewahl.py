@@ -4,7 +4,9 @@ from PyQt6.QtWidgets import QMainWindow, QWidget, QPushButton, QVBoxLayout, QLab
 from PyQt6.QtCore import QSize, Qt
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from pymongo import MongoClient
 from heart import Launcher
+from dbhelp import *
 
 class SubjectChoice11(QMainWindow):
     def __init__(self):
@@ -34,10 +36,10 @@ class SubjectChoice11(QMainWindow):
         wid1.setMaximumSize(QSize(155, 62))
         wid1.move(100, 342)
 
-        r_cl = QRadioButton('Chemie Labor')
+        r_cl = QRadioButton('Chemie-L')
         r_cl.toggled.connect(self.r_clt)
 
-        r_pl = QRadioButton('Physik Labor')
+        r_pl = QRadioButton('Physik-L')
         r_pl.toggled.connect(self.r_plt)
 
         grid1.addWidget(r_cl)
@@ -51,10 +53,10 @@ class SubjectChoice11(QMainWindow):
         wid2.setMaximumSize(QSize(155, 62))
         wid2.move(300, 342)
 
-        r_ds = QRadioButton('Deutsch stütz')
+        r_ds = QRadioButton('DeutschStuetz')
         r_ds.toggled.connect(self.r_dst)
 
-        r_ms = QRadioButton('Mathe stütz')
+        r_ms = QRadioButton('Mathestuetz')
         r_ms.toggled.connect(self.r_mst)
 
         grid2.addWidget(r_ds)
@@ -261,6 +263,9 @@ class SubjectChoice11(QMainWindow):
 
 
             QMessageBox.about(self, 'Speicherbenachrichtigung', 'Ihre Eingabe wurde gespeichert!')
+            db = DBHelp()
+            print('Fächer werden in der Datenbank gespeichert')
+            db.setzeFaecherBelegtTrue(finalsavearr, 1)
         
     def back(self):
         pipi = Launcher('homepage')
