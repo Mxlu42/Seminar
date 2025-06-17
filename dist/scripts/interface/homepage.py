@@ -143,7 +143,7 @@ class Homepage(QMainWindow):
     def ne13_clicked(self):
         print('Weiterleitung zur Seite "Noterneingabe 13"')
         db = DBHelp()
-        if db.checkGanzesJahrAngegeben(2):
+        if db.istJahrgangVollständigAngegeben([5,6]):
             lnh = Launcher('elfteklassewahl')
             lnh.launch()
 
