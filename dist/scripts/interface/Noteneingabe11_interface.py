@@ -5,12 +5,12 @@ from PyQt6.QtCore import QSize, Qt
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from heart import Launcher
-from dbhelp import DBHelp
+#from dbhelp import DBHelp
 
 class Noteneingabe11(QMainWindow):
     def __init__(self):
-        db = DBHelp()
-        print(db.getArrayAusAllenFaechernAndFaechertypseAndGesamtnoteInBestimmtemHalbJahr(0))
+        #db = DBHelp()
+        #print(db.getArrayAusAllenFaechernAndFaechertypseAndGesamtnoteInBestimmtemHalbJahr(0))
         super().__init__()
         
         #Mindestgröße / Titel definieren
@@ -46,8 +46,11 @@ class Noteneingabe11(QMainWindow):
             grid_layout.addWidget(lbl, 0, column,  Qt.AlignmentFlag.AlignLeft)
             column += 1
 
-        for i in range(30):
-            lbl = QLabel('Test')
+        mclass = ['Mathe', 'Deutsch', 'Profielfach (DB)', 'GGK', 'Englisch', 'Sport', 'Chemie', 'Physik', 'Informatik', 'Religion (DB)', 'Fremdsprache (DB)',  'Labor (DB)', 'Stuetz (DB)']
+
+
+        for i in mclass:
+            lbl = QLabel(i)
             lbl.resize(lbl.sizeHint())
             grid_layout.addWidget(lbl, row, 0,  Qt.AlignmentFlag.AlignLeft)
             grid_layout.setRowMinimumHeight(row, 30)
@@ -56,7 +59,7 @@ class Noteneingabe11(QMainWindow):
         row = 1
         column = 1
 
-        for i in range(30):
+        for i in range(len(mclass)):
             name = QComboBox()
             name.addItem('Bitte Note wählen')
             name.addItem('1')
