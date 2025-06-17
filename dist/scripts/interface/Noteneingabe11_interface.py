@@ -9,6 +9,8 @@ from heart import Launcher
 
 class Noteneingabe11(QMainWindow):
     def __init__(self):
+        global mclass
+        mclass = ['Mathe', 'Deutsch', 'Profielfach (DB)', 'GGK', 'Englisch', 'Sport', 'Chemie', 'Physik', 'Informatik', 'Religion (DB)', 'Fremdsprache (DB)',  'Labor (DB)', 'Stuetz (DB)']
         #db = DBHelp()
         #print(db.getArrayAusAllenFaechernAndFaechertypseAndGesamtnoteInBestimmtemHalbJahr(0))
         super().__init__()
@@ -46,7 +48,7 @@ class Noteneingabe11(QMainWindow):
             grid_layout.addWidget(lbl, 0, column,  Qt.AlignmentFlag.AlignLeft)
             column += 1
 
-        mclass = ['Mathe', 'Deutsch', 'Profielfach (DB)', 'GGK', 'Englisch', 'Sport', 'Chemie', 'Physik', 'Informatik', 'Religion (DB)', 'Fremdsprache (DB)',  'Labor (DB)', 'Stuetz (DB)']
+        
 
 
         for i in mclass:
@@ -59,17 +61,148 @@ class Noteneingabe11(QMainWindow):
         row = 1
         column = 1
 
-        for i in range(len(mclass)):
-            name = QComboBox()
-            name.addItem('Bitte Note wählen')
-            name.addItem('1')
-            name.addItem('2')
-            name.addItem('3')
-            name.addItem('4')
-            name.addItem('5')
-            name.addItem('6')
-            grid_layout.addWidget(name, row, 1,  Qt.AlignmentFlag.AlignLeft)
-            row += 1
+        self.cbb1 = QComboBox()
+        self.cbb1.addItem('Bitte Note wählen')
+        self.cbb1.addItem('1')
+        self.cbb1.addItem('2')
+        self.cbb1.addItem('3')
+        self.cbb1.addItem('4')
+        self.cbb1.addItem('5')
+        self.cbb1.addItem('6')
+        grid_layout.addWidget(self.cbb1, row, 1,  Qt.AlignmentFlag.AlignLeft)
+        row += 1
+
+        self.cbb2 = QComboBox()
+        self.cbb2.addItem('Bitte Note wählen')
+        self.cbb2.addItem('1')
+        self.cbb2.addItem('2')
+        self.cbb2.addItem('3')
+        self.cbb2.addItem('4')
+        self.cbb2.addItem('5')
+        self.cbb2.addItem('6')
+        grid_layout.addWidget(self.cbb2, row, 1,  Qt.AlignmentFlag.AlignLeft)
+        row += 1
+
+        self.cbb3 = QComboBox()
+        self.cbb3.addItem('Bitte Note wählen')
+        self.cbb3.addItem('1')
+        self.cbb3.addItem('2')
+        self.cbb3.addItem('3')
+        self.cbb3.addItem('4')
+        self.cbb3.addItem('5')
+        self.cbb3.addItem('6')
+        grid_layout.addWidget(self.cbb3, row, 1,  Qt.AlignmentFlag.AlignLeft)
+        row += 1
+
+        self.cbb4 = QComboBox()
+        self.cbb4.addItem('Bitte Note wählen')
+        self.cbb4.addItem('1')
+        self.cbb4.addItem('2')
+        self.cbb4.addItem('3')
+        self.cbb4.addItem('4')
+        self.cbb4.addItem('5')
+        self.cbb4.addItem('6')
+        grid_layout.addWidget(self.cbb4, row, 1,  Qt.AlignmentFlag.AlignLeft)
+        row += 1
+
+        self.cbb5 = QComboBox()
+        self.cbb5.addItem('Bitte Note wählen')
+        self.cbb5.addItem('1')
+        self.cbb5.addItem('2')
+        self.cbb5.addItem('3')
+        self.cbb5.addItem('4')
+        self.cbb5.addItem('5')
+        self.cbb5.addItem('6')
+        grid_layout.addWidget(self.cbb5, row, 1,  Qt.AlignmentFlag.AlignLeft)
+        row += 1
+
+        self.cbb6 = QComboBox()
+        self.cbb6.addItem('Bitte Note wählen')
+        self.cbb6.addItem('1')
+        self.cbb6.addItem('2')
+        self.cbb6.addItem('3')
+        self.cbb6.addItem('4')
+        self.cbb6.addItem('5')
+        self.cbb6.addItem('6')
+        grid_layout.addWidget(self.cbb6, row, 1,  Qt.AlignmentFlag.AlignLeft)
+        row += 1
+
+        self.cbb7 = QComboBox()
+        self.cbb7.addItem('Bitte Note wählen')
+        self.cbb7.addItem('1')
+        self.cbb7.addItem('2')
+        self.cbb7.addItem('3')
+        self.cbb7.addItem('4')
+        self.cbb7.addItem('5')
+        self.cbb7.addItem('6')
+        grid_layout.addWidget(self.cbb7, row, 1,  Qt.AlignmentFlag.AlignLeft)
+        row += 1
+
+        self.cbb8 = QComboBox()
+        self.cbb8.addItem('Bitte Note wählen')
+        self.cbb8.addItem('1')
+        self.cbb8.addItem('2')
+        self.cbb8.addItem('3')
+        self.cbb8.addItem('4')
+        self.cbb8.addItem('5')
+        self.cbb8.addItem('6')
+        grid_layout.addWidget(self.cbb8, row, 1,  Qt.AlignmentFlag.AlignLeft)
+        row += 1
+
+        self.cbb9 = QComboBox()
+        self.cbb9.addItem('Bitte Note wählen')
+        self.cbb9.addItem('1')
+        self.cbb9.addItem('2')
+        self.cbb9.addItem('3')
+        self.cbb9.addItem('4')
+        self.cbb9.addItem('5')
+        self.cbb9.addItem('6')
+        grid_layout.addWidget(self.cbb9, row, 1,  Qt.AlignmentFlag.AlignLeft)
+        row += 1
+
+        self.cbb10 = QComboBox()
+        self.cbb10.addItem('Bitte Note wählen')
+        self.cbb10.addItem('1')
+        self.cbb10.addItem('2')
+        self.cbb10.addItem('3')
+        self.cbb10.addItem('4')
+        self.cbb10.addItem('5')
+        self.cbb10.addItem('6')
+        grid_layout.addWidget(self.cbb10, row, 1,  Qt.AlignmentFlag.AlignLeft)
+        row += 1
+
+        self.cbb11 = QComboBox()
+        self.cbb11.addItem('Bitte Note wählen')
+        self.cbb11.addItem('1')
+        self.cbb11.addItem('2')
+        self.cbb11.addItem('3')
+        self.cbb11.addItem('4')
+        self.cbb11.addItem('5')
+        self.cbb11.addItem('6')
+        grid_layout.addWidget(self.cbb11, row, 1,  Qt.AlignmentFlag.AlignLeft)
+        row += 1
+
+        self.cbb12 = QComboBox()
+        self.cbb12.addItem('Bitte Note wählen')
+        self.cbb12.addItem('1')
+        self.cbb12.addItem('2')
+        self.cbb12.addItem('3')
+        self.cbb12.addItem('4')
+        self.cbb12.addItem('5')
+        self.cbb12.addItem('6')
+        grid_layout.addWidget(self.cbb12, row, 1,  Qt.AlignmentFlag.AlignLeft)
+        row += 1
+
+        self.cbb13 = QComboBox()
+        self.cbb13.addItem('Bitte Note wählen')
+        self.cbb13.addItem('1')
+        self.cbb13.addItem('2')
+        self.cbb13.addItem('3')
+        self.cbb13.addItem('4')
+        self.cbb13.addItem('5')
+        self.cbb13.addItem('6')
+        grid_layout.addWidget(self.cbb13, row, 1,  Qt.AlignmentFlag.AlignLeft)
+        row += 1
             
 
         scroll_content.setLayout(grid_layout)
@@ -82,6 +215,12 @@ class Noteneingabe11(QMainWindow):
         self.setCentralWidget(main_widget)
 
 
+        saveb = QPushButton('speichern')
+        saveb.resize(saveb.sizeHint())
+        saveb.clicked.connect(self.save)
+        main_layout.addWidget(saveb)
+
+
         backb = QPushButton('Zurück')
         backb.resize(backb.sizeHint())
         backb.clicked.connect(self.back)
@@ -89,17 +228,50 @@ class Noteneingabe11(QMainWindow):
 
         
 
+    def save(self):
+        if self.cbb1.currentText() == 'Bitte Note wählen':
+            QMessageBox.about(self, 'Fehler', f'Bitte Wählen Sie Ihre {mclass[0]} Note')
+            return
+        if self.cbb2.currentText() == 'Bitte Note wählen':
+            QMessageBox.about(self, 'Fehler', f'Bitte Wählen Sie Ihre {mclass[1]} Note')
+            return
+        if self.cbb3.currentText() == 'Bitte Note wählen':
+            QMessageBox.about(self, 'Fehler', f'Bitte Wählen Sie Ihre {mclass[2]} Note')
+            return
+        if self.cbb4.currentText() == 'Bitte Note wählen':
+            QMessageBox.about(self, 'Fehler', f'Bitte Wählen Sie Ihre {mclass[3]} Note')
+            return
+        if self.cbb5.currentText() == 'Bitte Note wählen':
+            QMessageBox.about(self, 'Fehler', f'Bitte Wählen Sie Ihre {mclass[4]} Note')
+            return
+        if self.cbb6.currentText() == 'Bitte Note wählen':
+            QMessageBox.about(self, 'Fehler', f'Bitte Wählen Sie Ihre {mclass[5]} Note')
+            return
+        if self.cbb7.currentText() == 'Bitte Note wählen':
+            QMessageBox.about(self, 'Fehler', f'Bitte Wählen Sie Ihre {mclass[6]} Note')
+            return
+        if self.cbb8.currentText() == 'Bitte Note wählen':
+            QMessageBox.about(self, 'Fehler', f'Bitte Wählen Sie Ihre {mclass[7]} Note')
+            return
+        if self.cbb9.currentText() == 'Bitte Note wählen':
+            QMessageBox.about(self, 'Fehler', f'Bitte Wählen Sie Ihre {mclass[8]} Note')
+            return
+        if self.cbb10.currentText() == 'Bitte Note wählen':
+            QMessageBox.about(self, 'Fehler', f'Bitte Wählen Sie Ihre {mclass[9]} Note')
+            return
+        if self.cbb11.currentText() == 'Bitte Note wählen':
+            QMessageBox.about(self, 'Fehler', f'Bitte Wählen Sie Ihre {mclass[10]} Note')
+            return
+        if self.cbb12.currentText() == 'Bitte Note wählen':
+            QMessageBox.about(self, 'Fehler', f'Bitte Wählen Sie Ihre {mclass[11]} Note')
+            return
+        if self.cbb13.currentText() == 'Bitte Note wählen':
+            QMessageBox.about(self, 'Fehler', f'Bitte Wählen Sie Ihre {mclass[12]} Note')
+            return
         
-
-    def NBox(self):
-        name = QComboBox()
-        name.addItem('Bitte Note wählen')
-        name.addItem('1')
-        name.addItem('2')
-        name.addItem('3')
-        name.addItem('4')
-        name.addItem('5')
-        name.addItem('6')
+        
+        savearr = [mclass, [self.cbb1.currentText(), self.cbb2.currentText(), self.cbb3.currentText(), self.cbb4.currentText(), self.cbb5.currentText(), self.cbb6.currentText(), self.cbb7.currentText(), self.cbb8.currentText(), self.cbb9.currentText(), self.cbb10.currentText(), self.cbb11.currentText(), self.cbb12.currentText(), self.cbb13.currentText()]]  
+        print(savearr)
 
     def back(self):
         pipi = Launcher('homepage')
