@@ -1,9 +1,7 @@
-from bewertung import *
 from dbhelp import *
 
 class Bestanden(object):
     def __init__(self):
-        self.HJG = Halbjahrgetten()      # type: ignore #kein plan was das ist
         self.all = []
 
     def ElfteBestanden(self):
