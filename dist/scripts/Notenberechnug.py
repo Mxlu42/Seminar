@@ -3,7 +3,7 @@ from dbhelp import *
 
 class Notenberechnung(object):
     def __init__(self, a, b): 
-        self.fach = b
+        self.fach = b is not None
         self.HJ = a             #diereck von felix
         self.einzelnoten = []
         self.geteinzelnoten()
@@ -24,3 +24,12 @@ class Notenberechnung(object):
                 gesamt += self.einzelnoten[i][1]
         erg = int(gesamt / gesamta)
         DBHelp.setNoteInDBEsterFreierPlatzMitDemNotentypeDerNichtBelegtIst(self.fach, 7, "gesamt", erg)
+
+    def Notendurchschnitt(self):
+        noten = DBHelp.getAlleNotenAusHalbjahr(self.HJ)
+        a = len(noten)
+        znote = 0
+        for i in range(0,a):
+            znote += i
+        erg = znote / a
+        return erg
