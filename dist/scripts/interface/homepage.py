@@ -140,7 +140,7 @@ class Homepage(QMainWindow):
 
     def k_clicked(self):
         print('Weiterleitung zur Seite "Klammerung"')
-        lnh = Launcher('Klammerung')
+        lnh = Launcher('Klammerung_interface')
         lnh.launch()
 
 app = QtWidgets.QApplication(sys.argv)
