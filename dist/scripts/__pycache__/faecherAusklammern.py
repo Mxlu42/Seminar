@@ -29,6 +29,8 @@ class FaecherRausstreichen(object):
             return False
         if (self.spanischbelegt > 0 and DBHelp.coutFachBelegt('Englisch') < 4 and DBHelp.coutFachBelegt('Spanisch') < 2) or self.spanischbelegt > 0 and DBHelp.coutFachBelegt('Spanisch') < 4:
             return False
-        if Bestanden.AbiJahreBestanden() == False or Bestanden.Dreizehn1Bestanden() == False or Bestanden.Dreizehn2Bestanden() == False or Bestanden.Zwoelfte1Bestanden() == False or Bestanden.Zwoelfte2Bestanden() == False:
+        if DBHelp.ZaehleAllePunkte() < 300:
+            return False
+        if DBHelp.BetegpflichtigNullCount() > 0:
             return False
         return True

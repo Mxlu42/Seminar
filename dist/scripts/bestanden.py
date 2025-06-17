@@ -67,4 +67,9 @@ class Bestanden(object):
         return True
         
     def AbiJahreBestanden(self):
+        if DBHelp.ZaehleAllePunkte() < 300:
+            return False
+        if DBHelp.BetegpflichtigNullCount() > 0:
+            return False
+        
         return True
