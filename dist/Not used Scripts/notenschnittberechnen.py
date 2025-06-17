@@ -1,5 +1,5 @@
-from DBprogramm import *
-from Bewertung import *
+#from dbhelp import *
+from bewertung import *
 
 class NotenschnnittBerechnen(object):
     def __init__(self):
