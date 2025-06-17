@@ -5,10 +5,15 @@ from PyQt6.QtCore import QSize, Qt
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from heart import Launcher
-#from dbhelp import getfaechermitnoten1213                                                                       #Miron muss noch schreiben
+#from scripts.dbhelp import DBHelp
 
 class SubjectChoice11(QMainWindow):
     def __init__(self):
+        #all = DBHelp.getFaecherMitNoten1213()
+
+        #faecher = all[0]
+        #noten = all[1]
+
         super().__init__()
         
         #Mindestgröße / Titel definieren
