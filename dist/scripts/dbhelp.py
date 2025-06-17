@@ -76,7 +76,9 @@ class DBHelp(object):
                 }
             }
         })
-        return result is not None
+        if result == None:
+            return False
+        return True
     
     def GetAlleAusgefülltenNotenAlsArrayMitAngabeFach(self, fachname, halbjahr_name):
         noten_liste = []
