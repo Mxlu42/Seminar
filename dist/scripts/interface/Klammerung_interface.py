@@ -28,7 +28,7 @@ class SubjectChoice11(QMainWindow):
         wid.setLayout(grid)
         wid.setMinimumSize(QSize(380, 200))
         wid.setMaximumSize(QSize(380, 200))
-        wid.move(round((500/2)-(380/2)), 100)
+        wid.move(round((500/2)-(380/2)), 50)
 
         colum = 0
 
@@ -37,6 +37,8 @@ class SubjectChoice11(QMainWindow):
             lbl.resize(lbl.sizeHint())
             grid.addWidget(lbl, 0, colum,  Qt.AlignmentFlag.AlignLeft)
             colum += 1
+
+        
 
         
     def back(self):
