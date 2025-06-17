@@ -90,6 +90,13 @@ class Homepage(QMainWindow):
         ne13.move(self.Center(ne13), bmh)
         bmh += 40
 
+        k = QPushButton('Klammerung', self)
+        k.resize(k.sizeHint())
+        k.setToolTip('Paltzhalter <br> Erklaertext Noteneingabe 13')
+        k.clicked.connect(self.k_clicked)
+        k.move(self.Center(k), bmh)
+        bmh += 40
+
 
 
 
@@ -129,6 +136,11 @@ class Homepage(QMainWindow):
     def ne13_clicked(self):
         print('Weiterleitung zur Seite "Noterneingabe 13"')
         lnh = Launcher('elfteklassewahl')
+        lnh.launch()
+
+    def k_clicked(self):
+        print('Weiterleitung zur Seite "Klammerung"')
+        lnh = Launcher('Klammerung')
         lnh.launch()
 
 app = QtWidgets.QApplication(sys.argv)
