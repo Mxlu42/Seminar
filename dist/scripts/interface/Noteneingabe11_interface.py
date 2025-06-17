@@ -5,15 +5,12 @@ from PyQt6.QtCore import QSize, Qt
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from heart import Launcher
-#from scripts.dbhelp import DBHelp
+from dbhelp import DBHelp
 
-class Klammerung(QMainWindow):
+class Noteneingabe11(QMainWindow):
     def __init__(self):
-        #all = DBHelp.getFaecherMitNoten1213()
-
-        #faecher = all[0]
-        #noten = all[1]
-
+        db = DBHelp()
+        print(db.getArrayAusAllenFaechernAndFaechertypseAndGesamtnoteInBestimmtemHalbJahr(0))
         super().__init__()
         
         #Mindestgröße / Titel definieren
@@ -43,7 +40,7 @@ class Klammerung(QMainWindow):
         column = 0
         row = 1
 
-        for s in [ '<b>Fach</b>', '<b>HJ1</b>', '<b>HJ2</b>', '<b>HJ3</b>', '<b>HJ4</b>']:
+        for s in [ '<b>Fach</b>', '<b>Note</b>']:
             lbl = QLabel(s)
             lbl.resize(lbl.sizeHint())
             grid_layout.addWidget(lbl, 0, column,  Qt.AlignmentFlag.AlignLeft)
@@ -59,15 +56,16 @@ class Klammerung(QMainWindow):
         row = 1
         column = 1
 
-        a = [30 * []]
         for i in range(30):
-            for q in range(4):
-                lbl = QCheckBox()
-                lbl.setChecked(True)
-                lbl.resize(lbl.sizeHint())
-                grid_layout.addWidget(lbl, row, column,  Qt.AlignmentFlag.AlignLeft)
-                column += 1
-            column = 1
+            name = QComboBox()
+            name.addItem('Bitte Note wählen')
+            name.addItem('1')
+            name.addItem('2')
+            name.addItem('3')
+            name.addItem('4')
+            name.addItem('5')
+            name.addItem('6')
+            grid_layout.addWidget(name, row, 1,  Qt.AlignmentFlag.AlignLeft)
             row += 1
             
 
@@ -90,7 +88,16 @@ class Klammerung(QMainWindow):
 
         
 
-        
+    def NBox(self):
+        name = QComboBox()
+        name.addItem('Bitte Note wählen')
+        name.addItem('1')
+        name.addItem('2')
+        name.addItem('3')
+        name.addItem('4')
+        name.addItem('5')
+        name.addItem('6')
+
     def back(self):
         pipi = Launcher('homepage')
         pipi.launch()
@@ -101,6 +108,6 @@ class Klammerung(QMainWindow):
 
 #Anzeigen / Ausführen des Programms als sepeates Fenster
 app = QtWidgets.QApplication(sys.argv)
-win = Klammerung()
+win = Noteneingabe11()
 win.show()
 sys.exit(app.exec())
