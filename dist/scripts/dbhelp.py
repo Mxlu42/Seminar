@@ -67,7 +67,7 @@ class DBHelp(object):
         return gefundene_faecher
     
 
-    def pruefe_halbjahr_angegeben(self, jahr):
+    def pruefe_halbjahr_angegeben(self, jahr):          # Nimand
         result = self.students.find_one({
             "halbjahre": {
                 "$elemMatch": {
