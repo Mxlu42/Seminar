@@ -100,6 +100,8 @@ class Window(QMainWindow):
 
     def directtoregisterpage(self):
         print('Weiterleiten zu: registerpage')
+        lnh = Launcher('registerpage')
+        lnh.launch()
 
     # Funktion des 'Speichern' Buttons mit Speicher benachrichtigung / Überprüfung auf Eingabefehler
     def save(self):   

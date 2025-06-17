@@ -31,7 +31,7 @@ class SubjectChoice11(QMainWindow):
         self.setCentralWidget(QWidget(self))
         self.setMinimumSize(QSize(500, 600))
         self.setMaximumSize(QSize(500, 600))
-        self.setWindowTitle('11te klasse Fächerwahl')
+        self.setWindowTitle('12te klasse Fächerwahl')
 
         lbl = QLabel('Platzhalter für den Erklärtext')
         lbl.resize(lbl.sizeHint())

@@ -38,14 +38,14 @@ class Homepage(QMainWindow):
 
         fw11 = QPushButton('Fächerwahl Klasse 11', self)
         fw11.resize(fw11.sizeHint())
-        fw11.setToolTip('Paltzhalter <br> Erklaertext Faecherwahl 11')
+        fw11.setToolTip('Wahl für ein Labor Fach,<br> eine 3. Fremdsprache, Stützfach und einer Konfession')
         fw11.clicked.connect(self.fw11_clicked)
         fw11.move(self.Center(fw11), bmh)
         bmh += 40
 
         ne11 = QPushButton('Noteneingabe Klasse 11', self)
         ne11.resize(ne11.sizeHint())
-        ne11.setToolTip('Paltzhalter <br> Erklaertext Noteneingabe 11')
+        ne11.setToolTip('Eingabe der Noten der Klasse 11')
         ne11.clicked.connect(self.ne11_clicked)
         ne11.move(self.Center(ne11), bmh)
         bmh += 40
@@ -58,14 +58,14 @@ class Homepage(QMainWindow):
 
         fw12 = QPushButton('Fächerwahl Klasse 12', self)
         fw12.resize(fw12.sizeHint())
-        fw12.setToolTip('Paltzhalter <br> Erklaertext Faecherwahl 12')
+        fw12.setToolTip('Wahl Deutsch eAN oder Mathe eAn,<br> Entgültige konfessionswahl, Englisch oder Spanisch und aller Wahlfächer')
         fw12.clicked.connect(self.fw12_clicked)
         fw12.move(self.Center(fw12), bmh)
         bmh += 40
 
         ne12 = QPushButton('Noteneingabe Klasse 12', self)
         ne12.resize(ne12.sizeHint())
-        ne12.setToolTip('Paltzhalter <br> Erklaertext Noteneingabe 12')
+        ne12.setToolTip('Eingabe der Noten  der Klasse 12')
         ne12.clicked.connect(self.ne12_clicked)
         ne12.move(self.Center(ne12), bmh)
         bmh += 40
@@ -78,16 +78,23 @@ class Homepage(QMainWindow):
 
         fw13 = QPushButton('Fächerwahl Klasse 13', self)
         fw13.resize(fw13.sizeHint())
-        fw13.setToolTip('Paltzhalter <br> Erklaertext Faecherwahl 13')
+        fw13.setToolTip('Wahl der Prüfungsfächer')
         fw13.clicked.connect(self.fw13_clicked)
         fw13.move(self.Center(fw13), bmh)
         bmh += 40
 
         ne13 = QPushButton('Noteneingabe Klasse 13', self)
         ne13.resize(ne13.sizeHint())
-        ne13.setToolTip('Paltzhalter <br> Erklaertext Noteneingabe 13')
+        ne13.setToolTip('Eingabe Der Noten der Klasse 13')
         ne13.clicked.connect(self.ne13_clicked)
         ne13.move(self.Center(ne13), bmh)
+        bmh += 40
+
+        k = QPushButton('Klammerung', self)
+        k.resize(k.sizeHint())
+        k.setToolTip('Auswahl der Klammerung')
+        k.clicked.connect(self.k_clicked)
+        k.move(self.Center(k), bmh)
         bmh += 40
 
 
@@ -129,6 +136,11 @@ class Homepage(QMainWindow):
     def ne13_clicked(self):
         print('Weiterleitung zur Seite "Noterneingabe 13"')
         lnh = Launcher('elfteklassewahl')
+        lnh.launch()
+
+    def k_clicked(self):
+        print('Weiterleitung zur Seite "Klammerung"')
+        lnh = Launcher('Klammerung_interface')
         lnh.launch()
 
 app = QtWidgets.QApplication(sys.argv)
