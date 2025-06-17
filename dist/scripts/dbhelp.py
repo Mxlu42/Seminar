@@ -80,6 +80,26 @@ class DBHelp(object):
             return False
         return True
     
+    def istJahrgangVollständigAngegeben(self, jahrgang_werte: list[int]):
+    
+        results = self.students.find()
+        for student in results:
+            jahr_status = {jahr: False for jahr in jahrgang_werte}
+
+            for halbjahr in student.get("halbjahre", []):
+                jahr = halbjahr.get("jahr")
+                angegeben = halbjahr.get("angegeben")
+
+                if jahr in jahrgang_werte and str(angegeben).lower() == "true":
+                    jahr_status[jahr] = True
+
+            if all(jahr_status.values()):
+                print(f"✅ Jahrgang mit Jahren {jahrgang_werte} ist vollständig angegeben.")
+                return True
+
+        print(f"❌ Jahrgang mit Jahren {jahrgang_werte} ist NICHT vollständig angegeben.")
+        return False
+
     def GetAlleAusgefülltenNotenAlsArrayMitAngabeFach(self, fachname, halbjahr_name):
         noten_liste = []
 
