@@ -1,4 +1,4 @@
-#importe DBHelp
+#from dbhelp import *
 
 
 class Halbjahrgetten(object):
@@ -27,5 +27,5 @@ class noteEingeben(object):
         self.HJ = HJ
         self.Note = Note
         self.Notentype = Notentype
-        DBhelp.setNoteInDB(self.fach, self.HJ, self.Note, self.Notentype)
+ #       DBHelp.setNoteInDB(self.fach, self.HJ, self.Note, self.Notentype)
     

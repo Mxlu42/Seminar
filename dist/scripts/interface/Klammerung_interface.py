@@ -1,14 +1,19 @@
 import sys
 from PyQt6 import QtCore, QtWidgets
-from PyQt6.QtWidgets import QMainWindow, QWidget, QPushButton, QGridLayout, QLabel, QLineEdit, QMessageBox, QComboBox, QRadioButton
+from PyQt6.QtWidgets import QMainWindow, QWidget, QPushButton, QGridLayout, QLabel, QLineEdit, QMessageBox, QComboBox, QRadioButton, QScrollArea, QVBoxLayout, QCheckBox
 from PyQt6.QtCore import QSize, Qt
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from heart import Launcher
-#from dbhelp import getfaechermitnoten1213                                                                       #Miron muss noch schreiben
+#from scripts.dbhelp import DBHelp
 
 class SubjectChoice11(QMainWindow):
     def __init__(self):
+        #all = DBHelp.getFaecherMitNoten1213()
+
+        #faecher = all[0]
+        #noten = all[1]
+
         super().__init__()
         
         #Mindestgröße / Titel definieren
@@ -17,26 +22,71 @@ class SubjectChoice11(QMainWindow):
         self.setMaximumSize(QSize(500, 600))
         self.setWindowTitle('Klammerung')
 
+        main_widget = QWidget()
+        main_layout = QVBoxLayout()
+
         lbl = QLabel('Platzhalter für den Erklärtext')
         lbl.resize(lbl.sizeHint())
         lbl.setAlignment(Qt.AlignmentFlag.AlignHCenter)
         lbl.setMargin(30)
-        self.setCentralWidget(lbl)
+        main_layout.addWidget(lbl)
 
-        wid = QWidget(self)
-        grid = QGridLayout(wid)
-        wid.setLayout(grid)
-        wid.setMinimumSize(QSize(380, 200))
-        wid.setMaximumSize(QSize(380, 200))
-        wid.move(round((500/2)-(380/2)), 50)
+        scroll_area = QScrollArea()
+        scroll_area.setWidgetResizable(True)
+        
+        
 
-        colum = 0
+        scroll_content = QWidget()
+        grid_layout = QGridLayout()
+        
 
-        for s in [ 'Fach', 'HJ1', 'HJ2', 'HJ3', 'HJ4']:
+        column = 0
+        row = 1
+
+        for s in [ '<b>Fach</b>', '<b>HJ1</b>', '<b>HJ2</b>', '<b>HJ3</b>', '<b>HJ4</b>']:
             lbl = QLabel(s)
             lbl.resize(lbl.sizeHint())
-            grid.addWidget(lbl, 0, colum,  Qt.AlignmentFlag.AlignLeft)
-            colum += 1
+            grid_layout.addWidget(lbl, 0, column,  Qt.AlignmentFlag.AlignLeft)
+            column += 1
+
+        for i in range(30):
+            lbl = QLabel('Test')
+            lbl.resize(lbl.sizeHint())
+            grid_layout.addWidget(lbl, row, 0,  Qt.AlignmentFlag.AlignLeft)
+            grid_layout.setRowMinimumHeight(row, 30)
+            row += 1
+
+        row = 1
+        column = 1
+
+        a = [30 * []]
+        for i in range(30):
+            for q in range(4):
+                lbl = QCheckBox()
+                lbl.setChecked(True)
+                lbl.resize(lbl.sizeHint())
+                grid_layout.addWidget(lbl, row, column,  Qt.AlignmentFlag.AlignLeft)
+                column += 1
+            column = 1
+            row += 1
+            
+
+        scroll_content.setLayout(grid_layout)
+        scroll_area.setWidget(scroll_content)
+
+
+        main_layout.addWidget(scroll_area)
+
+        main_widget.setLayout(main_layout)
+        self.setCentralWidget(main_widget)
+
+
+        backb = QPushButton('Zurück')
+        backb.resize(backb.sizeHint())
+        backb.clicked.connect(self.back)
+        main_layout.addWidget(backb)
+
+        
 
         
 

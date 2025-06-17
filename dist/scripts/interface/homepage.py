@@ -24,12 +24,7 @@ class Homepage(QMainWindow):
 
         bmh = 150
 
-        nb = QPushButton('Notenberechnung', self)
-        nb.resize(nb.sizeHint())
-        nb.setToolTip('Paltzhalter <br> Erklaertext Notenberechnung')
-        nb.clicked.connect(self.nb_clicked)
-        nb.move(self.Center(nb), bmh)
-        bmh += 40
+        
 
         k11 = QLabel('<u>Klasse 11 (Eingangsklasse)</u>', self)
         k11.setFixedWidth(200)
@@ -96,6 +91,13 @@ class Homepage(QMainWindow):
         k.setToolTip('Auswahl der Klammerung')
         k.clicked.connect(self.k_clicked)
         k.move(self.Center(k), bmh)
+        bmh += 40
+
+        nb = QPushButton('Ergebnisausgabe', self)
+        nb.resize(nb.sizeHint())
+        nb.setToolTip('Paltzhalter <br> Erklaertext Ergebnisausgabe')
+        nb.clicked.connect(self.nb_clicked)
+        nb.move(self.Center(nb), bmh)
         bmh += 40
 
 
