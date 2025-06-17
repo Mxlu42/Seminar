@@ -5,7 +5,7 @@ class FaecherRausstreichen(object):
     def __init__(self, a):                      #a ist ein Array, das die fächer die er rausstreichen  möchte beinhaltet. im Array stehen: Alles von dem Fach (um die daten zu haben, falls der Try falsch ist)
         self.Tryfaecher = a 
         self.spanischbelegt = DBHelp.coutFachBelegt('SpanischN')
-        if self.Streichen() == False or self.Ueberpuefen() == False:
+        if self.Streichen() == False or Bestanden.AbiJahreBestanden() == False:
             for i in self.Tryfaecher:
                 DBHelp.setBelegt(i(1), i(2), True)
             return False
@@ -20,17 +20,4 @@ class FaecherRausstreichen(object):
             if i(2) == ('Deutsch' or 'Mathe' or 'GGK' or 'Physik' or 'Chemie') or i(3) == 'Profil' or DBHelp.coutFachBelegt('Informatik') < 2:     #i(3) soll Fachtype sein #in hj 3,4,5,6
                 return False
             DBHelp.setBelegt(i(1), i(2), False)       #i(1) soll halpjahr und i(2) das fach sein
-        return True
-    
-    def Ueberpuefen(self):
-        if DBHelp.CountFaecherBelegt()  < 36:             #in hj 3,4,5,6
-            return False
-        if self.spanischbelegt == 0 and DBHelp.coutFachBelegt('Englisch') != 4:
-            return False
-        if (self.spanischbelegt > 0 and DBHelp.coutFachBelegt('Englisch') < 4 and DBHelp.coutFachBelegt('Spanisch') < 2) or self.spanischbelegt > 0 and DBHelp.coutFachBelegt('Spanisch') < 4:
-            return False
-        if DBHelp.ZaehleAllePunkte() < 300:
-            return False
-        if DBHelp.BetegpflichtigNullCount() > 0:
-            return False
         return True
