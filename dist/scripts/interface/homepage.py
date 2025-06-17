@@ -113,7 +113,7 @@ class Homepage(QMainWindow):
 
     def fw12_clicked(self):
         print('Weiterleitung zur Seite "Faecherwahl 12"')
-        lnh = Launcher('elfteklassewahl')
+        lnh = Launcher('zwoelfteklassewahl')
         lnh.launch()
 
     def ne12_clicked(self):
