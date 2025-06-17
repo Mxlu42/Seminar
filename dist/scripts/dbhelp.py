@@ -157,3 +157,21 @@ class DBHelp(object):
                                 "gesamtnote": fach.get("note", "")
                             })
         return ergebnis
+    
+    def getFaecherMitNoten1213(self):
+        faecher_noten = [[], []]  # Index 0 = Jahr 1 (12), Index 1 = Jahr 2 (13)
+        results = self.students.find()
+
+        for student in results:
+            for halbjahr in student.get("halbjahre", []):
+                jahr = halbjahr.get("jahr")
+                if jahr in [1, 2]:  # Jahrgang 12 und 13
+                    index = jahr - 1
+                    for fach in halbjahr.get("normal_faecher", []):
+                        if fach.get("belegt") == "true":
+                            gesamtnote = None
+                            for eintrag in fach.get("note", []):
+                                if eintrag.get("type") == "gesamt":
+                                    gesamtnote = eintrag.get("Wert")
+                            faecher_noten[index].append([fach.get("fach"), gesamtnote])
+        return faecher_noten
