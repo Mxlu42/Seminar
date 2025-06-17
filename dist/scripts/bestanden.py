@@ -66,3 +66,22 @@ class Bestanden(object):
         if DBHelp.BetegpflichtigNullCount() > 0:
             return False
         return True
+    
+    def AbiPruefungBestanden(self):
+        prfa = DBHelp.getallePruefungsfaecher(7)        #fach, note PruefNR
+        countPunkte = 0
+        countunter = 0
+        for i in prfa:
+            countPunkte += i(2)
+            if i(2) == 0:
+                return False
+            if (i(3) == 1 and i(2) < 5) or (i(3) == 2 and i(2) < 5):
+                return False
+            if (i(3) == 3 or i(3) == 4 or i(3) == 5) and i(2) < 5:
+                countunter += 1
+        if countPunkte < 20:
+            return False
+        if countunter > 2:
+            return False
+        
+        return True
