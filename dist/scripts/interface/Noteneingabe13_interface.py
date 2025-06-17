@@ -7,10 +7,10 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from heart import Launcher
 #from dbhelp import DBHelp
 
-class Noteneingabe12(QMainWindow):
+class Noteneingabe13(QMainWindow):
     def __init__(self):
         global mclass
-        mclass = ['Mathe', 'Deutsch', 'Profielfach (DB)', 'GGK', 'Englisch', 'Sport', 'Naturwissenschaft (DB)', 'Informatik', 'Religion (DB)', 'Mathe plus (DB)', 'Fremdsprache (DB)', 'Wirtaschaft (DB)','Labor (DB)', 'LT (DB)', 'Seminar (DB)']
+        mclass = ['Mathe', 'Deutsch', 'Profielfach (DB)', 'GGK', 'Englisch', 'Sport', 'Naturwissenschaft (DB)', 'Informatik', 'Religion (DB)', 'Mathe plus (DB)', 'Fremdsprache (DB)', 'Wirtaschaft (DB)','Labor (DB)', 'LT (DB)']
         #db = DBHelp()
         #print(db.getArrayAusAllenFaechernAndFaechertypseAndGesamtnoteInBestimmtemHalbJahr(0))
         super().__init__()
@@ -214,17 +214,6 @@ class Noteneingabe12(QMainWindow):
         self.cbb14.addItem('6')
         grid_layout.addWidget(self.cbb14, row, 1,  Qt.AlignmentFlag.AlignLeft)
         row += 1
-
-        self.cbb15 = QComboBox()
-        self.cbb15.addItem('Bitte Note wählen')
-        self.cbb15.addItem('1')
-        self.cbb15.addItem('2')
-        self.cbb15.addItem('3')
-        self.cbb15.addItem('4')
-        self.cbb15.addItem('5')
-        self.cbb15.addItem('6')
-        grid_layout.addWidget(self.cbb15, row, 1,  Qt.AlignmentFlag.AlignLeft)
-        row += 1
             
 
         scroll_content.setLayout(grid_layout)
@@ -293,12 +282,9 @@ class Noteneingabe12(QMainWindow):
         if self.cbb14.currentText() == 'Bitte Note wählen':
             QMessageBox.about(self, 'Fehler', f'Bitte Wählen Sie Ihre {mclass[13]} Note')
             return
-        if self.cbb15.currentText() == 'Bitte Note wählen':
-            QMessageBox.about(self, 'Fehler', f'Bitte Wählen Sie Ihre {mclass[14]} Note')
-            return
         
         
-        savearr = [mclass, [self.cbb1.currentText(), self.cbb2.currentText(), self.cbb3.currentText(), self.cbb4.currentText(), self.cbb5.currentText(), self.cbb6.currentText(), self.cbb7.currentText(), self.cbb8.currentText(), self.cbb9.currentText(), self.cbb10.currentText(), self.cbb11.currentText(), self.cbb12.currentText(), self.cbb13.currentText(), self.cbb14.currentText(), self.cbb15.currentText()]]  
+        savearr = [mclass, [self.cbb1.currentText(), self.cbb2.currentText(), self.cbb3.currentText(), self.cbb4.currentText(), self.cbb5.currentText(), self.cbb6.currentText(), self.cbb7.currentText(), self.cbb8.currentText(), self.cbb9.currentText(), self.cbb10.currentText(), self.cbb11.currentText(), self.cbb12.currentText(), self.cbb13.currentText(), self.cbb14.currentText()]]  
         print(savearr)
 
         self.cbb1.setCurrentIndex(0)
@@ -315,7 +301,6 @@ class Noteneingabe12(QMainWindow):
         self.cbb12.setCurrentIndex(0)
         self.cbb13.setCurrentIndex(0)
         self.cbb14.setCurrentIndex(0)
-        self.cbb15.setCurrentIndex(0)
 
     def back(self):
         pipi = Launcher('homepage')
@@ -327,6 +312,6 @@ class Noteneingabe12(QMainWindow):
 
 #Anzeigen / Ausführen des Programms als sepeates Fenster
 app = QtWidgets.QApplication(sys.argv)
-win = Noteneingabe12()
+win = Noteneingabe13()
 win.show()
 sys.exit(app.exec())

@@ -287,6 +287,21 @@ class Noteneingabe11(QMainWindow):
         savearr = [mclass, [self.cbb1.currentText(), self.cbb2.currentText(), self.cbb3.currentText(), self.cbb4.currentText(), self.cbb5.currentText(), self.cbb6.currentText(), self.cbb7.currentText(), self.cbb8.currentText(), self.cbb9.currentText(), self.cbb10.currentText(), self.cbb11.currentText(), self.cbb12.currentText(), self.cbb13.currentText(), self.cbb14.currentText()]]  
         print(savearr)
 
+        self.cbb1.setCurrentIndex(0)
+        self.cbb2.setCurrentIndex(0)
+        self.cbb3.setCurrentIndex(0)
+        self.cbb4.setCurrentIndex(0)
+        self.cbb5.setCurrentIndex(0)
+        self.cbb6.setCurrentIndex(0)
+        self.cbb7.setCurrentIndex(0)
+        self.cbb8.setCurrentIndex(0)
+        self.cbb9.setCurrentIndex(0)
+        self.cbb10.setCurrentIndex(0)
+        self.cbb11.setCurrentIndex(0)
+        self.cbb12.setCurrentIndex(0)
+        self.cbb13.setCurrentIndex(0)
+        self.cbb14.setCurrentIndex(0)
+
     def back(self):
         pipi = Launcher('homepage')
         pipi.launch()
