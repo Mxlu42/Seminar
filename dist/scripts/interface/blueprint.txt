@@ -1,4 +1,4 @@
- db.students.insertOne({
+db.students.insertOne({
  name: '%name%',
  vorname: '%vorname%',
  regristrations_datum: new Date(),
@@ -126,7 +126,13 @@
  {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
  {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
  },
- {fach: 'MathePlus', belegt: 'false', fachArt: null, note: [
+ {fach: 'MatheStuetz', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'DeutschStuetz', belegt: 'false', fachArt: null, note: [
  {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
  {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
  {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
@@ -263,7 +269,13 @@
  {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
  {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
  },
- {fach: 'MathePlus', belegt: 'false', fachArt: null, note: [
+ {fach: 'MatheStuetz', belegt: 'false', fachArt: null, note: [
+ {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
+ {Wert: null, type: 'muendlich'}, {Wert: null, type: 'GFS'}  ]
+ },
+ {fach: 'DeutschStuetz', belegt: 'false', fachArt: null, note: [
  {Wert: null, type: 'gesamt'}, {Wert: null, type: 'schriftlich'}, 
  {Wert: null, type: 'schriftlich'}, {Wert: null, type: 'schriftlich'}, 
  {Wert: null, type: 'muendlich'}, {Wert: null, type: 'muendlich'}, 
