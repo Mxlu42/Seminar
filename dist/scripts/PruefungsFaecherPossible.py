@@ -8,14 +8,15 @@ collection = db['students']
 
 class PruefungsfaecherPossible(object):
     def __init__(self):
-        if DBHelp.pruefe_halbjahr_angegeben(1) == True:
-            if DBHelp.FachBelegt("Evangelisch", 1) == True and DBHelp.FachBelegt("Evangelisch", 3) == True:
+        self.db = DBHelp()
+        if self.db.pruefe_halbjahr_angegeben(1) == True:
+            if self.db.FachBelegt("Evangelisch", 1) == True and self.db.FachBelegt("Evangelisch", 3) == True:
                 self.a = "Evangelisch"
                 self.aState = True
-            elif DBHelp.FachBelegt("Katholisch", 1) == True and DBHelp.FachBelegt("Katholisch", 3) == True:
+            elif self.db.FachBelegt("Katholisch", 1) == True and self.db.FachBelegt("Katholisch", 3) == True:
                 self.a = "Katholisch"
                 self.aState = True
-            elif DBHelp.FachBelegt("Ethik", 1) == True and DBHelp.FachBelegt("Ethik", 3) == True:
+            elif self.db.FachBelegt("Ethik", 1) == True and self.db.FachBelegt("Ethik", 3) == True:
                 self.a = "Ethik"
                 self.aState = True
             else:
@@ -25,10 +26,10 @@ class PruefungsfaecherPossible(object):
             self.a = "Ethik"
             self.aState = True
         
-        self.pr1 = DBHelp.get_faecher_by_fachart("Hauptfach")
+        self.pr1 = self.db.get_faecher_by_fachart("Hauptfach")
         self.prp2 = None
 
-        self.pr2 = DBHelp.get_faecher_by_fachart("EAN")
+        self.pr2 = self.db.get_faecher_by_fachart("EAN")
         self.prp2 = None
             
         self.FachblockPR2 = self.setFachblockPR2()
@@ -90,17 +91,17 @@ class PruefungsfaecherPossible(object):
     def setFachblockPR3(self):
         if self.FachblockPR2 == 1 and self.pr3 == "Deutsch":
             return 1
-        elif self.FachblockPR2 == 1 and (self.pr3 == "Englisch" or self.pr3 == "Spanisch"):
+        elif self.FachblockPR2 == 1 and (self.pr3 == "Englisch" or self.pr3 == "SpanischN"):
             return 2
         elif self.FachblockPR2 == 2 and self.pr3 == "Mathe":
             return 3
-        elif self.FachblockPR2 == 2 and (self.pr3 == "Englisch" or self.pr3 == "Spanisch"):
+        elif self.FachblockPR2 == 2 and (self.pr3 == "Englisch" or self.pr3 == "SpanischN"):
             return 4
 
     def setFachblockPR4(self):
         if (self.FachblockPR2 == 1 and (self.FachblockPR3  == 1 or self.FachblockPR3 == 2) or (self.FachblockPR2 == 2 and self.FachblockPR3 == 3)) and (self.pr4 == "GGK" or self.pr4 == self.a or self.pr4 == "Wirtschaft"):
             return 1
-        elif (self.FachblockPR2 == 1 and (self.FachblockPR3  == 1 and (self.pr4 == "Chemie" or self.pr4 == "Physik" or self.pr4 == "Englisch" or self.pr4 == "Spanisch")) or (self.FachblockPR3 == 2 and self.pr3 == "Englisch" (self.pr4 == "Chemie" or self.pr4 == "Physik" or self.pr4 == "Deutsch" or self.pr4 == "Spanisch")) or self.FachblockPR3 == 3 and (self.pr4 == "Chemie" or self.pr4 == "Physik" or self.pr4 == "Englisch" or self.pr4 == "Spanisch")):
+        elif (self.FachblockPR2 == 1 and (self.FachblockPR3  == 1 and (self.pr4 == "Chemie" or self.pr4 == "Physik" or self.pr4 == "Englisch" or self.pr4 == "SpanischN")) or (self.FachblockPR3 == 2 and self.pr3 == "Englisch" (self.pr4 == "Chemie" or self.pr4 == "Physik" or self.pr4 == "Deutsch" or self.pr4 == "SpanischN")) or self.FachblockPR3 == 3 and (self.pr4 == "Chemie" or self.pr4 == "Physik" or self.pr4 == "Englisch" or self.pr4 == "SpanischN")):
             return 2
         elif self.FachblockPR2 == 1 and self.FachblockPR3 == 4 and (self.pr4 == "GGK" or self.pr4 == self.a or self.pr4 == "Wirtschaft"):
             return 3
@@ -131,23 +132,23 @@ class PruefungsfaecherPossible(object):
         block = []
         if self.FachblockPR2 == 1:
             block.append("Deutsch")
-            if DBHelp.pruefe_halbjahr_angegeben(1) == False:                                            #Hier schau dir das mal an noah
+            if self.db.pruefe_halbjahr_angegeben(1) == False:                                            #Hier schau dir das mal an noah
                 block.append("Englisch")
-                block.append("Spanisch")
-            if DBHelp.FachBelegt("Englisch", 1) == True and DBHelp.FachBelegt("Englisch", 3) == True:                  #NOAH was das?
+                block.append("SpanischN")
+            if self.db.FachBelegt("Englisch", 1) == True and self.db.FachBelegt("Englisch", 3) == True:                  #NOAH was das?
                 block.append("Englisch")
-            if DBHelp.FachBelegt("SpanischN", 1) == True or DBHelp.FachBelegt("SpanischF", 1) == True:        #HEY SÜßI
-                block.append("Spanisch")
+            if self.db.FachBelegt("SpanischN", 1) == True:        #HEY SÜßI
+                block.append("SpanischN")
 
         elif self.FachblockPR2 == 2:
             block.append("Mathe")
-            if DBHelp.pruefe_halbjahr_angegeben(1) == False:                                                 #Willst du dir das mal anschauen
+            if self.db.pruefe_halbjahr_angegeben(1) == False:                                                 #Willst du dir das mal anschauen
                 block.append("Englisch")
-                block.append("Spanisch")
-            if DBHelp.FachBelegt("Englisch", 1) == True and DBHelp.FachBelegt("Englisch", 3) == True:                     #Noah schau, mal db sachen
+                block.append("SpanischN")
+            if self.db.FachBelegt("Englisch", 1) == True and self.db.FachBelegt("Englisch", 3) == True:                     #Noah schau, mal db sachen
                 block.append("Englisch")
-            if DBHelp.FachBelegt("SpanischN", 1) == True or DBHelp.FachBelegt("SpanischF", 1) == True:        #Da fehlt was
-                block.append("Spanisch")
+            if self.db.FachBelegt("SpanischN", 1) == True:        #Da fehlt was
+                block.append("SpanischN")
         return block
             
 
@@ -155,12 +156,12 @@ class PruefungsfaecherPossible(object):
         self.FachblockPR3 = self.setFachblockPR3()
         block1 = ["GGK", self.a, "Wirtschaft"]
         block2 = ["Chemie", "Physik", "Deutsch"]
-        if DBHelp.pruefe_halbjahr_angegeben(1) == False:                                                     #>_<
+        if self.db.pruefe_halbjahr_angegeben(1) == False:                                                     #>_<
             block2.append("Englisch")
             block2.append("Spanisch")
-        if DBHelp.FachBelegt("Englisch", 1) == True and DBHelp.FachBelegt("Englisch", 3) == True:                     #Noah schau, mal db sachen
+        if self.db.FachBelegt("Englisch", 1) == True and self.db.FachBelegt("Englisch", 3) == True:                     #Noah schau, mal db sachen
             block1.append("Englisch")
-        if DBHelp.FachBelegt("SpanischN", 1) == True or DBHelp.FachBelegt("SpanischF", 1) == True:      #Bitti mach ganz <OoO>
+        if self.db.FachBelegt("SpanischN", 1) == True:      #Bitti mach ganz <OoO>
             block2.append("Spanisch")
         if self.pr3 == "Deutsch":
             block2.remove("Deutsch")
@@ -190,15 +191,15 @@ class PruefungsfaecherPossible(object):
             block1.append(self.a)
             if self.pr4 == self.a:
                 block1.remove(self.a)
-        if DBHelp.pruefe_halbjahr_angegeben(3) == False:
-            if DBHelp.FachBelegt("SeminarProfil", 3):
+        if self.db.pruefe_halbjahr_angegeben(3) == False:
+            if self.db.FachBelegt("SeminarProfil", 3):
                 block1.remove("SeminarProfil")
-        if DBHelp.pruefe_halbjahr_angegeben(1) == False:
+        if self.db.pruefe_halbjahr_angegeben(1) == False:
             block1.append("Englisch")
             block1.append("Spanisch")
-        if DBHelp.FachBelegt("Englisch", 1) == True and DBHelp.FachBelegt("Englisch", 3) == True:                     #Noah schau, mal db sachen
+        if self.db.FachBelegt("Englisch", 1) == True and self.db.FachBelegt("Englisch", 3) == True:                     #Noah schau, mal db sachen
             self.pr3.append("Englisch")
-        if DBHelp.FachBelegt("SpanischN", 1) == True or DBHelp.FachBelegt("SpanischF", 1) == True:      #Letzter ich schwöre
+        if self.db.FachBelegt("SpanischN", 1) == True or self.db.FachBelegt("SpanischF", 1) == True:      #Letzter ich schwöre
             block1.append("Spanisch")
         if self.pr2 == "Deutsch" or self.pr3 == "Deutsch":
             block1.remove("Deutsch")
