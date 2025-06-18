@@ -16,7 +16,7 @@ class DBHelp(object):
             print(f"\n{student['name']} - {student['vorname']}")
 
             for halbjahr in student["halbjahre"]:
-                if halbjahr["name"] == halbjahr_seartch:
+                if halbjahr["jahr"] == halbjahr_seartch:
                     for fach in halbjahr["normal_faecher"]:
                         if fach["fach"] == fachname:
                             status = fach["belegt"]

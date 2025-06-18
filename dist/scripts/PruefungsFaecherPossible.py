@@ -197,8 +197,8 @@ class PruefungsfaecherPossible(object):
         if self.db.pruefe_halbjahr_angegeben(1) == False:
             block1.append("Englisch")
             block1.append("Spanisch")
-        if self.db.FachBelegt("Englisch", 1) == True and self.db.FachBelegt("Englisch", 3) == True:                     #Noah schau, mal db sachen
-            self.pr3.append("Englisch")
+        elif self.db.FachBelegt("Englisch", 1) == True and self.db.FachBelegt("Englisch", 3) == True:                     #Noah schau, mal db sachen
+            block1.append("Englisch")
         if self.db.FachBelegt("SpanischN", 1) == True or self.db.FachBelegt("SpanischF", 1) == True:      #Letzter ich schwöre
             block1.append("Spanisch")
         if self.pr2 == "Deutsch" or self.pr3 == "Deutsch":
