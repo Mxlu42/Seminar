@@ -1,6 +1,6 @@
 db.students.insertOne({
- name: 'sdfsdf',
- vorname: 'fbfcvb',
+ name: 'brandwein',
+ vorname: 'felix',
  passwort: '12345678',
  regristrations_datum: new Date(),
  halbjahre: [
