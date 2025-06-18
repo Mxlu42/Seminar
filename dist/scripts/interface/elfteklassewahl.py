@@ -56,7 +56,7 @@ class SubjectChoice11(QMainWindow):
         r_ds = QRadioButton('DeutschStuetz')
         r_ds.toggled.connect(self.r_dst)
 
-        r_ms = QRadioButton('Mathestuetz')
+        r_ms = QRadioButton('MatheStuetz')
         r_ms.toggled.connect(self.r_mst)
 
         grid2.addWidget(r_ds)
