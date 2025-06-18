@@ -7,14 +7,14 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from heart import Launcher
 from dbhelp import *
 
-class Homepage(QMainWindow):
+class Ergebnisausgabe(QMainWindow):
     def __init__(self):
         super().__init__()
 
         self.setCentralWidget(QWidget(self))
         self.setMinimumSize(QSize(500, 600))
         self.setMaximumSize(QSize(500, 600))
-        self.setWindowTitle('Homepage')
+        self.setWindowTitle('Ergebnisausgabe')
 
 
         txt = QLabel('Für genauere Informationen<br> einfach mit dem Cursor auf den entsprechenden Knopf gehen', self)
