@@ -23,7 +23,7 @@ class SubjectChoice11(QMainWindow):
         self.setMaximumSize(QSize(500, 600))
         self.setWindowTitle('11te klasse Fächerwahl')
 
-        lbl = QLabel('Platzhalter für den Erklärtext')
+        lbl = QLabel('Hier werden Sie vier Verscshiedene Wahlen treffen.<br>Erstens: die Wahl Zwischen Chemie- und Physik Labor. Labor ist ein Fach in dem<br>man praktische Übungen zusätzlich zum Theorieunterricht durchführt. Sie<br>müssen jedoch immernoch beide Theorieuntterrichte Besuchen.<br>Zweitens: die Wahl zwischen Deutsch- und Mathe Stütz. Hierbei dreht es sich um<br>eine Schulstunde in der Woche bei der für das gewählte Fach Themen nochmal<br>intensiv wiederholt werden.<br>Drittens: die Wahl der Dritten Fremdsprache. Wenn Sie bereits eine Fremdsprache<br>für mindestens vier Jahre belegt haben, dann ist Spanisch gAn für Sie Freiwillig<br>(ansonsten wählen Sie "Bereits belegt"). Wenn Sie Spanisch vor der elften Klasse<br>bereits für einen Teil der Zeit belegt haben, wählen Sie Spanisch eAn. Wenn keines<br>dieser beiden Szenarien für Sie zutreffend sind, sind sie dazu <b>Verpflichtet</b><br>Spanisch gAn zu wählen.<br>Viertens: die Wahl der Glaubenslehre. Hier ist es wichtig anzumerken dass es nur<br>möglich ist dieses Fach in der Abiturprüfung zu wählen, wenn man es drei Jahre in<br>Folge belegt hat (also 11, 12, 13).<br>Wenn Sie Ihre Wahl getrofen, und überprüft haben, drücken<br>Sie einfach auf "sperichern".')
         lbl.resize(lbl.sizeHint())
         lbl.setAlignment(Qt.AlignmentFlag.AlignHCenter)
         lbl.setMargin(30)

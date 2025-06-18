@@ -24,7 +24,7 @@ class Registerpage(QMainWindow):
         self.setMaximumSize(QSize(500, 600))
         self.setWindowTitle('Registerpage')
 
-        lbl = QLabel('Platzhalter für den Erklärtext')
+        lbl = QLabel('Willkommen Bei unserem Programm! Um zu Beginnen bitte wählen Sie Ihr<br>Profilfach aus, geben Sie Ihren Namen an und Erstellen<br>Sie ein sicheres Passwort. Teilen sie dieses paswort <b>Niemals</b>.<br>Viel Spaß bei der nutzung wünschen Felix B. Miron H. und Noah L.')
         lbl.resize(lbl.sizeHint())
         lbl.setAlignment(Qt.AlignmentFlag.AlignHCenter)
         lbl.setMargin(30)
@@ -39,7 +39,7 @@ class Registerpage(QMainWindow):
         wid.setLayout(grid)
         wid.setMinimumSize(QSize(380, 200))
         wid.setMaximumSize(QSize(380, 200))
-        wid.move(round((500/2)-(380/2)), 350)
+        wid.move(round((500/2)-(380/2)), 250)
         txts = []
 
         row = 0
