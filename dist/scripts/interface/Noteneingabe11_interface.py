@@ -19,7 +19,7 @@ class Noteneingabe11(QMainWindow):
         self.setCentralWidget(QWidget(self))
         self.setMinimumSize(QSize(500, 600))
         self.setMaximumSize(QSize(500, 600))
-        self.setWindowTitle('Klammerung')
+        self.setWindowTitle('Noteneingabe der Klasse 11')
 
         main_widget = QWidget()
         main_layout = QVBoxLayout()

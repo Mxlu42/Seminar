@@ -13,7 +13,7 @@ client = MongoClient('localhost', 27017)
 db = client['test']
 collection = db['students']
 
-class Window(QMainWindow):
+class Registerpage(QMainWindow):
     def __init__(self):
         global txts, txt1, txt2, txt3, txt4, cbb, grid
         super().__init__()
@@ -22,7 +22,7 @@ class Window(QMainWindow):
         self.setCentralWidget(QWidget(self))
         self.setMinimumSize(QSize(500, 600))
         self.setMaximumSize(QSize(500, 600))
-        self.setWindowTitle('Regestrierungsformular')
+        self.setWindowTitle('Registerpage')
 
         lbl = QLabel('Platzhalter für den Erklärtext')
         lbl.resize(lbl.sizeHint())
@@ -187,7 +187,7 @@ class Window(QMainWindow):
 
 def main():# Anzeigen / Ausführen des Programms als seperrates Fenster
     app = QtWidgets.QApplication(sys.argv)
-    win = Window()
+    win = Registerpage()
     win.show()
     sys.exit(app.exec())
 
