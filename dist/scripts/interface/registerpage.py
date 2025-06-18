@@ -161,7 +161,7 @@ class Window(QMainWindow):
         else:
             print('🛠️ Creating your account...')
             txt_data = CreateData()
-            replaced_content = txt_data.replace_data(aus[1],aus[2])
+            replaced_content = txt_data.replace_data(aus[1],aus[2], aus[3])
             txt_data.creationdb(replaced_content)
 
 

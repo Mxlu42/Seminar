@@ -13,8 +13,8 @@ class CreateData:
         with open(blueprint_path, 'r', encoding='utf-8') as file:
             self.content = file.read()
 
-    def replace_data(self, name, vorname):
-        replaced = self.content.replace('%name%', name).replace('%vorname%', vorname)
+    def replace_data(self, name, vorname, passwort):
+        replaced = self.content.replace('%name%', name).replace('%vorname%', vorname).replace('%passwort%', passwort)
 
         with open(actual_data_path, 'w', encoding='utf-8') as file:
             file.write(replaced)

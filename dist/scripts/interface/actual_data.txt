@@ -4,9 +4,9 @@
  vorname: 'Felix',
 =======
 db.students.insertOne({
- name: 'noaa',
- vorname: 'lisewski',
->>>>>>> 00b3cebc6483e8814a5c35c4185bb544bda479c0
+ name: 'lisewski',
+ vorname: 'noaa',
+ passwort: '12345678',
  regristrations_datum: new Date(),
  halbjahre: [
  {

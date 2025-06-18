@@ -1,6 +1,7 @@
 db.students.insertOne({
  name: '%name%',
  vorname: '%vorname%',
+ passwort: '%passwort%',
  regristrations_datum: new Date(),
  halbjahre: [
  {
