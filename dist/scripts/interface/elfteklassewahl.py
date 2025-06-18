@@ -53,10 +53,10 @@ class SubjectChoice11(QMainWindow):
         wid2.setMaximumSize(QSize(155, 62))
         wid2.move(300, 342)
 
-        r_ds = QRadioButton('DeutschStuetz')
+        r_ds = QRadioButton('Deutsch Stütz')
         r_ds.toggled.connect(self.r_dst)
 
-        r_ms = QRadioButton('MatheStuetz')
+        r_ms = QRadioButton('Mathe Stütz')
         r_ms.toggled.connect(self.r_mst)
 
         grid2.addWidget(r_ds)
@@ -70,10 +70,10 @@ class SubjectChoice11(QMainWindow):
         wid3.setMaximumSize(QSize(205, 85))
         wid3.move(100, 402)
 
-        r_sg = QRadioButton('Spanisch gAn')
+        r_sg = QRadioButton('SpanischN')
         r_sg.toggled.connect(self.r_sgt)
 
-        r_se = QRadioButton('Spanisch eAn')
+        r_se = QRadioButton('SpanischF')
         r_se.toggled.connect(self.r_set)
 
         r_f = QRadioButton('3. Fremdsprache bereits belegt')
@@ -132,42 +132,42 @@ class SubjectChoice11(QMainWindow):
     def r_clt(self):
         if r_cl.isChecked() == True:
             r_cp.clear()
-            r_cp.append('Chemie Labor')
+            r_cp.append('Chemie-L')
         else:
             return
         
     def r_plt(self):
         if r_pl.isChecked() == True:
             r_cp.clear()
-            r_cp.append('Physik Labor')
+            r_cp.append('Physik-L')
         else:
             return
         
     def r_dst(self):
         if r_ds.isChecked() == True:
             r_dsms.clear()
-            r_dsms.append('Deutsch stütz')
+            r_dsms.append('DeutschStuetz')
         else:
             return
         
     def r_mst(self):
         if r_ms.isChecked() == True:
             r_dsms.clear()
-            r_dsms.append('Mathe stütz')
+            r_dsms.append('MatheStuetz')
         else:
             return
     
     def r_sgt(self):
         if r_sg.isChecked() == True:
             r_sgsef.clear()
-            r_sgsef.append('Spanisch gAn')
+            r_sgsef.append('SpanischN')
         else:
             return
     
     def r_set(self):
         if r_se.isChecked() == True:
             r_sgsef.clear()
-            r_sgsef.append('Spanisch eAn')
+            r_sgsef.append('SpanischF')
         else:
             return
         
@@ -181,14 +181,14 @@ class SubjectChoice11(QMainWindow):
     def r_ert(self):
         if r_er.isChecked() == True:
             r_erkre.clear()
-            r_erkre.append('evangelische Religion')
+            r_erkre.append('Evangelisch')
         else:
             return
         
     def r_krt(self):
         if r_kr.isChecked() == True:
             r_erkre.clear()
-            r_erkre.append('katholische Religion')
+            r_erkre.append('Katholisch')
         else:
             return
         
@@ -214,11 +214,13 @@ class SubjectChoice11(QMainWindow):
             return
         else:
             finalsavearr = []
+            mclass = 'Mathe', 'Deutsch','GGK', 'Englisch', 'Sport', 'Chemie', 'Physik', 'Informatik','Wirtschaft',
 
             finalsavearr.append(r_cp[0])
             finalsavearr.append(r_dsms[0])
             finalsavearr.append(r_sgsef[0])
             finalsavearr.append(r_erkre[0])
+            finalsavearr.append(mclass)
             print(finalsavearr)
 
             r_cl.setAutoExclusive(False)
@@ -265,7 +267,8 @@ class SubjectChoice11(QMainWindow):
             QMessageBox.about(self, 'Speicherbenachrichtigung', 'Ihre Eingabe wurde gespeichert!')
             db = DBHelp()
             print('Fächer werden in der Datenbank gespeichert')
-            db.setzeFaecherBelegtTrue(finalsavearr, 1)
+            db.setzeMehrereFaecherBelegtTrue(finalsavearr, [1, 2])
+            db.setzeJahrgängeAngegeben([1,2])
         
     def back(self):
         pipi = Launcher('homepage')
