@@ -4,12 +4,6 @@ import os
 from pymongo import MongoClient
 import time
 
-MONGOD_DIR = r"C:\Tools\mongodb\mongodb-win32-x86_64-windows-7.0.8\bin"
-if MONGOD_DIR not in os.environ.get("PATH", ""):
-    os.environ["PATH"] = MONGOD_DIR + ";" + os.environ["PATH"]
-
-def install(package):
-    subprocess.check_call([sys.executable, '-m', 'pip', 'install', package])
 def install(package):
     subprocess.check_call([sys.executable, '-m', 'pip', 'install', package])
 
@@ -31,10 +25,10 @@ if getattr(sys, 'frozen', False):
 else:
     base_path = os.path.dirname(os.path.abspath(__file__))
 
-register_script        = os.path.join(base_path, 'scripts',   'interface', 'registerpage.py')
-register_script_python = os.path.join(base_path, 'dist',      'scripts',   'interface', 'registerpage.py')
-login_script           = os.path.join(base_path, 'scripts',   'interface', 'loginpage.py')
-login_script_python    = os.path.join(base_path, 'dist',      'scripts',   'interface', 'loginpage.py')
+register_script        = os.path.join(base_path, 'scripts', 'interface', 'registerpage.py')
+register_script_python = os.path.join(base_path, 'dist',    'scripts', 'interface', 'registerpage.py')
+login_script           = os.path.join(base_path, 'scripts', 'interface', 'loginpage.py')
+login_script_python    = os.path.join(base_path, 'dist',    'scripts', 'interface', 'loginpage.py')
 
 print("Using path:", base_path)
 print("Launching:", register_script)
@@ -46,8 +40,24 @@ MONGOD_DIR = r"C:\Tools\mongodb\mongodb-win32-x86_64-windows-7.0.8\bin"
 if MONGOD_DIR not in os.environ.get("PATH", ""):
     os.environ["PATH"] = MONGOD_DIR + ";" + os.environ["PATH"]
 
-client = MongoClient('localhost', 27017)
-db     = client['test']
+# ─── sicherstellen, dass mongod.exe läuft ────────────────────────────────────
+MONGOD_EXE = os.path.join(MONGOD_DIR, "mongod.exe")
+def ensure_mongod_running():
+    try:
+        tmp = MongoClient("localhost", 27017, serverSelectionTimeoutMS=2000)
+        tmp.admin.command("ping")
+    except Exception:
+        print("⚠️ MongoDB nicht erreichbar – starte mongod.exe …")
+        # Passe dbpath nach Bedarf an:
+        dbpath = os.path.join(MONGOD_DIR, "..", "..", "data", "db")
+        os.makedirs(dbpath, exist_ok=True)
+        subprocess.Popen([MONGOD_EXE, "--dbpath", dbpath], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        time.sleep(2)
+
+ensure_mongod_running()
+
+client     = MongoClient('localhost', 27017)
+db         = client['test']
 collection = db['students']
 
 def check_data():
