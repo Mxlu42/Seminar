@@ -68,7 +68,6 @@ class Klammerung(QMainWindow):
         self.cb_col4 = []
 
         for i in range(31):                                                                            #spaeter laenge der liste der belegten faecher
-            row_layout = QHBoxLayout()
 
             cb1 = QCheckBox()
             cb2 = QCheckBox()
@@ -116,9 +115,35 @@ class Klammerung(QMainWindow):
         
     def save(self):
         save1 = []
-        count_col1 = 0
+        count_col = 1
+
         for i in  self.cb_col1:
-            
+            if i.isChecked() == False:
+                save1.append([grid_layout.itemAtPosition(count_col, 0).widget().text(), '3'])
+            count_col += 1
+
+        count_col = 1
+
+        for i in self.cb_col2:
+            if i.isChecked() == False:
+                save1.append([grid_layout.itemAtPosition(count_col, 0).widget().text(), '4'])
+            count_col += 1
+
+        count_col = 1
+
+        for i in self.cb_col3:
+            if i.isChecked() == False:
+                save1.append([grid_layout.itemAtPosition(count_col, 0).widget().text(), '5'])
+            count_col += 1
+
+        count_col = 1 
+
+        for i in self.cb_col4:
+            if i.isChecked() == False:
+                save1.append([grid_layout.itemAtPosition(count_col, 0).widget().text(), '6'])
+            count_col += 1
+
+        print(save1)
 
 
     def back(self):
