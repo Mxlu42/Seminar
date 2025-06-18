@@ -198,7 +198,7 @@ class DBHelp(object):
             "halbjahre": {
                 "$elemMatch": {
                     "jahr": jahr,
-                    "angegeben": 'True'
+                    "angegeben": 'true'
                 }
             }
         })
