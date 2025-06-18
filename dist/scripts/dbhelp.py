@@ -25,88 +25,80 @@ class DBHelp(object):
                             else:
                                 return False
                             
-    def setzeMehrereFaecherBelegtTrue(self, faecher: list[str], jahrgänge: list[int]):
-        faecher_clean = []
+    def setzeMehrereFaecherBelegtTrue(self, faecher: list[str], jahrgänge: list[int]) -> list[str]:
+        """
+        1) Setzt in den angegebenen Jahrgängen zunächst alle Fächer auf belegt = "false".
+        2) Setzt dann alle gewählten Fächer (plus Partnerfach Mathe↔Deutsch) auf belegt = "true".
+        3) Liefert eine Liste ALLER Fächer zurück, die am Ende in diesen Jahrgängen belegt = "true" sind.
+        """
+        # 1) Flatten aller Listen/Tupel
+        clean = []
         for x in faecher:
-            if isinstance(x, (tuple, list)): # Setzt tuples und listen in strings um
-                for y in x:
-                    if isinstance(y, str):
-                        faecher_clean.append(y)
+            if isinstance(x, (tuple, list)):
+                clean += [y for y in x if isinstance(y, str)]
             elif isinstance(x, str):
-                faecher_clean.append(x)
-        faecher = faecher_clean
+                clean.append(x)
+        faecher = clean
 
-        # Partner-Mapping: wenn key gewählt wird, partner bekommt komplementäre FachArt
-        partner_map = {
-            "Mathe": "Deutsch",
-            "Deutsch": "Mathe"
-        }
+        partner_map = {"Mathe": "Deutsch", "Deutsch": "Mathe"}
 
-        print(f"📥 Aufruf mit Fächern={faecher}, Jahrgänge={jahrgänge}")
-        cursor = self.students.find()
+        # A) Alle nicht-gewählten Fächer auf false setzen
+        for jahr in jahrgänge:
+            self.students.update_many(
+                {"halbjahre.jahr": jahr},
+                {"$set": {"halbjahre.$[h].normal_faecher.$[f].belegt": "false"}},
+                array_filters=[
+                    {"h.jahr": jahr},
+                    {"f.fach": {"$nin": faecher}}
+                ]
+            )
 
-        for student in cursor:
-            name = student.get("name")
-            halbjahre = student.get("halbjahre", [])
-            updated = False
+        # B) Gewählte Fächer (und Partner) auf true setzen
+        for fach_input in faecher:
+            parts    = fach_input.strip().split(maxsplit=1)
+            fachname = parts[0]
+            fachart  = parts[1] if len(parts) > 1 else None
 
-            print(f"🔍 Bearbeite Schüler: {name}, Halbjahre: {[h.get('jahr') for h in halbjahre]}")
+            for jahr in jahrgänge:
+                # direktes Fach
+                update_spec = {"halbjahre.$[h].normal_faecher.$[f].belegt": "true"}
+                if fachart:
+                    update_spec["halbjahre.$[h].normal_faecher.$[f].fachArt"] = fachart
 
-            for halb in halbjahre:
-                jahr = halb.get("jahr")
-                if jahr not in jahrgänge:
-                    continue
-
-                print(f"  ▶️ prüfe Halbjahr {jahr}")
-                nf = halb.get("normal_faecher", [])
-                print(f"    Fächer in DB: {[f.get('fach') for f in nf]}")
-
-                for fach_input in faecher:
-                    parts    = fach_input.strip().split(maxsplit=1)
-                    fachname = parts[0]
-                    fachart  = parts[1] if len(parts) > 1 else None
-
-                    fach_obj = next((f for f in nf if f.get("fach") == fachname), None)
-                    if not fach_obj:
-                        print(f"    ⚠ Fach «{fachname}» nicht gefunden → übersprungen")
-                        continue
-
-                    if fach_obj.get("belegt") != "true":
-                        print(f"    ✏ setze belegt für «{fachname}»")
-                        fach_obj["belegt"] = "true"
-                        updated = True
-                    if fachart:
-                        print(f"    ✏ setze fachArt='{fachart}' für «{fachname}»")
-                        fach_obj["fachArt"] = fachart
-                        updated = True #abschnitt setzt die fachart oder den belegt auf true etc.
-
-                for orig, partner in partner_map.items(): #abschnitt vergleicht ean und gAn und ändert so die fachart jeweils
-                    if any(item.split()[0] == orig for item in faecher):
-                        art = next((item.split()[1].lower() for item in faecher
-                                    if item.split()[0] == orig and len(item.split()) > 1),
-                                None)
-                        if art not in ("ean", "gan"):
-                            continue
-                        comp = "gAn" if art == "ean" else "eAn"
-
-                        p_obj = next((f for f in nf if f.get("fach") == partner), None)
-                        if p_obj:
-                            if p_obj.get("belegt") != "true":
-                                print(f"    ✏ setze belegt für Partner «{partner}»")
-                                p_obj["belegt"] = "true"
-                                updated = True
-                            print(f"    ✏ setze fachArt='{comp}' für Partner «{partner}»")
-                            p_obj["fachArt"] = comp
-                            updated = True
-
-            if updated:
-                res = self.students.update_one(
-                    {"_id": student["_id"]},
-                    {"$set": {"halbjahre": halbjahre}}
+                self.students.update_many(
+                    {"halbjahre.jahr": jahr, "halbjahre.normal_faecher.fach": fachname},
+                    {"$set": update_spec},
+                    array_filters=[{"h.jahr": jahr}, {"f.fach": fachname}]
                 )
-                print(f"✅ Updated {name}: matched={res.matched_count}, modified={res.modified_count}")
-            else:
-                print(f"ℹ️ Keine Änderungen für {name}")
+
+                # Partnerfach Mathe↔Deutsch, komplementäres eAn↔gAn
+                partner = partner_map.get(fachname)
+                if partner and fachart and fachart.lower() in ("ean", "gan"):
+                    comp = "gAn" if fachart.lower() == "ean" else "eAn"
+                    self.students.update_many(
+                        {"halbjahre.jahr": jahr, "halbjahre.normal_faecher.fach": partner},
+                        {"$set": {
+                            "halbjahre.$[h].normal_faecher.$[p].belegt": "true",
+                            "halbjahre.$[h].normal_faecher.$[p].fachArt": comp
+                        }},
+                        array_filters=[{"h.jahr": jahr}, {"p.fach": partner}]
+                    )
+
+        # C) Aggregation: sammle alle Fächer, die jetzt belegt = "true" sind
+        pipeline = [
+            {"$unwind": "$halbjahre"},
+            {"$match":   {"halbjahre.jahr": {"$in": jahrgänge}}},
+            {"$unwind": "$halbjahre.normal_faecher"},
+            {"$match":   {"halbjahre.normal_faecher.belegt": "true"}},
+            {"$group":   {"_id": "$halbjahre.normal_faecher.fach"}},
+            {"$sort":    {"_id": 1}}
+        ]
+        cursor = self.students.aggregate(pipeline)
+        final_true = [doc["_id"] for doc in cursor]
+
+        print("✅ Am Ende belegt=true in Jahren", jahrgänge, ":", final_true)
+        return final_true
+
 
     def setzeJahrgängeAngegeben(self, jahrgänge: list[int]):
 
