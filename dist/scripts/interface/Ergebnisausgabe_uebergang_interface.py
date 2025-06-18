@@ -17,7 +17,7 @@ class Ergebnisausgabe(QMainWindow):
         self.setWindowTitle('Ergebnisausgabe')
 
 
-        txt = QLabel('Für genauere Informationen<br> einfach mit dem Cursor auf den entsprechenden Knopf gehen', self)
+        txt = QLabel('Für genauere Informationen<br>bewegen Sie einfach Ihren Coursor über den Knopf<br>der Sie interressiert, und warten Sie zwei Sekunden.', self)
         txt.setMinimumSize(QSize(400, 100))
         txt.setAlignment(Qt.AlignmentFlag.AlignCenter)
         txt.move(self.Center(txt), 30)
@@ -34,7 +34,7 @@ class Ergebnisausgabe(QMainWindow):
 
         fw11 = QPushButton('Ausgabe der Klasse 11', self)
         fw11.resize(fw11.sizeHint())
-        fw11.setToolTip('Eine geordnete Übersicht der Klasse 11 mit möglichkeit sie als .pdf zu Speichern')
+        fw11.setToolTip('Eine geordnete Übersicht der Klasse 11<br>mit möglichkeit sie als .pdf zu Speichern')
         fw11.clicked.connect(self.fw11_clicked)
         fw11.move(self.Center(fw11), bmh)
         bmh += 40
@@ -47,7 +47,7 @@ class Ergebnisausgabe(QMainWindow):
 
         fw12 = QPushButton('Ausgabe der Klasse 12', self)
         fw12.resize(fw12.sizeHint())
-        fw12.setToolTip('Eine geordnete Übersicht der Klasse 12 mit möglichkeit sie als .pdf zu Speichern')
+        fw12.setToolTip('Eine geordnete Übersicht der Klasse 12<br>mit möglichkeit sie als .pdf zu Speichern')
         fw12.clicked.connect(self.fw12_clicked)
         fw12.move(self.Center(fw12), bmh)
         bmh += 40
@@ -60,7 +60,7 @@ class Ergebnisausgabe(QMainWindow):
 
         fw13 = QPushButton('Ausgabe der Klasse 13', self)
         fw13.resize(fw13.sizeHint())
-        fw13.setToolTip('Eine geordnete Übersicht der Klasse 13 mit möglichkeit sie als .pdf zu Speichern')
+        fw13.setToolTip('Eine geordnete Übersicht der Klasse 13<br>mit möglichkeit sie als .pdf zu Speichern')
         fw13.clicked.connect(self.fw13_clicked)
         fw13.move(self.Center(fw13), bmh)
         bmh += 40

@@ -17,7 +17,7 @@ class Homepage(QMainWindow):
         self.setWindowTitle('Homepage')
 
 
-        txt = QLabel('Für genauere Informationen<br>bewegen Sie einfach Ihren Coursor über den Knopf<br>der Sie interressiert, und warten Sie zwei Sekunden', self)
+        txt = QLabel('Für genauere Informationen<br>bewegen Sie einfach Ihren Coursor über den Knopf<br>der Sie interressiert, und warten Sie zwei Sekunden.', self)
         txt.setMinimumSize(QSize(400, 100))
         txt.setAlignment(Qt.AlignmentFlag.AlignCenter)
         txt.move(self.Center(txt), 30)
