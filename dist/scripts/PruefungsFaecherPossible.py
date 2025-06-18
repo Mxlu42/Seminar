@@ -101,7 +101,7 @@ class PruefungsfaecherPossible(object):
     def setFachblockPR4(self):
         if (self.FachblockPR2 == 1 and (self.FachblockPR3  == 1 or self.FachblockPR3 == 2) or (self.FachblockPR2 == 2 and self.FachblockPR3 == 3)) and (self.pr4 == "GGK" or self.pr4 == self.a or self.pr4 == "Wirtschaft"):
             return 1
-        elif (self.FachblockPR2 == 1 and (self.FachblockPR3  == 1 and (self.pr4 == "Chemie" or self.pr4 == "Physik" or self.pr4 == "Englisch" or self.pr4 == "SpanischN")) or (self.FachblockPR3 == 2 and self.pr3 == "Englisch" (self.pr4 == "Chemie" or self.pr4 == "Physik" or self.pr4 == "Deutsch" or self.pr4 == "SpanischN")) or self.FachblockPR3 == 3 and (self.pr4 == "Chemie" or self.pr4 == "Physik" or self.pr4 == "Englisch" or self.pr4 == "SpanischN")):
+        elif (self.FachblockPR2 == 1 and (self.FachblockPR3  == 1 and (self.pr4 == "Chemie" or self.pr4 == "Physik" or self.pr4 == "Englisch" or self.pr4 == "SpanischN")) or (self.FachblockPR3 == 2 and self.pr3 == "Englisch" and (self.pr4 == "Chemie" or self.pr4 == "Physik" or self.pr4 == "Deutsch" or self.pr4 == "SpanischN")) or (self.FachblockPR3 == 3 and (self.pr4 == "Chemie" or self.pr4 == "Physik" or self.pr4 == "Englisch" or self.pr4 == "SpanischN"))):
             return 2
         elif self.FachblockPR2 == 1 and self.FachblockPR3 == 4 and (self.pr4 == "GGK" or self.pr4 == self.a or self.pr4 == "Wirtschaft"):
             return 3
