@@ -108,6 +108,6 @@ class Ergebnisausgabe(QMainWindow):
 
 
 app = QtWidgets.QApplication(sys.argv)
-win = Homepage()
+win = Ergebnisausgabe()
 win.show()
 sys.exit(app.exec())
