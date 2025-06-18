@@ -4,11 +4,11 @@ from PyQt6.QtWidgets import QMainWindow, QWidget, QPushButton, QGridLayout, QLab
 from PyQt6.QtCore import QSize, Qt
 from pymongo import MongoClient
 import os
-from dbhelp import *
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from heart import Launcher
 from init_db import CreateData
+from dbhelp import *
 
 client = MongoClient('localhost', 27017)
 db = client['test']
@@ -47,7 +47,7 @@ class Registerpage(QMainWindow):
 
         # Dropdownmenu erstellen und im grid plazieren
         cbb = QComboBox(self)
-        cbb.addItems(['Profilfach wählen', 'Informatik', 'Gestaltung- und Medientechnik', 'Mechatronik'])
+        cbb.addItems(['Profilfach wählen', 'Informationstechnik', 'Gestaltung_Medien', 'Mechatronik'])
         cbb.resize(cbb.sizeHint())
         grid.addWidget(cbb, row, 2, Qt.AlignmentFlag.AlignLeft)
         txts.append(cbb)
@@ -164,8 +164,9 @@ class Registerpage(QMainWindow):
             txt_data = CreateData()
             replaced_content = txt_data.replace_data(aus[1],aus[2], aus[3])
             txt_data.creationdb(replaced_content)
+            print(aus[0])
             db = DBHelp()
-            db.setzeMehrereFaecherBelegtTrue(aus[0], 1, 2, 3, 4, 5, 6)
+            db.setzeMehrereFaecherBelegtTrue([aus[0]],[1, 2, 3, 4, 5, 6])
 
         for document in collection.find():
             print(document)
