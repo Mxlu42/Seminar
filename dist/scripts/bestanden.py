@@ -10,7 +10,7 @@ class Bestanden(object):
 
     def ElfteBestanden(self):
         self.gesuchtesHJ = 1 and 2
-        self.all = self.db.getArrayAusHalpjahrMitFachFachartNote(self.gesuchtesHJ)       #zurÃ¼ckgegebenes Array: [[fach, fachart, Gesamtnote],[fach, fachart, Gesamtnote],...]
+        self.all = self.db.getArrayAusHalpjahrMitFachFachartGesamtnote(self.gesuchtesHJ)       #zurÃ¼ckgegebenes Array: [[fach, fachart, Gesamtnote],[fach, fachart, Gesamtnote],...]
         a = len(self.all)
         counterHF5 = 0
         counterNF5 = 0
@@ -86,7 +86,7 @@ class Bestanden(object):
         self.all.clear()
         HJ = [3, 4, 5, 6]
         for i in HJ:
-            self.all.append(self.db.getArrayAusHalpjahrMitFachFachartNote(i))
+            self.all.append(self.db.getArrayAusHalpjahrMitFachFachartGesamtnote(i))
         
         counterunterkurs = 0
         counterunterkursleistung = 0
