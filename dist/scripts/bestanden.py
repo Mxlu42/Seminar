@@ -52,6 +52,7 @@ class Bestanden(object):
             return False
         elif counterNF6 == 2 and (counterHF1 >= 2 and (counterNF1 == 1 and counterNF2 < 2) and counterNF2 < 4): #Nicht correct ig   #https://thg-relaunch.jimdofree.com/unterricht/regeln/versetzungsordnung/#:~:text=Durchschnitt%20aus%20den%20Noten%20aller%20f%C3%BCr%20die,5%20oder%206%20k%C3%B6nnen%20nicht%20ausgeglichen%20werden):
             return False
+        return True
         
     def FachochschulreifeBetanden(self):
         return True
