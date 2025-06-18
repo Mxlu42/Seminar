@@ -95,7 +95,7 @@ class Homepage(QMainWindow):
 
         nb = QPushButton('Ergebnisausgabe', self)
         nb.resize(nb.sizeHint())
-        nb.setToolTip('Paltzhalter <br> Erklaertext Ergebnisausgabe')
+        nb.setToolTip('Eine Möglichkeit alle Noten und Fächerwahlen übersichtlich Anzeigen zu lassen')
         nb.clicked.connect(self.nb_clicked)
         nb.move(self.Center(nb), bmh)
         bmh += 40
