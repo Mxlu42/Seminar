@@ -4,6 +4,7 @@ from PyQt6.QtWidgets import QMainWindow, QWidget, QPushButton, QGridLayout, QLab
 from PyQt6.QtCore import QSize, Qt
 from pymongo import MongoClient
 import os
+from dbhelp import *
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from heart import Launcher
@@ -163,7 +164,8 @@ class Registerpage(QMainWindow):
             txt_data = CreateData()
             replaced_content = txt_data.replace_data(aus[1],aus[2], aus[3])
             txt_data.creationdb(replaced_content)
-
+            db = DBHelp()
+            db.setzeMehrereFaecherBelegtTrue(aus[0], 1, 2, 3, 4, 5, 6)
 
         for document in collection.find():
             print(document)

@@ -26,10 +26,16 @@ class DBHelp(object):
                                 return False
                             
     def setzeMehrereFaecherBelegtTrue(self, faecher: list[str], jahrgänge: list[int]):
-        """
-        Setzt 'belegt' auf 'true' für alle angegebenen Fächer in den gewünschten Jahrgängen.
-        Wenn 'Mathe eAn' gewählt wird, setzt es automatisch 'Deutsch gAn' (und umgekehrt).
-        """
+        faecher_clean = []
+        for x in faecher:
+            if isinstance(x, (tuple, list)): # Setzt tuples und listen in strings um
+                for y in x:
+                    if isinstance(y, str):
+                        faecher_clean.append(y)
+            elif isinstance(x, str):
+                faecher_clean.append(x)
+        faecher = faecher_clean
+
         # Partner-Mapping: wenn key gewählt wird, partner bekommt komplementäre FachArt
         partner_map = {
             "Mathe": "Deutsch",
@@ -55,7 +61,6 @@ class DBHelp(object):
                 nf = halb.get("normal_faecher", [])
                 print(f"    Fächer in DB: {[f.get('fach') for f in nf]}")
 
-                # A) Alle direkt gewählten Fächer verarbeiten
                 for fach_input in faecher:
                     parts    = fach_input.strip().split(maxsplit=1)
                     fachname = parts[0]
@@ -73,12 +78,10 @@ class DBHelp(object):
                     if fachart:
                         print(f"    ✏ setze fachArt='{fachart}' für «{fachname}»")
                         fach_obj["fachArt"] = fachart
-                        updated = True
+                        updated = True #abschnitt setzt die fachart oder den belegt auf true etc.
 
-                # B) Automatische Partnerfächer
-                for orig, partner in partner_map.items():
+                for orig, partner in partner_map.items(): #abschnitt vergleicht ean und gAn und ändert so die fachart jeweils
                     if any(item.split()[0] == orig for item in faecher):
-                        # Bestimme gesetzte FachArt für orig
                         art = next((item.split()[1].lower() for item in faecher
                                     if item.split()[0] == orig and len(item.split()) > 1),
                                 None)
