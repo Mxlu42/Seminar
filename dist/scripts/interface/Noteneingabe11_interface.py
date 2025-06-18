@@ -11,6 +11,7 @@ class Noteneingabe11(QMainWindow):
     def __init__(self):
         global mclass
         mclass = ['Mathe', 'Deutsch', 'Profielfach (DB)', 'GGK', 'Englisch', 'Sport', 'Chemie', 'Physik', 'Informatik', 'Religion (DB)', 'Fremdsprache (DB)', 'Wirtschaft',  'Labor (DB)', 'Stuetz (DB)']
+        self.items = ['Bitte Note wählen', '1', '2', '3', '4', '5', '6']
         #db = DBHelp()
         #print(db.getArrayAusAllenFaechernAndFaechertypseAndGesamtnoteInBestimmtemHalbJahr(0))
         super().__init__()
@@ -62,156 +63,72 @@ class Noteneingabe11(QMainWindow):
         column = 1
 
         self.cbb1 = QComboBox()
-        self.cbb1.addItem('Bitte Note wählen')
-        self.cbb1.addItem('1')
-        self.cbb1.addItem('2')
-        self.cbb1.addItem('3')
-        self.cbb1.addItem('4')
-        self.cbb1.addItem('5')
-        self.cbb1.addItem('6')
+        self.cbb1.addItems(self.items)
         grid_layout.addWidget(self.cbb1, row, 1,  Qt.AlignmentFlag.AlignLeft)
         row += 1
 
         self.cbb2 = QComboBox()
-        self.cbb2.addItem('Bitte Note wählen')
-        self.cbb2.addItem('1')
-        self.cbb2.addItem('2')
-        self.cbb2.addItem('3')
-        self.cbb2.addItem('4')
-        self.cbb2.addItem('5')
-        self.cbb2.addItem('6')
+        self.cbb2.addItems(self.items)
         grid_layout.addWidget(self.cbb2, row, 1,  Qt.AlignmentFlag.AlignLeft)
         row += 1
 
         self.cbb3 = QComboBox()
-        self.cbb3.addItem('Bitte Note wählen')
-        self.cbb3.addItem('1')
-        self.cbb3.addItem('2')
-        self.cbb3.addItem('3')
-        self.cbb3.addItem('4')
-        self.cbb3.addItem('5')
-        self.cbb3.addItem('6')
+        self.cbb3.addItems(self.items)
         grid_layout.addWidget(self.cbb3, row, 1,  Qt.AlignmentFlag.AlignLeft)
         row += 1
 
         self.cbb4 = QComboBox()
-        self.cbb4.addItem('Bitte Note wählen')
-        self.cbb4.addItem('1')
-        self.cbb4.addItem('2')
-        self.cbb4.addItem('3')
-        self.cbb4.addItem('4')
-        self.cbb4.addItem('5')
-        self.cbb4.addItem('6')
+        self.cbb4.addItems(self.items)
         grid_layout.addWidget(self.cbb4, row, 1,  Qt.AlignmentFlag.AlignLeft)
         row += 1
 
         self.cbb5 = QComboBox()
-        self.cbb5.addItem('Bitte Note wählen')
-        self.cbb5.addItem('1')
-        self.cbb5.addItem('2')
-        self.cbb5.addItem('3')
-        self.cbb5.addItem('4')
-        self.cbb5.addItem('5')
-        self.cbb5.addItem('6')
+        self.cbb5.addItems(self.items)
         grid_layout.addWidget(self.cbb5, row, 1,  Qt.AlignmentFlag.AlignLeft)
         row += 1
 
         self.cbb6 = QComboBox()
-        self.cbb6.addItem('Bitte Note wählen')
-        self.cbb6.addItem('1')
-        self.cbb6.addItem('2')
-        self.cbb6.addItem('3')
-        self.cbb6.addItem('4')
-        self.cbb6.addItem('5')
-        self.cbb6.addItem('6')
+        self.cbb6.addItems(self.items)
         grid_layout.addWidget(self.cbb6, row, 1,  Qt.AlignmentFlag.AlignLeft)
         row += 1
 
         self.cbb7 = QComboBox()
-        self.cbb7.addItem('Bitte Note wählen')
-        self.cbb7.addItem('1')
-        self.cbb7.addItem('2')
-        self.cbb7.addItem('3')
-        self.cbb7.addItem('4')
-        self.cbb7.addItem('5')
-        self.cbb7.addItem('6')
+        self.cbb7.addItems(self.items)
         grid_layout.addWidget(self.cbb7, row, 1,  Qt.AlignmentFlag.AlignLeft)
         row += 1
 
         self.cbb8 = QComboBox()
-        self.cbb8.addItem('Bitte Note wählen')
-        self.cbb8.addItem('1')
-        self.cbb8.addItem('2')
-        self.cbb8.addItem('3')
-        self.cbb8.addItem('4')
-        self.cbb8.addItem('5')
-        self.cbb8.addItem('6')
+        self.cbb8.addItems(self.items)
         grid_layout.addWidget(self.cbb8, row, 1,  Qt.AlignmentFlag.AlignLeft)
         row += 1
 
         self.cbb9 = QComboBox()
-        self.cbb9.addItem('Bitte Note wählen')
-        self.cbb9.addItem('1')
-        self.cbb9.addItem('2')
-        self.cbb9.addItem('3')
-        self.cbb9.addItem('4')
-        self.cbb9.addItem('5')
-        self.cbb9.addItem('6')
+        self.cbb9.addItems(self.items)
         grid_layout.addWidget(self.cbb9, row, 1,  Qt.AlignmentFlag.AlignLeft)
         row += 1
 
         self.cbb10 = QComboBox()
-        self.cbb10.addItem('Bitte Note wählen')
-        self.cbb10.addItem('1')
-        self.cbb10.addItem('2')
-        self.cbb10.addItem('3')
-        self.cbb10.addItem('4')
-        self.cbb10.addItem('5')
-        self.cbb10.addItem('6')
+        self.cbb10.addItems(self.items)
         grid_layout.addWidget(self.cbb10, row, 1,  Qt.AlignmentFlag.AlignLeft)
         row += 1
 
         self.cbb11 = QComboBox()
-        self.cbb11.addItem('Bitte Note wählen')
-        self.cbb11.addItem('1')
-        self.cbb11.addItem('2')
-        self.cbb11.addItem('3')
-        self.cbb11.addItem('4')
-        self.cbb11.addItem('5')
-        self.cbb11.addItem('6')
+        self.cbb11.addItems(self.items)
         grid_layout.addWidget(self.cbb11, row, 1,  Qt.AlignmentFlag.AlignLeft)
         row += 1
 
         self.cbb12 = QComboBox()
-        self.cbb12.addItem('Bitte Note wählen')
-        self.cbb12.addItem('1')
-        self.cbb12.addItem('2')
-        self.cbb12.addItem('3')
-        self.cbb12.addItem('4')
-        self.cbb12.addItem('5')
-        self.cbb12.addItem('6')
+        self.cbb12.addItems(self.items)
         grid_layout.addWidget(self.cbb12, row, 1,  Qt.AlignmentFlag.AlignLeft)
         row += 1
 
         self.cbb13 = QComboBox()
-        self.cbb13.addItem('Bitte Note wählen')
-        self.cbb13.addItem('1')
-        self.cbb13.addItem('2')
-        self.cbb13.addItem('3')
-        self.cbb13.addItem('4')
-        self.cbb13.addItem('5')
-        self.cbb13.addItem('6')
+        self.cbb13.addItems(self.items)
         grid_layout.addWidget(self.cbb13, row, 1,  Qt.AlignmentFlag.AlignLeft)
         row += 1
 
         self.cbb14 = QComboBox()
-        self.cbb14.addItem('Bitte Note wählen')
-        self.cbb14.addItem('1')
-        self.cbb14.addItem('2')
-        self.cbb14.addItem('3')
-        self.cbb14.addItem('4')
-        self.cbb14.addItem('5')
-        self.cbb14.addItem('6')
+        self.cbb14.addItems(self.items)
         grid_layout.addWidget(self.cbb14, row, 1,  Qt.AlignmentFlag.AlignLeft)
         row += 1
             
