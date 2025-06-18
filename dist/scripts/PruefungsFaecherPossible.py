@@ -19,21 +19,18 @@ class PruefungsfaecherPossible(object):
             elif self.db.FachBelegt("Ethik", 1) == True and self.db.FachBelegt("Ethik", 3) == True:
                 self.a = "Ethik"
                 self.aState = True
-            else:
-                self.a = ""
-                self.aState = False
         else:
             self.a = "Ethik"
             self.aState = True
         
-        if self.db.pruefe_halbjahr_angegeben(3):
-            lol = self.db.getArrayAusAllenFaechernAndFaechertypseAndGesamtnoteInBestimmtemHalbJahr(3)
-            for i in lol:
-                if i(0) == ('Informationstechnik' or 'Gestaltung_Medien' or 'Mechatronik'):
-                    self.pr1 = i(0)
-                    break
-        else:
-            self.pr1 = self.db.get_faecher_by_fachart("Hauptfach")
+        #if self.db.pruefe_halbjahr_angegeben(3):
+        #    lol = self.db.getArrayAusAllenFaechernAndFaechertypseAndGesamtnoteInBestimmtemHalbJahr(3)
+        #    for i in lol:
+        #        if i(0) == ('Informationstechnik' or 'Gestaltung_Medien' or 'Mechatronik'):
+        #            self.pr1 = i(0)
+        #            break
+        #else:
+        self.pr1 = self.db.get_faecher_by_fachart("Hauptfach")
         self.prp2 = None
 
         self.pr2 = self.db.get_faecher_by_fachart("ean")
@@ -66,6 +63,7 @@ class PruefungsfaecherPossible(object):
         self.pr5 = fach
 
     def getPFP1(self):
+        print(self.pr1)
         if self.pr1 == []:
             self.prp1 = self.setPrufungsfachEins()
         else:
