@@ -17,9 +17,9 @@ class FaecherRausstreichen(object):
         pruefungfaecher = self.db.getpruefungsfacher()   #return ist ein eindimensionales Array das die fachnamen der pruefungsfaecher beinhaltet
         for i in self.Tryfaecher:
             for u in pruefungfaecher:
-                if i(2) == u:
+                if i(0) == u:
                     return False
-            if i(2) == ('Deutsch' or 'Mathe' or 'GGK' or 'Physik' or 'Chemie') or i(3) == 'Profil' or self.db.coutFachBelegt('Informatik') < 2:     #i(3) soll Fachtype sein #in hj 3,4,5,6
+            if i(0) == ('Deutsch' or 'Mathe' or 'GGK' or 'Physik' or 'Chemie') or i(3) == 'Profil' or self.db.coutFachBelegt('Informatik') < 2:     #i(3) soll Fachtype sein #in hj 3,4,5,6
                 return False
-            self.db.setBelegt(i(1), i(2), False)       #i(1) soll halpjahr und i(2) das fach sein
+            self.db.setBelegt(i(1), i(0), False)       #i(1) soll halpjahr und i(0) das fach sein
         return True
