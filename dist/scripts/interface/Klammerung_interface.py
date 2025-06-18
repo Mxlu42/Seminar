@@ -5,15 +5,11 @@ from PyQt6.QtCore import QSize, Qt
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from heart import Launcher
-#from scripts.dbhelp import DBHelp
+
 
 class Klammerung(QMainWindow):
     def __init__(self):
         global grid_layout
-        #all = DBHelp.getFaecherMitNoten1213()
-
-        #faecher = all[0]
-        #noten = all[1]
 
         self.cbs = []
 
