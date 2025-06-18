@@ -4,6 +4,9 @@ class Bestanden(object):
     def __init__(self):
         self.db = DBHelp()
         self.all = []
+        self.counterrgesamtpunkte = 0
+        self.counterrgesamtpunkteP = 0
+        
 
     def ElfteBestanden(self):
         self.gesuchtesHJ = 1 and 2
@@ -58,7 +61,64 @@ class Bestanden(object):
         return True
     
     def AbiPruefungBestanden(self):
+        self.all.clear
+        self.all.append(self.db.getArrayPruefungsfaechter())        #0 = fach, 1 = pruefungsnummer, 2 = punkte
+        
+        counterunter = 0
+        counterunter = 0
+
+        for i in range (0, len(self.all)):
+            self.counterrgesamtpunkteP += self.all(i)(2) * 4
+            if self.all(i)(2) < 5:
+                counterunter += 1
+            if self.all(i)(1) == ('1' or '2') and self.all(i)(2) < 5:
+                return False
+            if self.all(i)(2) == 0:
+                return False 
+
+        if counterunter > 2:
+            return False
+        if self.counterrgesamtpunkteP < 100:
+            return False
         return True
         
     def AbiJahreBestanden(self):
+        self.all.clear()
+        HJ = [3, 4, 5, 6]
+        for i in HJ:
+            self.all.append(self.db.getArrayAusHalpjahrMitFachFachartNote(i))
+        
+        counterunterkurs = 0
+        counterunterkursleistung = 0
+        for u in range (0, len(self.all)):
+            for i in range (0, len(self.all(u))):
+                if self.all(u)(i)(2) < 5:
+                    counterunterkurs += 1
+                if self.all(u)(i)(2) < 5 and ( self.all(u)(i)(1) == 'Profil' or self.all(u)(i)(1) == 'Haupt' ):
+                    counterunterkursleistung += 1
+                if self.all(u)(i)(1) == ('Deutsch' or 'Mathe' or 'GGK' or 'Physik' or 'Chemie' or 'Mechatronik' or 'Informationstechnik' or 'Gestaltung_Medien' ) and self.all(u)(i)(2) == 0:
+                    return False
+                if self.all(u)(i)(1) == 'Profil' or  self.all(u)(i)(1) == 'EAN':
+                    self.counterrgesamtpunkte += self.all(u)(i)(2)                
+                self.counterrgesamtpunkte += self.all(u)(i)(2)
+        self.counterrgesamtpunkte = self.counterrgesamtpunkte / 48
+        if self.counterrgesamtpunkte < 200:
+            return False
+        if counterunterkurs > 7:
+            return False
+        if counterunterkursleistung > 3:
+            return False
+        if self.db.CountFaecherBelegt()  <= 36:             #in hj 3,4,5,6
+            return False
+        if self.db.coutFachBelegt('SpanischN') == 0 and self.db.coutFachBelegt('Englisch') != 4:
+            return False
+        if (self.db.coutFachBelegt('SpanischN') > 0 and self.db.coutFachBelegt('Englisch') < 4 and self.db.coutFachBelegt('Spanisch') < 2) or self.db.coutFachBelegt('SpanischN') > 0 and self.db.coutFachBelegt('Spanisch') < 4:
+            return False
+        return True
+    
+    def AbiBestanden(self):
+        if self.AbiJahreBestanden() == False or self.AbiPruefungBestanden() == False:
+            return False
+        if self.counterrgesamtpunkte + self.counterrgesamtpunkteP < 300:
+            return False
         return True
