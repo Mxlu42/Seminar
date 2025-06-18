@@ -24,7 +24,7 @@ class Window(QMainWindow):
         self.setMaximumSize(QSize(500, 600))
         self.setWindowTitle('Loginpage')
 
-        lbl = QLabel('Platzhalter für den Erklärtext')
+        lbl = QLabel('Willkommen zurück! um mit der Anmeldung Fortzufahern geben sie einfach Ihren<br>Namen und Ihr Passwort ein, und clicken sie auf "Speichern".')
         lbl.resize(lbl.sizeHint())
         lbl.setAlignment(Qt.AlignmentFlag.AlignHCenter)
         lbl.setMargin(30)
