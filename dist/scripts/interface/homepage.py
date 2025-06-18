@@ -17,7 +17,7 @@ class Homepage(QMainWindow):
         self.setWindowTitle('Homepage')
 
 
-        txt = QLabel('Für genauere Informationen<br> einfach mit dem Cursor auf den entsprechenden Knopf gehen', self)
+        txt = QLabel('Für genauere Informationen<br>bewegen Sie einfach Ihren Coursor über den Knopf<br>der Sie interressiert, und warten Sie zwei Sekunden', self)
         txt.setMinimumSize(QSize(400, 100))
         txt.setAlignment(Qt.AlignmentFlag.AlignCenter)
         txt.move(self.Center(txt), 30)
@@ -95,7 +95,7 @@ class Homepage(QMainWindow):
 
         nb = QPushButton('Ergebnisausgabe', self)
         nb.resize(nb.sizeHint())
-        nb.setToolTip('Eine Möglichkeit alle Noten und Fächerwahlen übersichtlich Anzeigen zu lassen')
+        nb.setToolTip('Eine Möglichkeit alle Noten und<br>Fächerwahlen übersichtlich Anzeigen zu lassen')
         nb.clicked.connect(self.nb_clicked)
         nb.move(self.Center(nb), bmh)
         bmh += 40
