@@ -53,7 +53,7 @@ class Klammerung(QMainWindow):
             column += 1
 
         for i in range(31):                                                                         #spaeter liste der belegten Faecher
-            lbl = QLabel(str(i))
+            lbl = QLabel(f'test {str(i+1)}')
             lbl.resize(lbl.sizeHint())
             grid_layout.addWidget(lbl, row, 0,  Qt.AlignmentFlag.AlignLeft)
             grid_layout.setRowMinimumHeight(row, 30)
@@ -144,6 +144,18 @@ class Klammerung(QMainWindow):
             count_col += 1
 
         print(save1)
+
+        for i in self.cb_col1:
+            i.setChecked(True)
+
+        for i in self.cb_col2:
+            i.setChecked(True)
+
+        for i in self.cb_col3:
+            i.setChecked(True)
+
+        for i in self.cb_col4:
+            i.setChecked(True)
 
 
     def back(self):
