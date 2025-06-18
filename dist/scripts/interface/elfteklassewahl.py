@@ -269,6 +269,7 @@ class SubjectChoice11(QMainWindow):
             alleTrue = db.setzeMehrereFaecherBelegtTrue(finalsavearr, [1, 2])
             print(alleTrue)
             db.setzeJahrgängeAngegeben([1,2])
+        return alleTrue
         
     def back(self):
         pipi = Launcher('homepage')
