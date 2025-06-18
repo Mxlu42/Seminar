@@ -1,6 +1,6 @@
 import sys
 from PyQt6 import QtCore, QtWidgets
-from PyQt6.QtWidgets import QMainWindow, QWidget, QPushButton, QGridLayout, QLabel, QLineEdit, QMessageBox, QComboBox, QRadioButton, QScrollArea, QVBoxLayout, QCheckBox
+from PyQt6.QtWidgets import QMainWindow, QWidget, QPushButton, QGridLayout, QLabel, QLineEdit, QMessageBox, QComboBox, QRadioButton, QScrollArea, QVBoxLayout, QCheckBox, QHBoxLayout
 from PyQt6.QtCore import QSize, Qt
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -9,10 +9,13 @@ from heart import Launcher
 
 class Klammerung(QMainWindow):
     def __init__(self):
+        global grid_layout
         #all = DBHelp.getFaecherMitNoten1213()
 
         #faecher = all[0]
         #noten = all[1]
+
+        self.cbs = []
 
         super().__init__()
         
@@ -49,8 +52,8 @@ class Klammerung(QMainWindow):
             grid_layout.addWidget(lbl, 0, column,  Qt.AlignmentFlag.AlignLeft)
             column += 1
 
-        for i in range(30):
-            lbl = QLabel('Test')
+        for i in range(31):                                                                         #spaeter liste der belegten Faecher
+            lbl = QLabel(str(i))
             lbl.resize(lbl.sizeHint())
             grid_layout.addWidget(lbl, row, 0,  Qt.AlignmentFlag.AlignLeft)
             grid_layout.setRowMinimumHeight(row, 30)
@@ -59,26 +62,36 @@ class Klammerung(QMainWindow):
         row = 1
         column = 1
 
-        b = 15
+        self.cb_col1 = []
+        self.cb_col2 = []
+        self.cb_col3 = []
+        self.cb_col4 = []
 
-        a = []
-        #for i in range(0, b-1):
-            #a.append([i, self.setBox(), self.setBox(), self.setBox()])
+        for i in range(31):                                                                            #spaeter laenge der liste der belegten faecher
+            row_layout = QHBoxLayout()
 
-        print(a)
+            cb1 = QCheckBox()
+            cb2 = QCheckBox()
+            cb3 = QCheckBox()
+            cb4 = QCheckBox()
 
+            cb1.setChecked(True)
+            cb2.setChecked(True)
+            cb3.setChecked(True)
+            cb4.setChecked(True)
 
-        #a = [30 * [Fach, ]]
-        #for i in range(30):
-            #for q in range(4):
-                #lbl = QCheckBox()
-                #lbl.setChecked(True)
-                #lbl.resize(lbl.sizeHint())
-                #grid_layout.addWidget(lbl, row, column,  Qt.AlignmentFlag.AlignLeft)
-                #column += 1
-            #column = 1
-            #row += 1
-            
+            self.cb_col1.append(cb1)
+            self.cb_col2.append(cb2)
+            self.cb_col3.append(cb3)
+            self.cb_col4.append(cb4)
+
+            grid_layout.addWidget(cb1, row, 1, Qt.AlignmentFlag.AlignLeft)
+            grid_layout.addWidget(cb2, row, 2, Qt.AlignmentFlag.AlignLeft)
+            grid_layout.addWidget(cb3, row, 3, Qt.AlignmentFlag.AlignLeft)
+            grid_layout.addWidget(cb4, row, 4, Qt.AlignmentFlag.AlignLeft)
+
+            row += 1
+
 
         scroll_content.setLayout(grid_layout)
         scroll_area.setWidget(scroll_content)
@@ -89,21 +102,25 @@ class Klammerung(QMainWindow):
         main_widget.setLayout(main_layout)
         self.setCentralWidget(main_widget)
 
+        saveb = QPushButton('speichern')
+        saveb.resize(saveb.sizeHint())
+        saveb.clicked.connect(self.save)
+        main_layout.addWidget(saveb)
 
         backb = QPushButton('Zurück')
         backb.resize(backb.sizeHint())
         backb.clicked.connect(self.back)
         main_layout.addWidget(backb)
 
-    #def setBox(self):
-        #self.cb1 = QCheckBox()
-        #self.cb1.isChecked(True)
-        #self.cb1.resize(self.cb1.sizeHint())
-        #return self.cb1
 
         
+    def save(self):
+        save1 = []
+        count_col1 = 0
+        for i in  self.cb_col1:
+            
 
-        
+
     def back(self):
         pipi = Launcher('homepage')
         pipi.launch()
