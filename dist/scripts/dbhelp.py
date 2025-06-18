@@ -25,32 +25,29 @@ class DBHelp(object):
                             else:
                                 return False
                         
-    def ChangeAttributes(self, fachname, fachart, note):
-        students_list = self.students.find({
-            "halbjahre.normal_faecher.fach": fachname
-        })
+    def setzeMehrereFaecherBelegtTrue(self, faecher: list[str], jahrgang: int):
+        results = self.students.find()
 
-        for student in students_list:
-            updated_halbjahre = []
+        for student in results:
+            schueler_id = student["_id"]
+            updated_halbjahre = student.get("halbjahre", [])
+            changed = False
 
-            for halbjahr in student["halbjahre"]:
-                neue_faecher = []
+            for halbjahr in updated_halbjahre:
+                if halbjahr.get("jahr") == jahrgang:
+                    for fach in halbjahr.get("normal_faecher", []):
+                        if fach.get("fach") in faecher and fach.get("belegt") != "true":
+                            fach["belegt"] = "true"
+                            changed = True
 
-                for fach in halbjahr["normal_faecher"]:
-                    if fach["fach"] == fachname:
-                        fach["fachArt"] = fachart
-                        fach["note"] = note
-                    neue_faecher.append(fach)
+            if changed:
+                self.students.update_one(
+                    {"_id": schueler_id},
+                    {"$set": {"halbjahre": updated_halbjahre}}
+                )
+                print(f"✅ {student.get('name')} aktualisiert: {', '.join(faecher)} auf 'belegt = true'")
 
-                halbjahr["normal_faecher"] = neue_faecher
-                updated_halbjahre.append(halbjahr)
 
-            # Update das gesamte halbjahre-Array
-            self.students.update_one(
-                {"_id": student["_id"]},
-                {"$set": {"halbjahre": updated_halbjahre}}
-            )
-            print(f"✅ Aktualisiert: {student['name']} - {student['vorname']}")
 
     def get_faecher_by_fachart(self, fachart_suche):
         gefundene_faecher = [] 
