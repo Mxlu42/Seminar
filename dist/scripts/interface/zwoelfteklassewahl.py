@@ -34,7 +34,7 @@ class SubjectChoice11(QMainWindow):
         self.setMaximumSize(QSize(500, 600))
         self.setWindowTitle('12te klasse Fächerwahl')
 
-        lbl = QLabel('Platzhalter für den Erklärtext')
+        lbl = QLabel('Hie haben Sie zwei Verschiedene Arten von Wahlen zu tätigen, Wahlpflichtfächer und Wahlfächer.<br>Bei den Wahlpflichtfächern geht es um Mathe- oder Deutsch eAn, diese Wahl setzt gleichzeitig Ihr zweites Prüfungsfach auf das gewählte Fach. Bei der Wahl der Glaubenslehre, können Sie sich neu Entscheiden, sollten dies aber nicht tun wenn Sie das Fach im Abitur zur Auswahl haben möchten da dies nur dann geht, wenn man es ab der elften Klasse belegt hat. Bei der Wahl Englisch/Spanisch haben alle die Spanisch in der elften hatten die möglichkeit Englisch abzuwählen. Sollten Sie kein Spanisch in der elften Klasse gehabt haben, müssen Sie Englisch wählen.')
         lbl.resize(lbl.sizeHint())
         lbl.setAlignment(Qt.AlignmentFlag.AlignHCenter)
         lbl.setMargin(30)

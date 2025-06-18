@@ -153,6 +153,8 @@ class Klammerung(QMainWindow):
         for i in self.cb_col4:
             i.setChecked(True)
 
+        save1 = []
+
 
     def back(self):
         pipi = Launcher('homepage')
