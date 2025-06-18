@@ -26,11 +26,6 @@ class DBHelp(object):
                                 return False
                             
     def setzeMehrereFaecherBelegtTrue(self, faecher: list[str], jahrgänge: list[int]) -> list[str]:
-        """
-        1) Setzt in den angegebenen Jahrgängen zunächst alle Fächer auf belegt = "false".
-        2) Setzt dann alle gewählten Fächer (plus Partnerfach Mathe↔Deutsch) auf belegt = "true".
-        3) Liefert eine Liste ALLER Fächer zurück, die am Ende in diesen Jahrgängen belegt = "true" sind.
-        """
         # 1) Flatten aller Listen/Tupel
         clean = []
         for x in faecher:
@@ -98,7 +93,26 @@ class DBHelp(object):
 
         print("✅ Am Ende belegt=true in Jahren", jahrgänge, ":", final_true)
         return final_true
+    
+    def getAlleBelegtenFaechern(self, jahrgaenge: list[int] | None = None) -> list[str]:
+        pipeline = [
+            {"$unwind": "$halbjahre"},
+            # optional filtern nach jahrgaenge
+            *(
+                [{"$match": {"halbjahre.jahr": {"$in": jahrgaenge}}}]
+                if jahrgaenge is not None
+                else []
+            ),
+            {"$unwind": "$halbjahre.normal_faecher"},
+            {"$match": {"halbjahre.normal_faecher.belegt": "true"}},
+            {"$group": {"_id": "$halbjahre.normal_faecher.fach"}},
+            {"$sort": {"_id": 1}}
+        ]
 
+        cursor = self.students.aggregate(pipeline)
+        faecher = [doc["_id"] for doc in cursor]
+        print(f"ℹ️ Belegte Fächer{' in ' + str(jahrgaenge) if jahrgaenge else ''}: {faecher}")
+        return faecher
 
     def setzeJahrgängeAngegeben(self, jahrgänge: list[int]):
 

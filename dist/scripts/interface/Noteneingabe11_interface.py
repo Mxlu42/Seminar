@@ -6,14 +6,13 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from heart import Launcher
 from dbhelp import DBHelp
-from elfteklassewahl import SubjectChoice11
 
 class Noteneingabe11(QMainWindow):
     def __init__(self):
         global mclass
-        sc11 = SubjectChoice11()
-        arr = sc11.save
-        print(arr)
+        db = DBHelp()
+        true_faecher = db.getAlleBelegtenFaechern([1,2])
+        print('hello',true_faecher)
         mclass = ['Mathe', 'Deutsch', 'Profielfach (DB)', 'GGK', 'Englisch', 'Sport', 'Chemie', 'Physik', 'Informatik', 'Religion (DB)', 'Fremdsprache (DB)', 'Wirtschaft',  'Labor (DB)', 'Stuetz (DB)']
         self.items = ['Bitte Note wählen', '1', '2', '3', '4', '5', '6']
         #db = DBHelp()
