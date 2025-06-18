@@ -26,19 +26,28 @@ class PruefungsfaecherPossible(object):
             self.a = "Ethik"
             self.aState = True
         
-        self.pr1 = self.db.get_faecher_by_fachart("Hauptfach")
+        if self.db.pruefe_halbjahr_angegeben(3):
+            lol = self.db.getArrayAusAllenFaechernAndFaechertypseAndGesamtnoteInBestimmtemHalbJahr(3)
+            for i in lol:
+                if i(0) == ('Informationstechnik' or 'Gestaltung_Medien' or 'Mechatronik'):
+                    self.pr1 = i(0)
+                    break
+        else:
+            self.pr1 = self.db.get_faecher_by_fachart("Hauptfach")
         self.prp2 = None
 
-        self.pr2 = self.db.get_faecher_by_fachart("EAN")
+        self.pr2 = self.db.get_faecher_by_fachart("ean")
         self.prp2 = None
-            
         self.FachblockPR2 = self.setFachblockPR2()
+
         self.prp3 = self.setPruefungsfachDrei()
         self.FachblockPR3 = 0
         self.pr3 = None
+
         self.prp4 = self.setPruefungsfachVier()
         self.FachblockPR4 = 0
         self.pr4 = None
+
         self.prp5 = self.setPruefungsfachFuenf()
         self.pr5 = None
         self.FachblockPR5 = 0

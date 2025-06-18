@@ -311,7 +311,7 @@ class DBHelp(object):
                             })
         return ergebnis
     
-    def getArrayAusAllenFaechernAndFaechertypseAndGesamtnoteInBestimmtemHalbJahr(self, halbjahr_name):
+    def getArrayAusAllenFaechernAndFaechertypseAndGesamtnoteInBestimmtemHalbJahr(self, halbjahr_name):      #Fach, Fachart, note
         ergebnis = []
         results = self.students.find()
 
