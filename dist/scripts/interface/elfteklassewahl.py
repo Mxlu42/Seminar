@@ -214,11 +214,13 @@ class SubjectChoice11(QMainWindow):
             return
         else:
             finalsavearr = []
+            mclass = 'Mathe', 'Deutsch','GGK', 'Englisch', 'Sport', 'Chemie', 'Physik', 'Informatik','Wirtschaft',
 
             finalsavearr.append(r_cp[0])
             finalsavearr.append(r_dsms[0])
             finalsavearr.append(r_sgsef[0])
             finalsavearr.append(r_erkre[0])
+            finalsavearr.append(mclass)
             print(finalsavearr)
 
             r_cl.setAutoExclusive(False)
@@ -265,7 +267,8 @@ class SubjectChoice11(QMainWindow):
             QMessageBox.about(self, 'Speicherbenachrichtigung', 'Ihre Eingabe wurde gespeichert!')
             db = DBHelp()
             print('Fächer werden in der Datenbank gespeichert')
-            db.setzeMehrereFaecherBelegtTrue(finalsavearr, 1)
+            db.setzeMehrereFaecherBelegtTrue(finalsavearr, [1, 2])
+            db.setzeJahrgängeAngegeben([1,2])
         
     def back(self):
         pipi = Launcher('homepage')

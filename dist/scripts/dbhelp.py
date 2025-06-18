@@ -24,29 +24,107 @@ class DBHelp(object):
                                 return True
                             else:
                                 return False
-                        
-    def setzeMehrereFaecherBelegtTrue(self, faecher: list[str], jahrgang: int):
+                            
+    def setzeMehrereFaecherBelegtTrue(self, faecher: list[str], jahrgänge: list[int]):
+        """
+        Setzt 'belegt' auf 'true' für alle angegebenen Fächer in den gewünschten Jahrgängen.
+        Wenn 'Mathe eAn' gewählt wird, setzt es automatisch 'Deutsch gAn' (und umgekehrt).
+        """
+        # Partner-Mapping: wenn key gewählt wird, partner bekommt komplementäre FachArt
+        partner_map = {
+            "Mathe": "Deutsch",
+            "Deutsch": "Mathe"
+        }
+
+        print(f"📥 Aufruf mit Fächern={faecher}, Jahrgänge={jahrgänge}")
+        cursor = self.students.find()
+
+        for student in cursor:
+            name = student.get("name")
+            halbjahre = student.get("halbjahre", [])
+            updated = False
+
+            print(f"🔍 Bearbeite Schüler: {name}, Halbjahre: {[h.get('jahr') for h in halbjahre]}")
+
+            for halb in halbjahre:
+                jahr = halb.get("jahr")
+                if jahr not in jahrgänge:
+                    continue
+
+                print(f"  ▶️ prüfe Halbjahr {jahr}")
+                nf = halb.get("normal_faecher", [])
+                print(f"    Fächer in DB: {[f.get('fach') for f in nf]}")
+
+                # A) Alle direkt gewählten Fächer verarbeiten
+                for fach_input in faecher:
+                    parts    = fach_input.strip().split(maxsplit=1)
+                    fachname = parts[0]
+                    fachart  = parts[1] if len(parts) > 1 else None
+
+                    fach_obj = next((f for f in nf if f.get("fach") == fachname), None)
+                    if not fach_obj:
+                        print(f"    ⚠ Fach «{fachname}» nicht gefunden → übersprungen")
+                        continue
+
+                    if fach_obj.get("belegt") != "true":
+                        print(f"    ✏ setze belegt für «{fachname}»")
+                        fach_obj["belegt"] = "true"
+                        updated = True
+                    if fachart:
+                        print(f"    ✏ setze fachArt='{fachart}' für «{fachname}»")
+                        fach_obj["fachArt"] = fachart
+                        updated = True
+
+                # B) Automatische Partnerfächer
+                for orig, partner in partner_map.items():
+                    if any(item.split()[0] == orig for item in faecher):
+                        # Bestimme gesetzte FachArt für orig
+                        art = next((item.split()[1].lower() for item in faecher
+                                    if item.split()[0] == orig and len(item.split()) > 1),
+                                None)
+                        if art not in ("ean", "gan"):
+                            continue
+                        comp = "gAn" if art == "ean" else "eAn"
+
+                        p_obj = next((f for f in nf if f.get("fach") == partner), None)
+                        if p_obj:
+                            if p_obj.get("belegt") != "true":
+                                print(f"    ✏ setze belegt für Partner «{partner}»")
+                                p_obj["belegt"] = "true"
+                                updated = True
+                            print(f"    ✏ setze fachArt='{comp}' für Partner «{partner}»")
+                            p_obj["fachArt"] = comp
+                            updated = True
+
+            if updated:
+                res = self.students.update_one(
+                    {"_id": student["_id"]},
+                    {"$set": {"halbjahre": halbjahre}}
+                )
+                print(f"✅ Updated {name}: matched={res.matched_count}, modified={res.modified_count}")
+            else:
+                print(f"ℹ️ Keine Änderungen für {name}")
+
+    def setzeJahrgängeAngegeben(self, jahrgänge: list[int]):
+
         results = self.students.find()
 
         for student in results:
-            schueler_id = student["_id"]
+            schueler_id = student['_id']
             updated_halbjahre = student.get("halbjahre", [])
             changed = False
 
             for halbjahr in updated_halbjahre:
-                if halbjahr.get("jahr") == jahrgang:
-                    for fach in halbjahr.get("normal_faecher", []):
-                        if fach.get("fach") in faecher and fach.get("belegt") != "true":
-                            fach["belegt"] = "true"
-                            changed = True
+                if halbjahr.get("jahr") in jahrgänge and str(halbjahr.get("angegeben")).lower() != "true":
+                    halbjahr["angegeben"] = "true"
+                    changed = True
 
             if changed:
                 self.students.update_one(
                     {"_id": schueler_id},
                     {"$set": {"halbjahre": updated_halbjahre}}
                 )
-                print(f"✅ {student.get('name')} aktualisiert: {', '.join(faecher)} auf 'belegt = true'")
-
+                print(f"✅ 'angegeben = true' gesetzt für Schüler {student.get('name')} in Jahrgänge {jahrgänge}")
 
 
     def get_faecher_by_fachart(self, fachart_suche):

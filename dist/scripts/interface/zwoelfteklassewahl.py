@@ -5,6 +5,7 @@ from PyQt6.QtCore import QSize, Qt
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from heart import Launcher
+from dbhelp import *
 
 class SubjectChoice11(QMainWindow):
     def __init__(self):
@@ -244,7 +245,7 @@ class SubjectChoice11(QMainWindow):
         if r_lt.isChecked() == True:
             self.controll2 = 1
             r_ltarr.clear()
-            r_ltarr.append('Litheratur und Theater')
+            r_ltarr.append('Literatur_Theater')
         elif r_lt.isChecked() == False:
             r_ltarr.clear()
             self.controll2 = 0
@@ -254,7 +255,7 @@ class SubjectChoice11(QMainWindow):
         if r_mp.isChecked() == True:
             self.controll3 = 1
             r_mparr.clear()
-            r_mparr.append('Mathe plus')
+            r_mparr.append('MathePlus')
         elif r_mp.isChecked() == False:
             r_mparr.clear()
             self.controll3 = 0
@@ -262,14 +263,14 @@ class SubjectChoice11(QMainWindow):
     def r_ert(self):
         if r_er.isChecked() == True:
             r_erkre.clear()
-            r_erkre.append('evangelische Religion')
+            r_erkre.append('Evangelisch')
         else:
             return
         
     def r_krt(self):
         if r_kr.isChecked() == True:
             r_erkre.clear()
-            r_erkre.append('katholische Religion')
+            r_erkre.append('Katholisch')
         else:
             return
         
@@ -293,7 +294,7 @@ class SubjectChoice11(QMainWindow):
         if r_s.isChecked() == True:
             self.controll5 = 1
             r_sarr.clear()
-            r_sarr.append('Spanisch')
+            r_sarr.append('SpanischN')
         elif r_s.isChecked() == False:
             r_sarr.clear()
             self.controll5 = 0
@@ -310,7 +311,9 @@ class SubjectChoice11(QMainWindow):
             return
         else:
             finalsavearr = []
-            finalsavearr.append('alle Fächer die man auf jedenfall hat (Sport usw.)')
+            mclass = ['Mathe','GGK','Deutsch', 'Englisch', 'Sport','Informatik']
+            for i in range(len(mclass)):
+                finalsavearr.append(mclass[i])
 
             finalsavearr.append(r_dm[0])
             if self.controll == 1:
@@ -337,7 +340,7 @@ class SubjectChoice11(QMainWindow):
                 finalsavearr.append(r_sarr[0])
 
             print(finalsavearr)
-
+            final = finalsavearr.copy()
             finalsavearr.clear()
 
             r_de.setAutoExclusive(False)
@@ -391,6 +394,10 @@ class SubjectChoice11(QMainWindow):
 
 
             QMessageBox.about(self, 'Speicherbenachrichtigung', 'Ihre Eingabe wurde gespeichert!')
+            db = DBHelp()
+            print('Fächer werden in der Datenbank gespeichert')
+            db.setzeMehrereFaecherBelegtTrue(final, [3, 4])
+            db.setzeJahrgängeAngegeben([3,4])
         
     def back(self):
         pipi = Launcher('homepage')
