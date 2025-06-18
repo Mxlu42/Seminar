@@ -32,9 +32,9 @@ class Homepage(QMainWindow):
         k11.move(self.Center(k11), bmh)
         bmh += 40
 
-        fw11 = QPushButton('Fächerwahl Klasse 11', self)
+        fw11 = QPushButton('Ausgabe der Klasse 11', self)
         fw11.resize(fw11.sizeHint())
-        fw11.setToolTip('Wahl für ein Labor Fach,<br> eine 3. Fremdsprache, Stützfach und einer Konfession')
+        fw11.setToolTip('Eine geordnete Übersicht der Klasse 11 mit möglichkeit sie als .pdf zu Speichern')
         fw11.clicked.connect(self.fw11_clicked)
         fw11.move(self.Center(fw11), bmh)
         bmh += 40
@@ -45,9 +45,9 @@ class Homepage(QMainWindow):
         k12.move(self.Center(k12), bmh)
         bmh += 40
 
-        fw12 = QPushButton('Fächerwahl Klasse 12', self)
+        fw12 = QPushButton('Ausgabe der Klasse 12', self)
         fw12.resize(fw12.sizeHint())
-        fw12.setToolTip('Wahl Deutsch eAN oder Mathe eAn,<br> Entgültige konfessionswahl, Englisch oder Spanisch und aller Wahlfächer')
+        fw12.setToolTip('Eine geordnete Übersicht der Klasse 12 mit möglichkeit sie als .pdf zu Speichern')
         fw12.clicked.connect(self.fw12_clicked)
         fw12.move(self.Center(fw12), bmh)
         bmh += 40
@@ -58,9 +58,9 @@ class Homepage(QMainWindow):
         k13.move(self.Center(k13), bmh)
         bmh += 40
 
-        fw13 = QPushButton('Fächerwahl Klasse 13', self)
+        fw13 = QPushButton('Ausgabe der Klasse 13', self)
         fw13.resize(fw13.sizeHint())
-        fw13.setToolTip('Wahl der Prüfungsfächer')
+        fw13.setToolTip('Eine geordnete Übersicht der Klasse 13 mit möglichkeit sie als .pdf zu Speichern')
         fw13.clicked.connect(self.fw13_clicked)
         fw13.move(self.Center(fw13), bmh)
         bmh += 40
