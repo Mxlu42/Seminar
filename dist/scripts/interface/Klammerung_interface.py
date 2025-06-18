@@ -7,7 +7,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from heart import Launcher
 #from scripts.dbhelp import DBHelp
 
-class SubjectChoice11(QMainWindow):
+class Klammerung(QMainWindow):
     def __init__(self):
         #all = DBHelp.getFaecherMitNoten1213()
 
@@ -59,16 +59,25 @@ class SubjectChoice11(QMainWindow):
         row = 1
         column = 1
 
-        a = [30 * []]
-        for i in range(30):
-            for q in range(4):
-                lbl = QCheckBox()
-                lbl.setChecked(True)
-                lbl.resize(lbl.sizeHint())
-                grid_layout.addWidget(lbl, row, column,  Qt.AlignmentFlag.AlignLeft)
-                column += 1
-            column = 1
-            row += 1
+        b = 15
+
+        a = []
+        #for i in range(0, b-1):
+            #a.append([i, self.setBox(), self.setBox(), self.setBox()])
+
+        print(a)
+
+
+        #a = [30 * [Fach, ]]
+        #for i in range(30):
+            #for q in range(4):
+                #lbl = QCheckBox()
+                #lbl.setChecked(True)
+                #lbl.resize(lbl.sizeHint())
+                #grid_layout.addWidget(lbl, row, column,  Qt.AlignmentFlag.AlignLeft)
+                #column += 1
+            #column = 1
+            #row += 1
             
 
         scroll_content.setLayout(grid_layout)
@@ -86,7 +95,11 @@ class SubjectChoice11(QMainWindow):
         backb.clicked.connect(self.back)
         main_layout.addWidget(backb)
 
-        
+    #def setBox(self):
+        #self.cb1 = QCheckBox()
+        #self.cb1.isChecked(True)
+        #self.cb1.resize(self.cb1.sizeHint())
+        #return self.cb1
 
         
 
@@ -101,6 +114,6 @@ class SubjectChoice11(QMainWindow):
 
 #Anzeigen / Ausführen des Programms als sepeates Fenster
 app = QtWidgets.QApplication(sys.argv)
-win = SubjectChoice11()
+win = Klammerung()
 win.show()
 sys.exit(app.exec())

@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+ db.students.insertOne({
+ name: 'Brandwein',
+ vorname: 'Felix',
+=======
 db.students.insertOne({
  name: 'lisewski',
  vorname: 'noaa',

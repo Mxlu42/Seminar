@@ -27,5 +27,5 @@ class noteEingeben(object):
         self.HJ = HJ
         self.Note = Note
         self.Notentype = Notentype
- #       DBHelp.setNoteInDB(self.fach, self.HJ, self.Note, self.Notentype)
+        DBhelp.setNoteInDB(self.fach, self.HJ, self.Note, self.Notentype)
     
