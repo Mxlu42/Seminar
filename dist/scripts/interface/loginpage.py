@@ -6,6 +6,7 @@ from pymongo import MongoClient
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from heart import Launcher
+from dbhelp import *
 
 helpi = False
 client = MongoClient('localhost', 27017)
@@ -128,10 +129,14 @@ class Window(QMainWindow):
         txt1.clear()
         txt2.clear()
         txt3.clear()
-        
-        QMessageBox.about(self, 'Speicherbenachrichtigung', 'Deine Daten Wurden gespeichert!')
-        pipi = Launcher('homepage')
-        pipi.launch()
+
+        db = DBHelp()
+        if db.checkobpwkorrekt(aus):
+            QMessageBox.about(self, 'Loginbenachrichtigung', 'Weiterleitung zum Programm.')
+            pipi = Launcher('homepage')
+            pipi.launch()
+        else:
+            QMessageBox.about(self,'Fehler', 'Passwort oder Name inkorrekt.')
 
     # Funktion des 'Passwort anzeigen' Buttons
     def sp_p(self):

@@ -217,3 +217,9 @@ class DBHelp(object):
                                     gesamtnote = eintrag.get("Wert")
                             faecher_noten[index].append([fach.get("fach"), gesamtnote])
         return faecher_noten
+
+    def checkobpwkorrekt(self, arr):
+        if self.students.find_one({"name": arr[0],'vorname': arr[1] ,"passwort": arr[2]}):
+            return True
+        else:
+            return False

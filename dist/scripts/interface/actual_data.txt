@@ -1,11 +1,6 @@
-<<<<<<< HEAD
- db.students.insertOne({
- name: 'Brandwein',
- vorname: 'Felix',
-=======
 db.students.insertOne({
  name: 'lisewski',
- vorname: 'noaa',
+ vorname: 'noah',
  passwort: '12345678',
  regristrations_datum: new Date(),
  halbjahre: [
