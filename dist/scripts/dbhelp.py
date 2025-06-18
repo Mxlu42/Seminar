@@ -255,6 +255,7 @@ class DBHelp(object):
                                 })
         return noten_liste
     
+    #usless
     def setNoteInDBEsterFreierPlatzMitDemNotentypeDerNichtBelegtIst(self, fachname, halbjahr_name, notentyp, note):
         results = self.students.find({
             "halbjahre.normal_faecher.fach": fachname
