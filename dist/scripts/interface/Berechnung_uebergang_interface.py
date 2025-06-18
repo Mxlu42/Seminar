@@ -1,7 +1,7 @@
 import sys
 import os
 from PyQt6 import QtCore, QtWidgets
-from PyQt6.QtWidgets import QMainWindow, QWidget, QPushButton, QGridLayout, QLabel, QLineEdit, QMessageBox, QComboBox
+from PyQt6.QtWidgets import QMainWindow, QWidget, QPushButton, QGridLayout, QLabel, QLineEdit, QMessageBox, QComboBox, QVBoxLayout
 from PyQt6.QtCore import QSize, Qt
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from heart import Launcher
@@ -65,6 +65,17 @@ class Homepage(QMainWindow):
         fw13.move(self.Center(fw13), bmh)
         bmh += 40
 
+        backwid = QWidget(self)
+        backbox = QVBoxLayout(backwid)
+        backwid.setMinimumSize(100, 50)
+        backwid.setMaximumSize(100, 50)
+        backwid.move(10, 540)
+
+        backb = QPushButton('Zurück')
+        backb.resize(backb.sizeHint())
+        backb.clicked.connect(self.back)
+        backbox.addWidget(backb)
+
 
 
 
@@ -89,6 +100,10 @@ class Homepage(QMainWindow):
         print('Weiterleitung zur Seite "Faecherwahl 13"')
         lnh = Launcher('pruefae_interface')
         lnh.launch()
+
+    def back(self):
+        pipi = Launcher('homepage')
+        pipi.launch()
 
 
 
