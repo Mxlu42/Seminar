@@ -1,20 +1,20 @@
 import sys
 import os
 from PyQt6 import QtCore, QtWidgets
-from PyQt6.QtWidgets import QMainWindow, QWidget, QPushButton, QGridLayout, QLabel, QLineEdit, QMessageBox, QComboBox
+from PyQt6.QtWidgets import QMainWindow, QWidget, QPushButton, QGridLayout, QLabel, QLineEdit, QMessageBox, QComboBox, QVBoxLayout
 from PyQt6.QtCore import QSize, Qt
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from heart import Launcher
 from dbhelp import *
 
-class Homepage(QMainWindow):
+class Ergebnisausgabe(QMainWindow):
     def __init__(self):
         super().__init__()
 
         self.setCentralWidget(QWidget(self))
         self.setMinimumSize(QSize(500, 600))
         self.setMaximumSize(QSize(500, 600))
-        self.setWindowTitle('Homepage')
+        self.setWindowTitle('Ergebnisausgabe')
 
 
         txt = QLabel('Für genauere Informationen<br> einfach mit dem Cursor auf den entsprechenden Knopf gehen', self)
@@ -65,6 +65,17 @@ class Homepage(QMainWindow):
         fw13.move(self.Center(fw13), bmh)
         bmh += 40
 
+        backwid = QWidget(self)
+        backbox = QVBoxLayout(backwid)
+        backwid.setMinimumSize(100, 50)
+        backwid.setMaximumSize(100, 50)
+        backwid.move(10, 540)
+
+        backb = QPushButton('Zurück')
+        backb.resize(backb.sizeHint())
+        backb.clicked.connect(self.back)
+        backbox.addWidget(backb)
+
 
 
 
@@ -90,9 +101,13 @@ class Homepage(QMainWindow):
         lnh = Launcher('pruefae_interface')
         lnh.launch()
 
+    def back(self):
+        pipi = Launcher('homepage')
+        pipi.launch()
+
 
 
 app = QtWidgets.QApplication(sys.argv)
-win = Homepage()
+win = Ergebnisausgabe()
 win.show()
 sys.exit(app.exec())

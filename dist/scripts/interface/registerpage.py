@@ -13,7 +13,7 @@ client = MongoClient('localhost', 27017)
 db = client['test']
 collection = db['students']
 
-class Window(QMainWindow):
+class Registerpage(QMainWindow):
     def __init__(self):
         global txts, txt1, txt2, txt3, txt4, cbb, grid
         super().__init__()
@@ -22,9 +22,9 @@ class Window(QMainWindow):
         self.setCentralWidget(QWidget(self))
         self.setMinimumSize(QSize(500, 600))
         self.setMaximumSize(QSize(500, 600))
-        self.setWindowTitle('Regestrierungsformular')
+        self.setWindowTitle('Registerpage')
 
-        lbl = QLabel('Platzhalter für den Erklärtext')
+        lbl = QLabel('Willkommen Bei unserem Programm! Um zu Beginnen bitte wählen Sie Ihr<br>Profilfach aus, geben Sie Ihren Namen an und Erstellen<br>Sie ein sicheres Passwort. Teilen sie dieses paswort <b>Niemals</b>.<br>Viel Spaß bei der nutzung wünschen Felix B. Miron H. und Noah L.')
         lbl.resize(lbl.sizeHint())
         lbl.setAlignment(Qt.AlignmentFlag.AlignHCenter)
         lbl.setMargin(30)
@@ -39,7 +39,7 @@ class Window(QMainWindow):
         wid.setLayout(grid)
         wid.setMinimumSize(QSize(380, 200))
         wid.setMaximumSize(QSize(380, 200))
-        wid.move(round((500/2)-(380/2)), 350)
+        wid.move(round((500/2)-(380/2)), 250)
         txts = []
 
         row = 0
@@ -187,7 +187,7 @@ class Window(QMainWindow):
 
 def main():# Anzeigen / Ausführen des Programms als seperrates Fenster
     app = QtWidgets.QApplication(sys.argv)
-    win = Window()
+    win = Registerpage()
     win.show()
     sys.exit(app.exec())
 

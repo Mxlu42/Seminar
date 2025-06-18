@@ -6,6 +6,7 @@ from pymongo import MongoClient
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from heart import Launcher
+from dbhelp import *
 
 helpi = False
 client = MongoClient('localhost', 27017)
@@ -23,7 +24,7 @@ class Window(QMainWindow):
         self.setMaximumSize(QSize(500, 600))
         self.setWindowTitle('Loginpage')
 
-        lbl = QLabel('Platzhalter für den Erklärtext')
+        lbl = QLabel('Willkommen zurück! um mit der Anmeldung Fortzufahern geben sie einfach Ihren<br>Namen und Ihr Passwort ein, und clicken sie auf "Speichern".')
         lbl.resize(lbl.sizeHint())
         lbl.setAlignment(Qt.AlignmentFlag.AlignHCenter)
         lbl.setMargin(30)
@@ -38,7 +39,7 @@ class Window(QMainWindow):
         wid.setLayout(grid)
         wid.setMinimumSize(QSize(380, 200))
         wid.setMaximumSize(QSize(380, 200))
-        wid.move(round((500/2)-(380/2)), 350)
+        wid.move(round((500/2)-(380/2)), 250)
         txts = []
 
         row = 0
@@ -128,10 +129,14 @@ class Window(QMainWindow):
         txt1.clear()
         txt2.clear()
         txt3.clear()
-        
-        QMessageBox.about(self, 'Speicherbenachrichtigung', 'Deine Daten Wurden gespeichert!')
-        pipi = Launcher('homepage')
-        pipi.launch()
+
+        db = DBHelp()
+        if db.checkobpwkorrekt(aus):
+            QMessageBox.about(self, 'Loginbenachrichtigung', 'Weiterleitung zum Programm.')
+            pipi = Launcher('homepage')
+            pipi.launch()
+        else:
+            QMessageBox.about(self,'Fehler', 'Passwort oder Name inkorrekt.')
 
     # Funktion des 'Passwort anzeigen' Buttons
     def sp_p(self):

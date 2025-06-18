@@ -17,7 +17,7 @@ class Homepage(QMainWindow):
         self.setWindowTitle('Homepage')
 
 
-        txt = QLabel('Für genauere Informationen<br> einfach mit dem Cursor auf den entsprechenden Knopf gehen', self)
+        txt = QLabel('Für genauere Informationen<br>bewegen Sie einfach Ihren Coursor über den Knopf<br>der Sie interressiert, und warten Sie zwei Sekunden', self)
         txt.setMinimumSize(QSize(400, 100))
         txt.setAlignment(Qt.AlignmentFlag.AlignCenter)
         txt.move(self.Center(txt), 30)
@@ -95,7 +95,7 @@ class Homepage(QMainWindow):
 
         nb = QPushButton('Ergebnisausgabe', self)
         nb.resize(nb.sizeHint())
-        nb.setToolTip('Paltzhalter <br> Erklaertext Ergebnisausgabe')
+        nb.setToolTip('Eine Möglichkeit alle Noten und<br>Fächerwahlen übersichtlich Anzeigen zu lassen')
         nb.clicked.connect(self.nb_clicked)
         nb.move(self.Center(nb), bmh)
         bmh += 40
@@ -108,8 +108,8 @@ class Homepage(QMainWindow):
         return 250 - (w // 2)
 
     def nb_clicked(self):
-        print('Weiterleitung zur Seite "Notenberechnung"')
-        lnh = Launcher('elfteklassewahl')
+        print('Weiterleitung zur Seite "Ergebnisausgabe"')
+        lnh = Launcher('Ergebnisausgabe_uebergang_interface')
         lnh.launch()
 
     def fw11_clicked(self):
@@ -120,22 +120,24 @@ class Homepage(QMainWindow):
         print('Weiterleitung zur Seite "Noterneingabe 11"')
         db = DBHelp()
         if db.istJahrgangVollständigAngegeben([1, 2]):
-            lnh = Launcher('elfteklassewahl')
+            lnh = Launcher('Noteneingabe11_interface')
             lnh.launch()
         else:
-            print('Du musst zuerst Fächer angeben') # hier pop up
+            QMessageBox.about(self, 'Fehler', 'Bevor Noten eingegeben werden können, müssen zunächst Fächer der Klasse 11 Angegeben Werden')
 
     def fw12_clicked(self):
         print('Weiterleitung zur Seite "Faecherwahl 12"')
-        lnh = Launcher('elfteklassewahl')
+        lnh = Launcher('zwoelfteklassewahl')
         lnh.launch()
 
     def ne12_clicked(self):
         print('Weiterleitung zur Seite "Noterneingabe 12"')
         db = DBHelp()
         if db.istJahrgangVollständigAngegeben([3,4]):
-            lnh = Launcher('elfteklassewahl')
+            lnh = Launcher('Noteneingabe12_interface')
             lnh.launch()
+        else:
+            QMessageBox.about(self, 'Fehler', 'Bevor Noten eingegeben werden können, müssen zunächst Fächer der Klasse 12 Angegeben Werden')
 
     def fw13_clicked(self):
         print('Weiterleitung zur Seite "Faecherwahl 13"')
@@ -146,8 +148,10 @@ class Homepage(QMainWindow):
         print('Weiterleitung zur Seite "Noterneingabe 13"')
         db = DBHelp()
         if db.istJahrgangVollständigAngegeben([5,6]):
-            lnh = Launcher('elfteklassewahl')
+            lnh = Launcher('Noteneingabe13_interface')
             lnh.launch()
+        else:
+            QMessageBox.about(self, 'Fehler', 'Bevor Noten eingegeben werden können, müssen zunächst Fächer der Klasse 13 Angegeben Werden')
 
     def k_clicked(self):
         print('Weiterleitung zur Seite "Klammerung"')
