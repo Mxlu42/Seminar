@@ -123,7 +123,7 @@ class Homepage(QMainWindow):
             lnh = Launcher('elfteklassewahl')
             lnh.launch()
         else:
-            print('Du musst zuerst Fächer angeben') # hier pop up
+            QMessageBox.about(self, 'Fehler', 'Bevor Noten eingegeben werden können, müssen zunächst Fächer der Klasse 11 Angegeben Werden')
 
     def fw12_clicked(self):
         print('Weiterleitung zur Seite "Faecherwahl 12"')
@@ -136,6 +136,8 @@ class Homepage(QMainWindow):
         if db.istJahrgangVollständigAngegeben([3,4]):
             lnh = Launcher('elfteklassewahl')
             lnh.launch()
+        else:
+            QMessageBox.about(self, 'Fehler', 'Bevor Noten eingegeben werden können, müssen zunächst Fächer der Klasse 12 Angegeben Werden')
 
     def fw13_clicked(self):
         print('Weiterleitung zur Seite "Faecherwahl 13"')
@@ -148,6 +150,8 @@ class Homepage(QMainWindow):
         if db.istJahrgangVollständigAngegeben([5,6]):
             lnh = Launcher('elfteklassewahl')
             lnh.launch()
+        else:
+            QMessageBox.about(self, 'Fehler', 'Bevor Noten eingegeben werden können, müssen zunächst Fächer der Klasse 13 Angegeben Werden')
 
     def k_clicked(self):
         print('Weiterleitung zur Seite "Klammerung"')
