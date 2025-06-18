@@ -268,7 +268,6 @@ class SubjectChoice11(QMainWindow):
             print('Fächer werden in der Datenbank gespeichert')
             db.setzeMehrereFaecherBelegtTrue(finalsavearr, [1, 2])
             db.setzeJahrgängeAngegeben([1,2])
-        return alleTrue
         
     def back(self):
         pipi = Launcher('homepage')
