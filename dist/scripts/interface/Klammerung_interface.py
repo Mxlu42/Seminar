@@ -5,15 +5,11 @@ from PyQt6.QtCore import QSize, Qt
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from heart import Launcher
-#from scripts.dbhelp import DBHelp
+
 
 class Klammerung(QMainWindow):
     def __init__(self):
         global grid_layout
-        #all = DBHelp.getFaecherMitNoten1213()
-
-        #faecher = all[0]
-        #noten = all[1]
 
         self.cbs = []
 
@@ -53,7 +49,7 @@ class Klammerung(QMainWindow):
             column += 1
 
         for i in range(31):                                                                         #spaeter liste der belegten Faecher
-            lbl = QLabel(str(i))
+            lbl = QLabel(f'test {str(i+1)}')
             lbl.resize(lbl.sizeHint())
             grid_layout.addWidget(lbl, row, 0,  Qt.AlignmentFlag.AlignLeft)
             grid_layout.setRowMinimumHeight(row, 30)
@@ -144,6 +140,18 @@ class Klammerung(QMainWindow):
             count_col += 1
 
         print(save1)
+
+        for i in self.cb_col1:
+            i.setChecked(True)
+
+        for i in self.cb_col2:
+            i.setChecked(True)
+
+        for i in self.cb_col3:
+            i.setChecked(True)
+
+        for i in self.cb_col4:
+            i.setChecked(True)
 
 
     def back(self):
