@@ -38,7 +38,7 @@ class Window(QMainWindow):
         wid.setLayout(grid)
         wid.setMinimumSize(QSize(380, 200))
         wid.setMaximumSize(QSize(380, 200))
-        wid.move(round((500/2)-(380/2)), 350)
+        wid.move(round((500/2)-(380/2)), 250)
         txts = []
 
         row = 0
