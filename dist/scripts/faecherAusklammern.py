@@ -1,5 +1,5 @@
 from dbhelp import *
-from Bestanden import *
+from bestanden import *
 
 class FaecherRausstreichen(object):
     def __init__(self, a):                      #a ist ein Array, das die fächer die er rausstreichen  möchte beinhaltet. im Array stehen: Alles von dem Fach (um die daten zu haben, falls der Try falsch ist)

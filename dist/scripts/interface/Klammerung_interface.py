@@ -6,7 +6,7 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from heart import Launcher
 #from scripts.dbhelp import DBHelp
-from scripts_pycache_.faecherAusKlammern.py
+from faecherAusklammern import *
 
 class Klammerung(QMainWindow):
     def __init__(self):
