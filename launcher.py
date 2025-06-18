@@ -4,6 +4,12 @@ import os
 from pymongo import MongoClient
 import time
 
+MONGOD_DIR = r"C:\Tools\mongodb\mongodb-win32-x86_64-windows-7.0.8\bin"
+if MONGOD_DIR not in os.environ.get("PATH", ""):
+    os.environ["PATH"] = MONGOD_DIR + ";" + os.environ["PATH"]
+
+def install(package):
+    subprocess.check_call([sys.executable, '-m', 'pip', 'install', package])
 def install(package):
     subprocess.check_call([sys.executable, '-m', 'pip', 'install', package])
 
