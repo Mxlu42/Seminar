@@ -24,7 +24,7 @@ class Noteneingabe11(QMainWindow):
         main_widget = QWidget()
         main_layout = QVBoxLayout()
 
-        lbl = QLabel('Platzhalter für den Erklärtext')
+        lbl = QLabel('Bitte geben Sie alle Ihre Noten für alle Fächer an. Wenn Sie fertig sind,<br>überprüfen Sie alles nochmal. <b>Vorsicht:</b> die Auswahlfelfer lassen sich mit dem<br>Mausrad bedienen, also immer rechts daneben Scrollen.<br>Wenn Sie fertig sind drücken Sie auf "Speichern".')
         lbl.resize(lbl.sizeHint())
         lbl.setAlignment(Qt.AlignmentFlag.AlignHCenter)
         lbl.setMargin(30)
