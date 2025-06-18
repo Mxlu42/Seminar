@@ -16,8 +16,6 @@ class Noteneingabe11(QMainWindow):
         print(arr)
         mclass = ['Mathe', 'Deutsch', 'Profielfach (DB)', 'GGK', 'Englisch', 'Sport', 'Chemie', 'Physik', 'Informatik', 'Religion (DB)', 'Fremdsprache (DB)', 'Wirtschaft',  'Labor (DB)', 'Stuetz (DB)']
         self.items = ['Bitte Note wählen', '1', '2', '3', '4', '5', '6']
-        #db = DBHelp()
-        #print(db.getArrayAusAllenFaechernAndFaechertypseAndGesamtnoteInBestimmtemHalbJahr(0))
         super().__init__()
         
         #Mindestgröße / Titel definieren
