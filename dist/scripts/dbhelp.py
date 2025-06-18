@@ -121,6 +121,48 @@ class DBHelp(object):
                 )
                 print(f"✅ 'angegeben = true' gesetzt für Schüler {student.get('name')} in Jahrgänge {jahrgänge}")
 
+    def get_noten_faecher(self, faecher: list[str], jahrgaenge: list[int]) -> dict[int, list[dict[str, any]]]:
+        # 1) Flattening aller Tupel/List-Eingaben
+        clean = []
+        for x in faecher:
+            if isinstance(x, (tuple, list)):
+                clean += [y for y in x if isinstance(y, str)]
+            elif isinstance(x, str):
+                clean.append(x)
+        faecher = clean
+
+        result: dict[int, list[dict[str, any]]] = {}
+
+        for jahr in jahrgaenge:
+            result[jahr] = []
+            # Suche alle Schüler, die dieses Halbjahr haben
+            cursor = self.students.find({"halbjahre.jahr": jahr})
+            for student in cursor:
+                for halb in student.get("halbjahre", []):
+                    if halb.get("jahr") != jahr:
+                        continue
+                    for fach in halb.get("normal_faecher", []):
+                        if fach.get("fach") in faecher and fach.get("belegt") == "true":
+                            # suche die Note vom Typ "gesamt"
+                            gesamtnote = None
+                            for n in fach.get("note", []):
+                                if n.get("type") == "gesamt":
+                                    gesamtnote = n.get("Wert")
+                                    break
+                            result[jahr].append({
+                                "fach": fach.get("fach"),
+                                "gesamtnote": gesamtnote
+                            })
+            # Optional: Duplikate entfernen, falls mehrere Schüler gleiches Fach haben
+            # result[jahr] = [dict(t) for t in {tuple(d.items()) for d in result[jahr]}]
+
+        # Debug-Ausgabe
+        for jahr, arr in result.items():
+            print(f"🏷 Halbjahr {jahr}:")
+            for entry in arr:
+                print(f"  • {entry['fach']}: {entry['gesamtnote']}")
+        return result
+
 
     def get_faecher_by_fachart(self, fachart_suche):
         gefundene_faecher = [] 
