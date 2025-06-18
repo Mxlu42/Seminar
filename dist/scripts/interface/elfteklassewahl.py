@@ -266,8 +266,7 @@ class SubjectChoice11(QMainWindow):
             QMessageBox.about(self, 'Speicherbenachrichtigung', 'Ihre Eingabe wurde gespeichert!')
             db = DBHelp()
             print('Fächer werden in der Datenbank gespeichert')
-            alleTrue = db.setzeMehrereFaecherBelegtTrue(finalsavearr, [1, 2])
-            print(alleTrue)
+            db.setzeMehrereFaecherBelegtTrue(finalsavearr, [1, 2])
             db.setzeJahrgängeAngegeben([1,2])
         return alleTrue
         
