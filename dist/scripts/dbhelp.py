@@ -193,25 +193,27 @@ class DBHelp(object):
                             gefundene_faecher.add(fach["fach"])
 
         return list(gefundene_faecher)
-    
-    def setFachart_by_Fach_and_year(self, fachname, halbjahre_liste, neue_fachart):
-        students_list = self.students.find()
+def setFachart_by_Fach_and_year(self, fachname, halbjahre_liste, neue_fachart):
+    students_list = self.students.find()  # Alle Schüler holen
 
-        for student in students_list:
-            aktualisiert = False
+    for student in students_list:
+        aktualisiert = False  # Flag, um Update nur bei Änderung zu machen
 
-            for halbjahr in student["halbjahre"]:
-                if halbjahr["jahr"] in [str(hj) for hj in halbjahre_liste]:
-                    for fach in halbjahr["normal_faecher"]:
-                        if fach["fach"] == fachname:
+        for halbjahr in student.get("halbjahre", []):
+            if halbjahr.get("jahr") in [str(hj) for hj in halbjahre_liste]:
+                for fach in halbjahr.get("normal_faecher", []):
+                    if fach.get("fach") == fachname:
+                        if fach.get("fachArt") != neue_fachart:
                             fach["fachArt"] = neue_fachart
                             aktualisiert = True
 
-            if aktualisiert:
-                self.students.update_one(
-                    {"_id": student["_id"]},
-                    {"$set": {"halbjahre": student["halbjahre"]}}
-                )
+        if aktualisiert:
+            self.students.update_one(
+                {"_id": student["_id"]},  # Filter nach ID
+                {"$set": {"halbjahre": student["halbjahre"]}}  # Neues Feld schreiben
+            )
+
+                
 
     def pruefe_halbjahr_angegeben(self, jahr):          
         result = self.students.find_one({
