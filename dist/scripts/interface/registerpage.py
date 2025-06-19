@@ -151,6 +151,7 @@ class Registerpage(QMainWindow):
         if db.login(name, vorname, password):
             # Erst nach erfolgreichem login die Fächer setzen
             db.setzeMehrereFaecherBelegtTrue([profilfach], [1,2,3,4,5,6])
+            db.setFachart_by_Fach_and_year(profilfach, [1, 2, 3, 4, 5, 6], 'profil')
             QMessageBox.about(self, 'Login', 'Weiterleitung zum Programm.')
             Launcher('homepage').launch()
         else:

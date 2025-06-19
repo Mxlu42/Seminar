@@ -174,25 +174,25 @@ class DBHelp(object):
                     gefundene_faecher.append(fach.get("fach"))
         return gefundene_faecher
 
-    def setFachart_by_Fach_and_year(self, fachname, halbjahre_liste, neue_fachart):
-        students_list = self.students.find()  # Alle Schüler holen
-
-        for student in students_list:
-            aktualisiert = False  # Flag, um Update nur bei Änderung zu machen
-
-            for halbjahr in student.get("halbjahre", []):
-                if halbjahr.get("jahr") in [str(hj) for hj in halbjahre_liste]:
-                    for fach in halbjahr.get("normal_faecher", []):
-                        if fach.get("fach") == fachname:
-                            if fach.get("fachArt") != neue_fachart:
-                                fach["fachArt"] = neue_fachart
-                                aktualisiert = True
-
-            if aktualisiert:
-                self.students.update_one(
-                    {"_id": student["_id"]},  # Filter nach ID
-                    {"$set": {"halbjahre": student["halbjahre"]}}  # Neues Feld schreiben
-                )
+    def setFachart_by_Fach_and_year(self, fachname: str, halbjahre_liste: list[int], neue_fachart: str) -> int:
+        total_modified = 0
+        for jahr in halbjahre_liste:
+            res = self.students.update_one(
+                {"_id": self.current_user_id, 
+                "halbjahre.jahr": jahr,
+                "halbjahre.normal_faecher.fach": fachname},
+                {"$set": {
+                    "halbjahre.$[h].normal_faecher.$[f].fachArt": neue_fachart,
+                    "halbjahre.$[h].normal_faecher.$[f].belegt": "true"
+                }},
+                array_filters=[
+                    {"h.jahr": jahr},
+                    {"f.fach": fachname}
+                ]
+            )
+            total_modified += res.modified_count
+        print(f"✅ setFachart_by_Fach_and_year geändert in {total_modified} Dokument(en).")
+        return total_modified
 
     def pruefe_halbjahr_angegeben(self, jahr):
         student = self.students.find_one({"_id": self.current_user_id})
