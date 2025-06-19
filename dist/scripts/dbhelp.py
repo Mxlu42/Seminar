@@ -202,7 +202,7 @@ class DBHelp(object):
     def getArrayPruefungsfaecher(self):
         pruefungs_array = []
 
-        student = self.current_user_id # Der eingeloggte Benutzer
+        student = self.students.find_one({"_id": self.current_user_id})
 
         for halbjahr in student.get("halbjahre", []):
             if halbjahr.get("jahr") == "7":
@@ -221,7 +221,7 @@ class DBHelp(object):
         count = 0
         relevante_jahre = ["3", "4", "5", "6"]
 
-        student = self.current_user_id  # ← muss beim Login gesetzt sein
+        student = self.students.find_one({"_id": self.current_user_id})
 
         for halbjahr in student.get("halbjahre", []):
             if halbjahr.get("jahr") in relevante_jahre:
