@@ -91,7 +91,7 @@ class Bestanden(object):
     
     def AbiPruefungBestanden(self):
         self.all.clear
-        self.all.append(self.db.getArrayPruefungsfaechter())        #0 = fach, 1 = pruefungsnummer, 2 = punkte
+        self.all.append(self.db.getArrayPruefungsfaecher())        #0 = fach, 1 = pruefungsnummer, 2 = punkte
         
         counterunter = 0
         counterunter = 0
