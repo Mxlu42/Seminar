@@ -167,6 +167,11 @@ class Registerpage(QMainWindow):
             print(aus[0])
             db = DBHelp()
             db.setzeMehrereFaecherBelegtTrue([aus[0]],[1, 2, 3, 4, 5, 6])
+            user = collection.find_one({"name": data["name"], "password": data["password"]})
+            if user:
+                with open("current_user_id.txt", "w") as f:
+                    f.write(str(user["_id"]))
+
 
         for document in collection.find():
             print(document)
