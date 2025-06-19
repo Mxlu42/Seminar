@@ -30,7 +30,7 @@ class PruefungsfaecherPossible(object):
         #            self.pr1 = i(0)
         #            break
         #else:
-        self.pr1 = self.db.get_faecher_by_fachart("Hauptfach")
+        self.pr1 = self.db.get_faecher_by_fachart("profil")
         self.prp2 = None
 
         self.pr2 = self.db.get_faecher_by_fachart("ean")

@@ -178,8 +178,8 @@ class DBHelp(object):
         return result
 
 
-    def get_faecher_by_fachart(self, fachart_suche):
-        gefundene_faecher = [] 
+    def get_faecher_by_fachart(self, fachart_suche, halbjahr_suche):
+        gefundene_faecher = set()
 
         students_list = self.students.find({
             "halbjahre.normal_faecher.fachArt": fachart_suche
@@ -187,10 +187,12 @@ class DBHelp(object):
 
         for student in students_list:
             for halbjahr in student["halbjahre"]:
-                for fach in halbjahr["normal_faecher"]:
-                    if fach["fachArt"] == fachart_suche:
-                        gefundene_faecher.append(fach["fach"])
-        return gefundene_faecher
+                if halbjahr["jahr"] == halbjahr_suche:
+                    for fach in halbjahr["normal_faecher"]:
+                        if fach["fachArt"] == fachart_suche:
+                            gefundene_faecher.add(fach["fach"])
+
+        return list(gefundene_faecher)
     
 
     def pruefe_halbjahr_angegeben(self, jahr):          
