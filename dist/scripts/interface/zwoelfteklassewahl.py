@@ -9,7 +9,7 @@ from dbhelp import *
 
 class SubjectChoice11(QMainWindow):
     def __init__(self):
-        global r_dm, r_de, r_me, r_sparr, r_sgarr, r_sp, r_sg, r_warr, r_ltarr, r_mparr, r_mp, r_w, r_lt, r_erkre, r_er, r_kr, r_e, r_en, r_s, r_enarr, r_sarr
+        global r_p, r_c, r_dm, r_de, r_me, r_sparr, r_sgarr, r_sp, r_sg, r_warr, r_ltarr, r_mparr, r_mp, r_w, r_lt, r_erkre, r_er, r_kr, r_e, r_en, r_s, r_enarr, r_sarr, r_cparr
         r_dm = []
         r_sparr = []
         r_sgarr = []
@@ -19,6 +19,7 @@ class SubjectChoice11(QMainWindow):
         r_erkre = []
         r_enarr = []
         r_sarr = []
+        r_cparr = []
         self.controll = 0
         self.controll0 = 0
         self.controll1 = 0
@@ -150,6 +151,22 @@ class SubjectChoice11(QMainWindow):
 
         grid_en.addWidget(r_en)
         grid_s.addWidget(r_s)
+
+        wid_pc = QWidget(self)
+        grid_pc = QVBoxLayout(wid_pc)
+        wid_pc.setLayout(grid_s)
+        wid_pc.setMinimumSize(QSize(205, 62))
+        wid_pc.setMaximumSize(QSize(205, 62))
+        wid_pc.move(100, 510)
+
+        r_p = QRadioButton('Physik')
+        r_p.toggled.connect(self.r_pt)
+
+        r_c = QRadioButton('Chemie')
+        r_c.toggled.connect(self.r_ct)
+
+        grid_pc.addWidget(r_c)
+        grid_pc.addWidget(r_p)
 
         wpfwid = QWidget(self)
         wpfbox = QVBoxLayout(wpfwid)
@@ -298,6 +315,22 @@ class SubjectChoice11(QMainWindow):
         elif r_s.isChecked() == False:
             r_sarr.clear()
             self.controll5 = 0
+
+    def r_ct(self):
+        if r_c.isChecked() == True:
+            r_cparr.clear()
+            r_cparr.append('Chemie')
+            r_cparr.append('Chemie Labor')
+        else:
+            return
+
+    def r_pt(self):
+        if r_p.isChecked() == True:
+            r_cparr.clear()
+            r_cparr.append('Physik')
+            r_cparr.append('Physik Labor')
+        else:
+            return
         
     def save(self):
         if r_de.isChecked() == False and r_me.isChecked() == False:
@@ -338,6 +371,9 @@ class SubjectChoice11(QMainWindow):
 
             if self.controll5 == 1:
                 finalsavearr.append(r_sarr[0])
+
+            finalsavearr.append(r_cparr[0])
+            finalsavearr.append(r_cparr[1])
 
             print(finalsavearr)
             final = finalsavearr.copy()
@@ -391,6 +427,14 @@ class SubjectChoice11(QMainWindow):
             r_s.setAutoExclusive(False)
             r_s.setChecked(False)
             r_s.setAutoExclusive(True)
+
+            r_c.setAutoExclusive(False)
+            r_c.setChecked(False)
+            r_c.setAutoExclusive(True)
+
+            r_p.setAutoExclusive(False)
+            r_p.setChecked(False)
+            r_p.setAutoExclusive(True)
 
 
             QMessageBox.about(self, 'Speicherbenachrichtigung', 'Ihre Eingabe wurde gespeichert!')
