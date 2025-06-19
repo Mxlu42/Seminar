@@ -201,7 +201,7 @@ class DBHelp(object):
             aktualisiert = False
 
             for halbjahr in student["halbjahre"]:
-                if halbjahr["name"] in [str(hj) for hj in halbjahre_liste]:
+                if halbjahr["jahr"] in [str(hj) for hj in halbjahre_liste]:
                     for fach in halbjahr["normal_faecher"]:
                         if fach["fach"] == fachname:
                             fach["fachArt"] = neue_fachart
