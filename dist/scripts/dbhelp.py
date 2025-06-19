@@ -199,8 +199,25 @@ class DBHelp(object):
                 return True
         return False
     
+    def getArrayPruefungsfaecher(self):
+        pruefungs_array = []
+
+        student = self.current_user_id() # Der eingeloggte Benutzer
+
+        for halbjahr in student.get("halbjahre", []):
+            if halbjahr.get("jahr") == "7":
+                for fach in halbjahr.get("pruefungsfaecher", []):
+                    eintrag = [
+                        fach.get("fach"),
+                        fach.get("PruefungsfachNr"),
+                        fach.get("note")
+                    ]
+                    pruefungs_array.append(eintrag)
+                break
+
+        return pruefungs_array
+
     def istJahrgangVollständigAngegeben(self, jahrgang_werte: list[int]):
-        
             results = self.students.find()
             for student in results:
                 jahr_status = {jahr: False for jahr in jahrgang_werte}
