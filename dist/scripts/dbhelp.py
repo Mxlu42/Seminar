@@ -312,3 +312,69 @@ class DBHelp(object):
                                 gesamtnote = eintrag.get("Wert")
                         faecher_noten[index].append([fach.get("fach"), gesamtnote])
         return faecher_noten
+
+    def set_gesamtnote_by_array(self, fachnoten: list[tuple[str]], halbjahr: str) -> int:
+        """
+        Für den eingeloggten Schüler: Setzt die ‚gesamt‘-Note für jedes Fach in fachnoten
+        im angegebenen Halbjahr. fachnoten ist eine Liste von (fachname, gesamtnote).
+        Gibt die Anzahl der tatsächlich modifizierten Fächer zurück.
+        """
+        total_modified = 0
+
+        for fachname, gesamtnote in fachnoten:
+            res = self.students.update_one(
+                {
+                    "_id": self.current_user_id,
+                    "halbjahre.jahr": halbjahr,
+                    "halbjahre.normal_faecher.fach": fachname
+                },
+                {
+                    "$set": {
+                        # Wir nutzen zwei Array-Filters: eins für Halbjahr, eins für Fach,
+                        # und eins für das Note-Array-Element mit type=="gesamt"
+                        "halbjahre.$[h].normal_faecher.$[f].note.$[n].Wert": gesamtnote
+                    }
+                },
+                array_filters=[
+                    {"h.jahr": halbjahr},
+                    {"f.fach": fachname},
+                    {"n.type": "gesamt"}
+                ]
+            )
+            if res.modified_count:
+                print(f"✅ {fachname}: gesamtnote auf {gesamtnote} gesetzt.")
+            else:
+                print(f"⚠️ {fachname}: Note nicht gesetzt (vielleicht Fach nicht belegt oder kein 'gesamt'-Eintrag).")
+            total_modified += res.modified_count
+
+        print(f"🎯 Insgesamt geändert: {total_modified} Fächer im Halbjahr {halbjahr}.")
+        return total_modified
+
+    def getAlleGesamtNotenAusHalbjahr(self, halbjahr: int) -> dict[str, any]:
+            """
+            Liefert für den eingeloggten Schüler alle 'gesamt'-Noten
+            im angegebenen Halbjahr zurück als {fachname: gesamtnote}.
+            """
+            # 1) Schüler laden
+            student = self.students.find_one({"_id": self.current_user_id})
+            if not student:
+                print("❌ Kein eingeloggter Student.")
+                return {}
+
+            # 2) Ergebnis-Container
+            gesamt_noten: dict[str, any] = {}
+
+            # 3) Gewünschtes Halbjahr suchen
+            for hj in student.get("halbjahre", []):
+                if hj.get("jahr") == halbjahr:
+                    # 4) Jedes Fach durchgehen und die 'gesamt'-Note extrahieren
+                    for fach in hj.get("normal_faecher", []):
+                        fachname = fach.get("fach")
+                        for note in fach.get("note", []):
+                            if note.get("type") == "gesamt":
+                                gesamt_noten[fachname] = note.get("Wert")
+                                break
+                    break  # nachdem wir das richtige Halbjahr gefunden haben
+
+            print(f"ℹ️ Gesamt-Noten Halbjahr {halbjahr}: {gesamt_noten}")
+            return gesamt_noten
