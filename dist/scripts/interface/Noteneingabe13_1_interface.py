@@ -7,26 +7,31 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from heart import Launcher
 from dbhelp import DBHelp
 
-class Noteneingabe12_2(QMainWindow):
+class Noteneingabe13_1(QMainWindow):
     def __init__(self):
         global mclass
-        self.db = DBHelp()
-        self.true_faecher = self.db.getAlleBelegtenFaechern([4])
-        profil = self.db.get_faecher_by_fachart('profil')
-        self.ean = self.db.get_faecher_by_fachart('eAn')[0]
-        self.gan = self.db.get_faecher_by_fachart('gAn')[0]
+        super().__init__()
+        db = DBHelp()
+        self.true_faecher = db.getAlleBelegtenFaechern([5])
+        print(self.true_faecher)
+        profil = db.get_faecher_by_fachart('profil')
+        self.ean = db.get_faecher_by_fachart('eAn')[0]
+        self.gan = db.get_faecher_by_fachart('gAn')[0]
+        self.naturwissenschaft = 'Nein'
+        self.matheplus = 'Nein'
         self.englisch = 'Nein'
         self.spanisch = 'Nein'
-        self.matheplus = 'Nein'
         self.wirtschaft = 'Nein'
         self.lt = 'Nein'
-        self.seminar = 'Nein'
         for i in self.true_faecher:
             if i == 'Physik' or i == 'Chemie':
                 self.naturwissenschaft = i
-            
+
             if i == 'Ethik' or i == 'Evangelisch' or i == 'Katholisch':
                 self.religion = i
+
+            if i == 'MathePlus':
+                self.matheplus = 'Mathe Plus'
 
             if i == 'Englisch':
                 self.englisch = 'Englisch'
@@ -34,45 +39,36 @@ class Noteneingabe12_2(QMainWindow):
             elif i == 'SpanischN':
                 self.spanisch = 'Spanisch'
 
-            if i == 'MathePlus':
-                self.matheplus = 'Mathe Plus'
-
             if i == 'Wirtschaft':
-                self.matheplus = 'Wirtschaft'
+                self.wirtschaft = i
 
             if i == 'Literatur_Theater':
                 self.lt = 'Literatur und Theater'
 
-            if i == 'Seminarkurs Profilfach':
-                self.seminar = 'Seminarkurs Profilfach'
-
-            if i == 'Seminarkurs GGK':
-                self.seminar = 'Seminarkurs GGK'
-
-        print('hello', self.true_faecher)
-        mclass = [f'{self.ean} eAn', f'{self.gan} gAn', 'Profilfach', 'GGK', 'Sport',  'Informatik', self.religion, self.matheplus, self.spanisch, self.englisch, self.naturwissenschaft, f'{self.naturwissenschaft} Labor', self.wirtschaft, self.lt, self.seminar]
+            
+        mclass = [f'{self.ean} eAn', f'{self.gan} gAn', 'Profilfach', 'GGK', 'Englisch', 'Sport', self.naturwissenschaft, 'Informatik', self.religion, self.matheplus, self.spanisch, self.englisch, self.wirtschaft, f'{self.naturwissenschaft} Labor', self.lt]
         self.items = ['Bitte Note wählen', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15']
+        
+        if self.matheplus == 'Nein':
+            mclass.remove(self.matheplus)
         if self.englisch == 'Nein':
             mclass.remove(self.englisch)
         if self.spanisch == 'Nein':
             mclass.remove(self.spanisch)
-        if self.matheplus == 'Nein':
-            mclass.remove(self.matheplus)
         if self.wirtschaft == 'Nein':
             mclass.remove(self.wirtschaft)
         if self.lt == 'Nein':
             mclass.remove(self.lt)
-        if self.seminar == 'Nein':
-            mclass.remove(self.seminar)
+        
 
+        
         self.l = len(mclass)
-        super().__init__()
         
         #Mindestgröße / Titel definieren
         self.setCentralWidget(QWidget(self))
         self.setMinimumSize(QSize(500, 600))
         self.setMaximumSize(QSize(500, 600))
-        self.setWindowTitle('Noteneingabe der Klasse 12/2')
+        self.setWindowTitle('Noteneingabe der Klasse 13')
 
         main_widget = QWidget()
         main_layout = QVBoxLayout()
@@ -166,42 +162,22 @@ class Noteneingabe12_2(QMainWindow):
 
         self.cbb11 = QComboBox()
         self.cbb11.addItems(self.items)
-        if self.l < 11:
-            pass
-        else:
-            grid_layout.addWidget(self.cbb11, row, 1,  Qt.AlignmentFlag.AlignLeft)
+        grid_layout.addWidget(self.cbb11, row, 1,  Qt.AlignmentFlag.AlignLeft)
         row += 1
 
         self.cbb12 = QComboBox()
         self.cbb12.addItems(self.items)
-        if self.l < 12:
-            pass
-        else:
-            grid_layout.addWidget(self.cbb12, row, 1,  Qt.AlignmentFlag.AlignLeft)
+        grid_layout.addWidget(self.cbb12, row, 1,  Qt.AlignmentFlag.AlignLeft)
         row += 1
 
         self.cbb13 = QComboBox()
         self.cbb13.addItems(self.items)
-        if self.l < 13:
-            pass
-        else:
-            grid_layout.addWidget(self.cbb13, row, 1,  Qt.AlignmentFlag.AlignLeft)
+        grid_layout.addWidget(self.cbb13, row, 1,  Qt.AlignmentFlag.AlignLeft)
         row += 1
 
         self.cbb14 = QComboBox()
         self.cbb14.addItems(self.items)
-        if self.l < 14:
-            pass
-        else:
-            grid_layout.addWidget(self.cbb14, row, 1,  Qt.AlignmentFlag.AlignLeft)
-        row += 1
-
-        self.cbb15 = QComboBox()
-        self.cbb15.addItems(self.items)    
-        if self.l < 15:
-            pass
-        else:
-            grid_layout.addWidget(self.cbb15, row, 1,  Qt.AlignmentFlag.AlignLeft)
+        grid_layout.addWidget(self.cbb14, row, 1,  Qt.AlignmentFlag.AlignLeft)
         row += 1
             
 
@@ -259,55 +235,21 @@ class Noteneingabe12_2(QMainWindow):
         if self.cbb10.currentText() == 'Bitte Note wählen':
             QMessageBox.about(self, 'Fehler', f'Bitte Wählen Sie Ihre {mclass[9]} Note')
             return
-        if self.l >= 11:
-            if self.cbb11.currentText() == 'Bitte Note wählen':
-                QMessageBox.about(self, 'Fehler', f'Bitte Wählen Sie Ihre {mclass[10]} Note')
-                return
-        if self.l >= 12:
-            if self.cbb12.currentText() == 'Bitte Note wählen':
-                QMessageBox.about(self, 'Fehler', f'Bitte Wählen Sie Ihre {mclass[11]} Note')
-                return
-        if self.l >= 13:
-            if self.cbb13.currentText() == 'Bitte Note wählen':
-                QMessageBox.about(self, 'Fehler', f'Bitte Wählen Sie Ihre {mclass[12]} Note')
-                return
-        if self.l >= 14:
-            if self.cbb14.currentText() == 'Bitte Note wählen':
-                QMessageBox.about(self, 'Fehler', f'Bitte Wählen Sie Ihre {mclass[13]} Note')
-                return
-        if self.l >= 15:
-            if self.cbb15.currentText() == 'Bitte Note wählen':
-                QMessageBox.about(self, 'Fehler', f'Bitte Wählen Sie Ihre {mclass[14]} Note')
-                return
+        if self.cbb11.currentText() == 'Bitte Note wählen':
+            QMessageBox.about(self, 'Fehler', f'Bitte Wählen Sie Ihre {mclass[10]} Note')
+            return
+        if self.cbb12.currentText() == 'Bitte Note wählen':
+            QMessageBox.about(self, 'Fehler', f'Bitte Wählen Sie Ihre {mclass[11]} Note')
+            return
+        if self.cbb13.currentText() == 'Bitte Note wählen':
+            QMessageBox.about(self, 'Fehler', f'Bitte Wählen Sie Ihre {mclass[12]} Note')
+            return
+        if self.cbb14.currentText() == 'Bitte Note wählen':
+            QMessageBox.about(self, 'Fehler', f'Bitte Wählen Sie Ihre {mclass[13]} Note')
+            return
         
         
-        savearr = [mclass, [self.cbb1.currentText(), self.cbb2.currentText(), self.cbb3.currentText(), self.cbb4.currentText(), self.cbb5.currentText(), self.cbb6.currentText(), self.cbb7.currentText(), self.cbb8.currentText(), self.cbb9.currentText(), self.cbb10.currentText(), self.cbb11.currentText(), self.cbb12.currentText(), self.cbb13.currentText(), self.cbb14.currentText(), self.cbb15.currentText()]]  
-        if self.l > 13:
-            savearr[1].pop()
-        elif self.l > 12:
-            savearr[1].pop()
-            savearr[1].pop()
-        elif self.l > 11:
-            savearr[1].pop()
-            savearr[1].pop()
-            savearr[1].pop()
-        elif self.l > 10:
-            savearr[1].pop()
-            savearr[1].pop()
-            savearr[1].pop()
-            savearr[1].pop()
-        elif self.l > 9:
-            savearr[1].pop()
-            savearr[1].pop()
-            savearr[1].pop()
-            savearr[1].pop()
-            savearr[1].pop()
-        
-        
-        
-        
-
-        self.db.set_gesamtnote_by_array(savearr, 4)
+        savearr = [mclass, [self.cbb1.currentText(), self.cbb2.currentText(), self.cbb3.currentText(), self.cbb4.currentText(), self.cbb5.currentText(), self.cbb6.currentText(), self.cbb7.currentText(), self.cbb8.currentText(), self.cbb9.currentText(), self.cbb10.currentText(), self.cbb11.currentText(), self.cbb12.currentText(), self.cbb13.currentText(), self.cbb14.currentText()]]  
         print(savearr)
 
         self.cbb1.setCurrentIndex(0)
@@ -324,10 +266,9 @@ class Noteneingabe12_2(QMainWindow):
         self.cbb12.setCurrentIndex(0)
         self.cbb13.setCurrentIndex(0)
         self.cbb14.setCurrentIndex(0)
-        self.cbb15.setCurrentIndex(0)
 
     def back(self):
-        pipi = Launcher('Noteneingabe12_interface')
+        pipi = Launcher('homepage')
         pipi.launch()
 
 
@@ -336,6 +277,6 @@ class Noteneingabe12_2(QMainWindow):
 
 #Anzeigen / Ausführen des Programms als sepeates Fenster
 app = QtWidgets.QApplication(sys.argv)
-win = Noteneingabe12_2()
+win = Noteneingabe13_1()
 win.show()
 sys.exit(app.exec())

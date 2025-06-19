@@ -12,6 +12,7 @@ class Noteneingabe12_1(QMainWindow):
         global mclass
         self.db = DBHelp()
         self.true_faecher = self.db.getAlleBelegtenFaechern([3])
+        profil = self.db.get_faecher_by_fachart('profil')
         self.ean = self.db.get_faecher_by_fachart('eAn')[0]
         self.gan = self.db.get_faecher_by_fachart('gAn')[0]
         self.englisch = 'Nein'
@@ -48,8 +49,11 @@ class Noteneingabe12_1(QMainWindow):
             if i == 'Seminarkurs GGK':
                 self.seminar = 'Seminarkurs GGK'
 
+            if i == 'Wirtschaft':
+                self.wirtschaft = i
+
         print('hello', self.true_faecher)
-        mclass = [f'{self.ean} eAn', f'{self.gan} gAn', 'Profielfach (DB)', 'GGK', 'Sport',  'Informatik', self.religion, self.matheplus, self.spanisch, self.englisch, self.naturwissenschaft, f'{self.naturwissenschaft} Labor', self.wirtschaft, self.lt, self.seminar]
+        mclass = [f'{self.ean} eAn', f'{self.gan} gAn', 'Profilfach', 'GGK', 'Sport',  'Informatik', self.religion, self.matheplus, self.spanisch, self.englisch, self.naturwissenschaft, f'{self.naturwissenschaft} Labor', self.wirtschaft, self.lt, self.seminar]
         self.items = ['Bitte Note wählen', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15']
         if self.englisch == 'Nein':
             mclass.remove(self.englisch)

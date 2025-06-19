@@ -7,7 +7,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from heart import Launcher
 from dbhelp import *
 
-class Ergebnisausgabe(QMainWindow):
+class Noteneingabe12(QMainWindow):
     def __init__(self):
         super().__init__()
 
@@ -32,14 +32,14 @@ class Ergebnisausgabe(QMainWindow):
 
         fw12 = QPushButton('Eingabe der Klasse 12/1', self)
         fw12.resize(fw12.sizeHint())
-        fw12.setToolTip('Hier geben sie alle ihre Noten des Halbjahres 12/1 ein')
+        fw12.setToolTip('Hier geben Sie alle Ihre Noten des Halbjahres 12/1 ein')
         fw12.clicked.connect(self.fw12_clicked)
         fw12.move(self.Center(fw12), bmh)
         bmh += 40
 
         fw13 = QPushButton('Eingabe der Klasse 12/2', self)
         fw13.resize(fw13.sizeHint())
-        fw13.setToolTip('Hier geben sie alle ihre Noten des Halbjahres 12/2 ein')
+        fw13.setToolTip('Hier geben Sie alle Ihre Noten des Halbjahres 12/2 ein')
         fw13.clicked.connect(self.fw13_clicked)
         fw13.move(self.Center(fw13), bmh)
         bmh += 40
@@ -84,6 +84,6 @@ class Ergebnisausgabe(QMainWindow):
 
 
 app = QtWidgets.QApplication(sys.argv)
-win = Ergebnisausgabe()
+win = Noteneingabe12()
 win.show()
 sys.exit(app.exec())
