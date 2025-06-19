@@ -24,7 +24,7 @@ class Window(QMainWindow):
         self.setMaximumSize(QSize(500, 600))
         self.setWindowTitle('Loginpage')
 
-        lbl = QLabel('Willkommen zurück! um mit der Anmeldung Fortzufahern geben sie einfach Ihren<br>Namen und Ihr Passwort ein, und clicken sie auf "Speichern".')
+        lbl = QLabel('Willkommen zurück! um mit der Anmeldung Fortzufahren geben sie einfach Ihren<br>Namen und Ihr Passwort ein, und clicken sie auf "Speichern".')
         lbl.resize(lbl.sizeHint())
         lbl.setAlignment(Qt.AlignmentFlag.AlignHCenter)
         lbl.setMargin(30)
@@ -132,11 +132,16 @@ class Window(QMainWindow):
 
         db = DBHelp()
         if db.checkobpwkorrekt(aus):
+            # Speichere die ID global für andere Module
+            with open("current_user_id.txt", "w") as f:
+                f.write(str(db.current_user_id))
+            
             QMessageBox.about(self, 'Loginbenachrichtigung', 'Weiterleitung zum Programm.')
             pipi = Launcher('homepage')
             pipi.launch()
         else:
             QMessageBox.about(self,'Fehler', 'Passwort oder Name inkorrekt.')
+
 
     # Funktion des 'Passwort anzeigen' Buttons
     def sp_p(self):
