@@ -100,9 +100,6 @@ class Homepage(QMainWindow):
         nb.move(self.Center(nb), bmh)
         bmh += 40
 
-
-
-
     def Center(self, x):
         w = x.width()
         return 250 - (w // 2)
