@@ -90,7 +90,10 @@ class DBHelp(object):
                     partner = partner_map.get(name)
                     if partner and art and art.lower() in ("ean", "gan"):
                         comp = "gAn" if art.lower() == "ean" else "eAn"
-                        neue_faecher.append({"fach": partner, "belegt": "true", "fachArt": comp})
+                        schon_drin = any(f.get("fach") == partner for f in neue_faecher)
+                        if not schon_drin:
+                            neue_faecher.append({"fach": partner, "belegt": "true", "fachArt": comp})
+
 
                 neue_faecher.append(fach)
 
