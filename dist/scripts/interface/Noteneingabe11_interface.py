@@ -12,6 +12,8 @@ class Noteneingabe11(QMainWindow):
         global mclass
         db = DBHelp()
         self.true_faecher = db.getAlleBelegtenFaechern([1,2])
+        #profil = db.get_faecher_by_fachart('profil')
+        #print(profil)
         self.fremdsprache = 'kontrolle'
         for i in self.true_faecher:
             if i == 'Ethik' or i == 'Evangelisch' or i == 'Katholisch':

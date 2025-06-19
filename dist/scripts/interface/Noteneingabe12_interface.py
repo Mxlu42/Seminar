@@ -12,12 +12,15 @@ class Noteneingabe12(QMainWindow):
         global mclass
         db = DBHelp()
         self.true_faecher = db.getAlleBelegtenFaechern([3, 4])
+        self.ean = db.get_faecher_by_fachart('eAn')[0]
+        self.gan = db.get_faecher_by_fachart('gAn')[0]
         self.fremdsprache = 'kontrolle'
-        #for i in self.true_faecher:
-            
+        for i in self.true_faecher:
+            if i == 'Physik' or i == 'Chemie':
+                self.naturwissenschaft = i
 
         print('hello', self.true_faecher)
-        mclass = ['Mathe', 'Deutsch', 'Profielfach (DB)', 'GGK', 'Englisch', 'Sport', 'Naturwissenschaft (DB)', 'Informatik', 'Religion (DB)', 'Mathe plus (DB)', 'Fremdsprache (DB)', 'Wirtaschaft (DB)','Labor (DB)', 'LT (DB)', 'Seminar (DB)']
+        mclass = [f'{self.ean} eAn', f'{self.gan} gAn', 'Profielfach (DB)', 'GGK', 'Englisch', 'Sport',  'Informatik', 'Religion (DB)', 'Mathe plus (DB)', 'Fremdsprache (DB)', self.naturwissenschaft, f'{self.naturwissenschaft} Labor','Wirtaschaft (DB)','Labor (DB)', 'LT (DB)', 'Seminar (DB)']
         self.items = ['Bitte Note wählen', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15']
         #db = DBHelp()
         #print(db.getArrayAusAllenFaechernAndFaechertypseAndGesamtnoteInBestimmtemHalbJahr(0))
