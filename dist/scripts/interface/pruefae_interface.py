@@ -12,8 +12,8 @@ class Pruefungsfaecherwahl(QMainWindow):
     def __init__(self):
         self.pfc = PruefungsfaecherPossible()
         db = DBHelp()
-        profil = db.get_faecher_by_fachart('profil', 1)
-        pf2 = db.get_faecher_by_fachart('ean', 3)
+        profil = db.get_faecher_by_fachart('profil', '1')
+        pf2 = db.get_faecher_by_fachart('ean', '3')
         self.savearr = []
         super().__init__()
         #Mindestgröße / Titel definieren
@@ -43,7 +43,7 @@ class Pruefungsfaecherwahl(QMainWindow):
         self.cbb1.addItems(profil)
         self.cbb1.resize(self.cbb1.sizeHint())
         box1.addWidget(self.cbb1)
-        self.cbb1.currentIndexChanged.connect(self.update_cbb_1)
+        #self.cbb1.currentIndexChanged.connect(self.update_cbb_1)
 
         lbl2 = QLabel('<u>2. Prüfungsfach</u>')
         lbl2.resize(lbl2.sizeHint())
@@ -105,12 +105,6 @@ class Pruefungsfaecherwahl(QMainWindow):
         backb.clicked.connect(self.back)
         backbox.addWidget(backb)
 
-    #def update_cbb_1(self):
-        #self.cbb1.blockSignals(True)
-        #self.cbb2.blockSignals(True)
-
-        #self.cbb2.blockSignals(False)                                                            #Benötigt daten aus der db
-        #self.cbb1.blockSignals(False)
 
     def update_cbb_2(self):
         self.cbb2.blockSignals(True)

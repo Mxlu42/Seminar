@@ -11,9 +11,31 @@ class Noteneingabe11(QMainWindow):
     def __init__(self):
         global mclass
         db = DBHelp()
-        true_faecher = db.getAlleBelegtenFaechern([1,2])
-        print('hello',true_faecher)
-        mclass = ['Mathe', 'Deutsch', 'Profielfach (DB)', 'GGK', 'Englisch', 'Sport', 'Chemie', 'Physik', 'Informatik', 'Religion (DB)', 'Fremdsprache (DB)', 'Wirtschaft',  'Labor (DB)', 'Stuetz (DB)']
+        self.true_faecher = db.getAlleBelegtenFaechern([1,2])
+        for i in self.true_faecher:
+            if i == 'Ethik' or i == 'Evangelisch' or i == 'Katholisch':
+                religion = i
+
+            if i == 'Physik-L' or i == 'Chemie-L':
+                labor = i
+
+            if i == 'DeutschStuetz':
+                stuetz = 'Deutsch Stütz'
+
+            elif i == 'MatheStuetz':
+                stuetz = 'Mathe Stütz'
+
+            if i == 'SpanischN':
+                self.fremdsprache = 'Spaisch gAn'
+
+            elif i == 'SpanischF':
+                self.fremdsprache = 'Spanisch eAn'
+
+            else:
+                self.fremdsprache = None
+
+        print('hello', self.true_faecher)
+        mclass = ['Mathe', 'Deutsch', 'Profielfach (DB)', 'GGK', 'Englisch', 'Sport', 'Chemie', 'Physik', 'Informatik', religion,  'Wirtschaft',  labor, stuetz, self.fremdsprache]
         self.items = ['Bitte Note wählen', '1', '2', '3', '4', '5', '6']
         super().__init__()
         
@@ -130,7 +152,8 @@ class Noteneingabe11(QMainWindow):
 
         self.cbb14 = QComboBox()
         self.cbb14.addItems(self.items)
-        grid_layout.addWidget(self.cbb14, row, 1,  Qt.AlignmentFlag.AlignLeft)
+        if self.fremdsprache != None:
+            grid_layout.addWidget(self.cbb14, row, 1,  Qt.AlignmentFlag.AlignLeft)
         row += 1
             
 
@@ -197,12 +220,16 @@ class Noteneingabe11(QMainWindow):
         if self.cbb13.currentText() == 'Bitte Note wählen':
             QMessageBox.about(self, 'Fehler', f'Bitte Wählen Sie Ihre {mclass[12]} Note')
             return
-        if self.cbb14.currentText() == 'Bitte Note wählen':
-            QMessageBox.about(self, 'Fehler', f'Bitte Wählen Sie Ihre {mclass[13]} Note')
-            return
+        if self.fremdsprache != None:
+            if self.cbb14.currentText() == 'Bitte Note wählen':
+                QMessageBox.about(self, 'Fehler', f'Bitte Wählen Sie Ihre {mclass[13]} Note')
+                return
         
         
         savearr = [mclass, [self.cbb1.currentText(), self.cbb2.currentText(), self.cbb3.currentText(), self.cbb4.currentText(), self.cbb5.currentText(), self.cbb6.currentText(), self.cbb7.currentText(), self.cbb8.currentText(), self.cbb9.currentText(), self.cbb10.currentText(), self.cbb11.currentText(), self.cbb12.currentText(), self.cbb13.currentText(), self.cbb14.currentText()]]  
+        if self.fremdsprache == None:
+            savearr[0].pop()
+            savearr[1].pop()
         print(savearr)
 
         self.cbb1.setCurrentIndex(0)
