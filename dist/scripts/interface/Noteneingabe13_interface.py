@@ -5,15 +5,17 @@ from PyQt6.QtCore import QSize, Qt
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from heart import Launcher
-#from dbhelp import DBHelp
+from dbhelp import DBHelp
 
 class Noteneingabe13(QMainWindow):
     def __init__(self):
         global mclass
-        mclass = ['Mathe', 'Deutsch', 'Profielfach (DB)', 'GGK', 'Englisch', 'Sport', 'Naturwissenschaft (DB)', 'Informatik', 'Religion (DB)', 'Mathe plus (DB)', 'Fremdsprache (DB)', 'Wirtaschaft (DB)','Labor (DB)', 'LT (DB)']
+        db = DBHelp()
+        self.true_faecher = db.getAlleBelegtenFaechern([5, 6])
+        self.ean = db.get_faecher_by_fachart('eAn')[0]
+        self.gan = db.get_faecher_by_fachart('gAn')[0]
+        mclass = [f'{self.ean} eAn', f'{self.gan} gAn', 'Profielfach (DB)', 'GGK', 'Englisch', 'Sport', 'Naturwissenschaft (DB)', 'Informatik', 'Religion (DB)', 'Mathe plus (DB)', 'Fremdsprache (DB)', 'Wirtaschaft (DB)','Labor (DB)', 'LT (DB)']
         self.items = ['Bitte Note wählen', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15']
-        #db = DBHelp()
-        #print(db.getArrayAusAllenFaechernAndFaechertypseAndGesamtnoteInBestimmtemHalbJahr(0))
         super().__init__()
         
         #Mindestgröße / Titel definieren

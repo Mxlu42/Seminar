@@ -281,26 +281,30 @@ class Noteneingabe12(QMainWindow):
         
         
         savearr = [mclass, [self.cbb1.currentText(), self.cbb2.currentText(), self.cbb3.currentText(), self.cbb4.currentText(), self.cbb5.currentText(), self.cbb6.currentText(), self.cbb7.currentText(), self.cbb8.currentText(), self.cbb9.currentText(), self.cbb10.currentText(), self.cbb11.currentText(), self.cbb12.currentText(), self.cbb13.currentText(), self.cbb14.currentText(), self.cbb15.currentText()]]  
-        if self.l > 10:
-            savearr.remove(self.cbb11.currentText())
-            savearr.remove(self.cbb12.currentText())
-            savearr.remove(self.cbb13.currentText())
-            savearr.remove(self.cbb14.currentText())
-            savearr.remove(self.cbb15.currentText())
-        if self.l > 11:
-            savearr.remove(self.cbb12.currentText())
-            savearr.remove(self.cbb13.currentText())
-            savearr.remove(self.cbb14.currentText())
-            savearr.remove(self.cbb15.currentText())
-        if self.l > 12:
-            savearr.remove(self.cbb13.currentText())
-            savearr.remove(self.cbb14.currentText())
-            savearr.remove(self.cbb15.currentText())
         if self.l > 13:
-            savearr.remove(self.cbb14.currentText())
-            savearr.remove(self.cbb15.currentText())
-        if self.l > 14:
-            savearr.remove(self.cbb15.currentText())
+            savearr[1].pop()
+        elif self.l > 12:
+            savearr[1].pop()
+            savearr[1].pop()
+        elif self.l > 11:
+            savearr[1].pop()
+            savearr[1].pop()
+            savearr[1].pop()
+        elif self.l > 10:
+            savearr[1].pop()
+            savearr[1].pop()
+            savearr[1].pop()
+            savearr[1].pop()
+        elif self.l > 9:
+            savearr[1].pop()
+            savearr[1].pop()
+            savearr[1].pop()
+            savearr[1].pop()
+            savearr[1].pop()
+        
+        
+        
+        
 
         
         print(savearr)
