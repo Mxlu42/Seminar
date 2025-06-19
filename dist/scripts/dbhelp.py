@@ -237,25 +237,31 @@ class DBHelp(object):
 
         return count
 
-    def istJahrgangVollständigAngegeben(self, jahrgang_werte: list[int]):
-            results = self.students.find()
-            for student in results:
-                jahr_status = {jahr: False for jahr in jahrgang_werte}
-
-                for halbjahr in student.get("halbjahre", []):
-                    jahr = halbjahr.get("jahr")
-                    angegeben = halbjahr.get("angegeben")
-
-                    if jahr in jahrgang_werte and str(angegeben).lower() == "true":
-                        jahr_status[jahr] = True
-
-                if all(jahr_status.values()):
-                    print(f"✅ Jahrgang mit Jahren {jahrgang_werte} ist vollständig angegeben.")
-                    return True
-
-            print(f"❌ Jahrgang mit Jahren {jahrgang_werte} ist NICHT vollständig angegeben.")
+    def istJahrgangVollständigAngegeben(self, jahrgang_werte: list[int]) -> bool:
+        if not self.current_user_id:
+            print("❌ Kein eingeloggter Student vorhanden.")
             return False
 
+        student = self.students.find_one({"_id": self.current_user_id})
+        if not student:
+            print(f"❌ Student mit ID {self.current_user_id} nicht gefunden.")
+            return False
+
+        jahr_status = {jahr: False for jahr in jahrgang_werte}
+
+        for halbjahr in student.get("halbjahre", []):
+            jahr = halbjahr.get("jahr")
+            angegeben = halbjahr.get("angegeben")
+            if jahr in jahrgang_werte and str(angegeben).lower() == "true":
+                jahr_status[jahr] = True
+
+        if all(jahr_status.values()):
+            print(f"✅ Schüler mit ID {self.current_user_id} hat alle Jahrgänge {jahrgang_werte} vollständig angegeben.")
+            return True
+        else:
+            print(f"❌ Schüler mit ID {self.current_user_id} hat nicht alle Jahrgänge {jahrgang_werte} angegeben: {jahr_status}")
+            return False
+ 
     def getArrayAusHalpjahrMitFachFachartGesamtnote(self, gesuchtesHJ):
             ergebnis = []
             results = self.students.find()
