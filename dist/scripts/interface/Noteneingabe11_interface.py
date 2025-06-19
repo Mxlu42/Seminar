@@ -230,9 +230,9 @@ class Noteneingabe11(QMainWindow):
         
         
         savearr = [mclass, [self.cbb1.currentText(), self.cbb2.currentText(), self.cbb3.currentText(), self.cbb4.currentText(), self.cbb5.currentText(), self.cbb6.currentText(), self.cbb7.currentText(), self.cbb8.currentText(), self.cbb9.currentText(), self.cbb10.currentText(), self.cbb11.currentText(), self.cbb12.currentText(), self.cbb13.currentText(), self.cbb14.currentText()]]  
-        #if self.fremdsprache == None:
-            #savearr[0].pop()
-            #savearr[1].pop()
+        if self.fremdsprache == None:
+            savearr[0].pop()
+            savearr[1].pop()
         print(savearr)
 
         self.cbb1.setCurrentIndex(0)
