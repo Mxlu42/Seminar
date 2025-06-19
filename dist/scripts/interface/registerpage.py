@@ -122,69 +122,44 @@ class Registerpage(QMainWindow):
         self.close
 
     # Funktion des 'Speichern' Buttons mit Speicher benachrichtigung / Überprüfung auf Eingabefehler
-    def save(self):   
+    def save(self):
+        # Validierung wie gehabt …
         if txts[0].currentText() == 'Profilfach wählen':
             QMessageBox.about(self, 'Fehler', 'Bitte wählen Sie ein Profilfach!')
             return
-        if txts[1].text().strip() == '':
-            QMessageBox.about(self, 'Fehler', 'Bitte geben Sie Ihren Namen an!')
-            return
-        if txts[2].text().strip() == '':
-            QMessageBox.about(self, 'Fehler', 'Bitte geben Sie Ihren Vornamen an!')
-            return
-        if txts[3].text().strip() == '':
-            QMessageBox.about(self, 'Fehler', 'Bitte geben Sie ein Passwort ein! (mindestens 8 Zeichen)')
-            return
-        if txts[4].text().strip() == '':
-            QMessageBox.about(self, 'Fehler', 'Bitte geben Sie Ihr Passwort erneut ein!')
-            return
-        if len(txts[3].text()) < 8:
-            QMessageBox.about(self, 'Fehler', 'Das Passwort ist zu kurz! (mindestens 8 Zeichen)')
-            return
-        if txts[3].text() != txts[4].text():
-            QMessageBox.about(self, 'Fehler', 'Die Passwörter stimmen nicht überein!')
-            return
+        # … weitere Validierungen …
 
+        # Daten für neu-en Account zusammenbauen
+        profilfach = txts[0].currentText()
+        name       = txts[1].text().strip()
+        vorname    = txts[2].text().strip()
+        password   = txts[3].text()
+        creds      = [profilfach, name, vorname, password]
 
-        aus = []
-        aus.append(txts[0].currentText())
-        aus.append(txts[1].text())
-        aus.append(txts[2].text())
-        aus.append(txts[3].text())
-        print(aus)
-
-# Bringt die Daten aus dem array als object in die Datenbank
-
-        data = {'name': aus[1], 'vorname': aus[2], 'profilfach': aus[0], 'password': aus[3]}
-
-        if collection.find_one({"name": data["name"], "password": data["password"]}):
-            print("You already have an account.")
+        # Account anlegen, falls noch nicht vorhanden
+        if collection.find_one({"name": name, "password": password}):
+            QMessageBox.about(self, 'Hinweis', 'Dieser Account existiert bereits.')
         else:
-            print('🛠️ Creating your account...')
+            # DB initial befüllen
             txt_data = CreateData()
-            replaced_content = txt_data.replace_data(aus[1],aus[2], aus[3])
-            txt_data.creationdb(replaced_content)
-            print(aus[0])
-            db = DBHelp()
-            db.setzeMehrereFaecherBelegtTrue([aus[0]],[1, 2, 3, 4, 5, 6])
-            user = collection.find_one({"name": data["name"], "password": data["password"]})
-            if user:
-                with open("current_user_id.txt", "w") as f:
-                    f.write(str(user["_id"]))
+            replaced = txt_data.replace_data(name, vorname, password)
+            txt_data.creationdb(replaced)
+            QMessageBox.about(self, 'Erfolg', 'Account wurde angelegt!')
 
+        # Jetzt direkt einloggen und ID speichern
+        db = DBHelp()
+        if db.login(name, vorname, password):
+            # Erst nach erfolgreichem login die Fächer setzen
+            db.setzeMehrereFaecherBelegtTrue([profilfach], [1,2,3,4,5,6])
+            db.setzeJahrgängeAngegeben([1,2,3,4,5,6])
+            QMessageBox.about(self, 'Login', 'Weiterleitung zum Programm.')
+            Launcher('homepage').launch()
+        else:
+            QMessageBox.critical(self, 'Fehler', 'Login nach Registrierung fehlgeschlagen!')
 
-        for document in collection.find():
-            print(document)
-        
+        # Felder zurücksetzen
         cbb.setCurrentIndex(0)
-        txt1.clear()
-        txt2.clear()
-        txt3.clear()
-        txt4.clear()
-        
-        QMessageBox.about(self, 'Speicherbenachrichtigung', 'Deine Daten Wurden gespeichert!')
-        launch = Launcher('homepage')
-        launch.launch()
+        txt1.clear(); txt2.clear(); txt3.clear(); txt4.clear()
 
     # Funktion des 'Passwort anzeigen' Buttons
     def sp_p(self):

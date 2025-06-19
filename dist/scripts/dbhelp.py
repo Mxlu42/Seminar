@@ -1,126 +1,112 @@
 from pymongo import MongoClient
 import os
-from bson import ObjectId
+import bson
 
 class DBHelp(object):
     def __init__(self):
         self.client = MongoClient("mongodb://localhost:27017/")
         self.db = self.client["test"]
         self.students = self.db["students"]
-        
-        # Versuche current_user_id aus Datei zu laden
         self.current_user_id = None
+
+        # Lade zuletzt gespeicherte User-ID aus Datei
         try:
-            if os.path.exists("current_user_id.txt"):
-                with open("current_user_id.txt", "r") as f:
-                    self.current_user_id = ObjectId(f.read().strip())
-        except Exception as e:
-            print("Fehler beim Laden von current_user_id:", e)
+            with open("current_user_id.txt", "r") as f:
+                oid = f.read().strip()
+                if oid:
+                    self.current_user_id = bson.ObjectId(oid)
+        except Exception:
+            pass
 
     def login(self, name, vorname, passwort):
         user = self.students.find_one({"name": name, "vorname": vorname, "passwort": passwort})
         if user:
-            self.current_user_id = user['_id']
+            self.current_user_id = user["_id"]
+            with open("current_user_id.txt", "w") as f:
+                f.write(str(user["_id"]))
             return True
-        return False
-
-    def checkobpwkorrekt(self, arr):
-        user = self.students.find_one({"name": arr[0],'vorname': arr[1] ,"passwort": arr[2]})
-        if user:
-            self.current_user_id = user['_id']
-            return True
-        return False
-
-    def FachBelegt(self, fachname, halbjahr_seartch):
-        student = self.students.find_one({"_id": self.current_user_id})
-        if not student:
-            return False
-
-        for halbjahr in student.get("halbjahre", []):
-            if halbjahr["jahr"] == halbjahr_seartch:
-                for fach in halbjahr["normal_faecher"]:
-                    if fach["fach"] == fachname:
-                        return fach["belegt"] == "true"
         return False
 
     def setzeMehrereFaecherBelegtTrue(self, faecher: list[str], jahrgänge: list[int]) -> list[str]:
+        # 1) Flatten aller Eingaben
         clean = []
         for x in faecher:
             if isinstance(x, (tuple, list)):
-                clean += [y for y in x if isinstance(y, str)]
+                clean.extend([y for y in x if isinstance(y, str)])
             elif isinstance(x, str):
                 clean.append(x)
         faecher = clean
 
+        # 2) Map Fachname → FachArt
         fach_zu_art = {}
         for eintrag in faecher:
             parts = eintrag.strip().split(maxsplit=1)
-            fachname = parts[0]
-            fachart = parts[1] if len(parts) > 1 else None
-            fach_zu_art[fachname] = fachart
+            fach_zu_art[parts[0]] = parts[1] if len(parts) > 1 else None
 
         partner_map = {"Mathe": "Deutsch", "Deutsch": "Mathe"}
 
+        # 3) Schüler laden
         student = self.students.find_one({"_id": self.current_user_id})
         if not student:
             print("❌ Kein Student mit current_user_id gefunden.")
             return []
 
-        original_halbjahre = student.get("halbjahre", [])
-        halbjahre_neu = []
-
-        for halbjahr in original_halbjahre:
-            jahr = halbjahr.get("jahr")
+        # 4) Halbjahre durchgehen und Fächer updaten
+        updated_halbjahre = []
+        for halb in student["halbjahre"]:
+            jahr = halb["jahr"]
             if jahr not in jahrgänge:
-                halbjahre_neu.append(halbjahr)
+                updated_halbjahre.append(halb)
                 continue
 
-            neue_faecher = []
-            for fach in halbjahr.get("normal_faecher", []):
-                name = fach.get("fach")
-                if name not in fach_zu_art:
-                    fach["belegt"] = "false"
-                    fach["fachArt"] = ""
-                else:
+            for fach in halb["normal_faecher"]:
+                name = fach["fach"]
+                if name in fach_zu_art:
+                    # ausgewähltes Fach immer belegen
                     fach["belegt"] = "true"
                     art = fach_zu_art[name]
                     if art:
                         fach["fachArt"] = art
 
+                    # Partner-Logik: kein neues Element, sondern nur anpassen
                     partner = partner_map.get(name)
                     if partner and art and art.lower() in ("ean", "gan"):
+                        # komplementäre FachArt
                         comp = "gAn" if art.lower() == "ean" else "eAn"
-                        schon_drin = any(f.get("fach") == partner for f in neue_faecher)
-                        if not schon_drin:
-                            neue_faecher.append({"fach": partner, "belegt": "true", "fachArt": comp})
+                        # vorhandenes Partner‐Objekt suchen
+                        p_obj = next((f for f in halb["normal_faecher"] if f["fach"] == partner), None)
+                        if p_obj:
+                            p_obj["belegt"] = "true"
+                            p_obj["fachArt"] = comp
+                else:
+                    # nicht ausgewähltes Fach zurücksetzen
+                    fach["belegt"] = "false"
+                    fach["fachArt"] = ""
 
+            updated_halbjahre.append(halb)
 
-                neue_faecher.append(fach)
-
-            halbjahr["normal_faecher"] = neue_faecher
-            halbjahre_neu.append(halbjahr)
-
-        result = self.students.update_one(
+        # 5) In DB zurückschreiben
+        res = self.students.update_one(
             {"_id": self.current_user_id},
-            {"$set": {"halbjahre": halbjahre_neu}}
+            {"$set": {"halbjahre": updated_halbjahre}}
         )
-
-        if result.modified_count == 0:
-            print("⚠️ WARNUNG: Keine Änderungen vorgenommen!")
+        if res.modified_count:
+            print(f"✅ {res.modified_count} Halbjahre aktualisiert.")
         else:
-            print(f"✅ {result.modified_count} Datensätze geändert.")
+            print("⚠️ WARNUNG: Keine Änderungen!")
 
+        # 6) Rückgabe aller aktuell belegt=true Fächer
         return self.getAlleBelegtenFaechern(jahrgänge)
+
 
     def getAlleBelegtenFaechern(self, jahrgaenge: list[int] | None = None) -> list[str]:
         student = self.students.find_one({"_id": self.current_user_id})
         if not student:
             return []
-
         faecher = set()
-        for halbjahr in student.get("halbjahre", []):
-            if jahrgaenge is None or halbjahr.get("jahr") in jahrgaenge:
-                for fach in halbjahr.get("normal_faecher", []):
+        for halb in student.get("halbjahre", []):
+            if jahrgaenge is None or halb.get("jahr") in jahrgaenge:
+                for fach in halb.get("normal_faecher", []):
                     if fach.get("belegt") == "true":
                         faecher.add(fach.get("fach"))
         return sorted(faecher)
@@ -156,7 +142,26 @@ class DBHelp(object):
                                 gesamtnote = n.get("Wert")
                         result[jahr].append({"fach": fach.get("fach"), "gesamtnote": gesamtnote})
         return result
+    
+    def FachBelegt(self, fachname, halbjahr_seartch):
+        student = self.students.find_one({"_id": self.current_user_id})
+        if not student:
+            return False
 
+        for halbjahr in student.get("halbjahre", []):
+            if halbjahr["jahr"] == halbjahr_seartch:
+                for fach in halbjahr["normal_faecher"]:
+                    if fach["fach"] == fachname:
+                        return fach["belegt"] == "true"
+        return False
+
+    def checkobpwkorrekt(self, arr):
+        user = self.students.find_one({"name": arr[0],'vorname': arr[1] ,"passwort": arr[2]})
+        if user:
+            self.current_user_id = user['_id']
+            return True
+        return False
+    
     def get_faecher_by_fachart(self, fachart_suche):
         student = self.students.find_one({"_id": self.current_user_id})
         if not student:
