@@ -122,7 +122,7 @@ class DBHelp(object):
                         faecher.add(fach.get("fach"))
         return sorted(faecher)
 
-    def setzeJahrgängeAngegeben(self, jahrgänge: list[int]):
+    def setzeJahrgängeAngegeben(self, jahrgänge: list[int]):            #ae
         student = self.students.find_one({"_id": self.current_user_id})
         if not student:
             return
@@ -166,6 +166,26 @@ class DBHelp(object):
                     gefundene_faecher.append(fach.get("fach"))
         return gefundene_faecher
 
+    def setFachart_by_Fach_and_year(self, fachname, halbjahre_liste, neue_fachart):
+        students_list = self.students.find()  # Alle Schüler holen
+
+        for student in students_list:
+            aktualisiert = False  # Flag, um Update nur bei Änderung zu machen
+
+            for halbjahr in student.get("halbjahre", []):
+                if halbjahr.get("jahr") in [str(hj) for hj in halbjahre_liste]:
+                    for fach in halbjahr.get("normal_faecher", []):
+                        if fach.get("fach") == fachname:
+                            if fach.get("fachArt") != neue_fachart:
+                                fach["fachArt"] = neue_fachart
+                                aktualisiert = True
+
+            if aktualisiert:
+                self.students.update_one(
+                    {"_id": student["_id"]},  # Filter nach ID
+                    {"$set": {"halbjahre": student["halbjahre"]}}  # Neues Feld schreiben
+                )
+
     def pruefe_halbjahr_angegeben(self, jahr):
         student = self.students.find_one({"_id": self.current_user_id})
         if not student:
@@ -175,6 +195,58 @@ class DBHelp(object):
             if halbjahr.get("jahr") == jahr and str(halbjahr.get("angegeben")).lower() == "true":
                 return True
         return False
+    
+    def istJahrgangVollständigAngegeben(self, jahrgang_werte: list[int]):
+        
+            results = self.students.find()
+            for student in results:
+                jahr_status = {jahr: False for jahr in jahrgang_werte}
+
+                for halbjahr in student.get("halbjahre", []):
+                    jahr = halbjahr.get("jahr")
+                    angegeben = halbjahr.get("angegeben")
+
+                    if jahr in jahrgang_werte and str(angegeben).lower() == "true":
+                        jahr_status[jahr] = True
+
+                if all(jahr_status.values()):
+                    print(f"✅ Jahrgang mit Jahren {jahrgang_werte} ist vollständig angegeben.")
+                    return True
+
+            print(f"❌ Jahrgang mit Jahren {jahrgang_werte} ist NICHT vollständig angegeben.")
+            return False
+
+    def getArrayAusHalpjahrMitFachFachartGesamtnote(self, gesuchtesHJ):
+            ergebnis = []
+            results = self.students.find()
+
+            for student in results:
+                for halbjahr in student.get("halbjahre", []):
+                    if halbjahr.get("name") == gesuchtesHJ:
+                        for fach in halbjahr.get("normal_faecher", []):
+                            if fach.get("belegt") == "true":
+                                ergebnis.append({
+                                    "fach": fach.get("fach", ""),
+                                    "fachart": fach.get("fachart", ""),
+                                    "gesamtnote": fach.get("note", "")
+                                })
+            return ergebnis
+
+    def getArrayAusAllenFaechernAndFaechertypseAndGesamtnoteInBestimmtemHalbJahr(self, halbjahr_name):      #Fach, Fachart, note
+            ergebnis = []
+            results = self.students.find()
+
+            for student in results:
+                for halbjahr in student.get("halbjahre", []):
+                    if halbjahr.get("name") == halbjahr_name:
+                        for fach in halbjahr.get("normal_faecher", []):
+                            if fach.get("belegt") == "true":
+                                ergebnis.append({
+                                    "fach": fach.get("fach", ""),
+                                    "fachart": fach.get("fachart", ""),
+                                    "gesamtnote": fach.get("note", "")
+                                })
+            return ergebnis
 
     def getFaecherMitNoten1213(self):
         student = self.students.find_one({"_id": self.current_user_id})
