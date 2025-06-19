@@ -5,11 +5,20 @@ from PyQt6.QtCore import QSize, Qt
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from heart import Launcher
-#from dbhelp import DBHelp
+from dbhelp import DBHelp
 
 class Noteneingabe12(QMainWindow):
     def __init__(self):
         global mclass
+        db = DBHelp()
+        self.true_faecher = db.getAlleBelegtenFaechern([3, 4])
+        ean = db.get_faecher_by_fachart(3,4)
+        print(ean)
+        self.fremdsprache = 'kontrolle'
+        #for i in self.true_faecher:
+            
+
+        print('hello', self.true_faecher)
         mclass = ['Mathe', 'Deutsch', 'Profielfach (DB)', 'GGK', 'Englisch', 'Sport', 'Naturwissenschaft (DB)', 'Informatik', 'Religion (DB)', 'Mathe plus (DB)', 'Fremdsprache (DB)', 'Wirtaschaft (DB)','Labor (DB)', 'LT (DB)', 'Seminar (DB)']
         self.items = ['Bitte Note wählen', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15']
         #db = DBHelp()
