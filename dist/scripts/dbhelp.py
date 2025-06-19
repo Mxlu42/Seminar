@@ -204,8 +204,40 @@ class DBHelp(object):
                 return True
         return False
     
+    def getArrayPruefungsfaecher(self):
+        pruefungs_array = []
+
+        student = self.students.find_one({"_id": self.current_user_id})
+
+        for halbjahr in student.get("halbjahre", []):
+            if halbjahr.get("jahr") == "7":
+                for fach in halbjahr.get("pruefungsfaecher", []):
+                    eintrag = [
+                        fach.get("fach"),
+                        fach.get("PruefungsfachNr"),
+                        fach.get("note")
+                    ]
+                    pruefungs_array.append(eintrag)
+                break
+
+        return pruefungs_array
+    
+    def countFachBelegt(self, fachname):
+        count = 0
+        relevante_jahre = ["3", "4", "5", "6"]
+
+        student = self.students.find_one({"_id": self.current_user_id})
+
+        for halbjahr in student.get("halbjahre", []):
+            if halbjahr.get("jahr") in relevante_jahre:
+                for fach in halbjahr.get("normal_faecher", []):
+                    if fach.get("fach") == fachname:
+                        count += 1
+                        break  # Nur einmal pro Halbjahr zählen
+
+        return count
+
     def istJahrgangVollständigAngegeben(self, jahrgang_werte: list[int]):
-        
             results = self.students.find()
             for student in results:
                 jahr_status = {jahr: False for jahr in jahrgang_werte}
