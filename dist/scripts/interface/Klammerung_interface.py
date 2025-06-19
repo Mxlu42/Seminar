@@ -5,16 +5,14 @@ from PyQt6.QtCore import QSize, Qt
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from heart import Launcher
-#from scripts.dbhelp import DBHelp
+from dbhelp import DBHelp
 from faecherAusklammern import *
 
 class Klammerung(QMainWindow):
     def __init__(self):
         global grid_layout
-        #all = DBHelp.getFaecherMitNoten1213()
-
-        #faecher = all[0]
-        #noten = all[1]
+        db = DBHelp()
+        self.true_fecher = db.getAlleBelegtenFaechern([5, 6])
 
         self.cbs = []
 
@@ -53,7 +51,7 @@ class Klammerung(QMainWindow):
             grid_layout.addWidget(lbl, 0, column,  Qt.AlignmentFlag.AlignLeft)
             column += 1
 
-        for i in range(31):                                                                         #spaeter liste der belegten Faecher
+        for i in self.true_fecher:                                                                         #spaeter liste der belegten Faecher
             lbl = QLabel(str(i))
             lbl.resize(lbl.sizeHint())
             grid_layout.addWidget(lbl, row, 0,  Qt.AlignmentFlag.AlignLeft)
@@ -68,7 +66,7 @@ class Klammerung(QMainWindow):
         self.cb_col3 = []
         self.cb_col4 = []
 
-        for i in range(31):                                                                            #spaeter laenge der liste der belegten faecher
+        for i in range(len(self.true_fecher)):                                                                            #spaeter laenge der liste der belegten faecher
 
             cb1 = QCheckBox()
             cb2 = QCheckBox()
@@ -146,6 +144,8 @@ class Klammerung(QMainWindow):
 
         print(save1)
 
+        if FaecherRausstreichen(save1) == True:
+            pass  #muss halt in Datenbank
 
     def back(self):
         pipi = Launcher('homepage')
