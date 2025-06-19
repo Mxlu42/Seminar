@@ -14,16 +14,57 @@ class Noteneingabe12(QMainWindow):
         self.true_faecher = db.getAlleBelegtenFaechern([3, 4])
         self.ean = db.get_faecher_by_fachart('eAn')[0]
         self.gan = db.get_faecher_by_fachart('gAn')[0]
-        self.fremdsprache = 'kontrolle'
+        self.englisch = 'Nein'
+        self.spanisch = 'Nein'
+        self.matheplus = 'Nein'
+        self.wirtschaft = 'Nein'
+        self.lt = 'Nein'
+        self.seminar = 'Nein'
         for i in self.true_faecher:
             if i == 'Physik' or i == 'Chemie':
                 self.naturwissenschaft = i
+            
+            if i == 'Ethik' or i == 'Evangelisch' or i == 'Katholisch':
+                self.religion = i
+
+            if i == 'Englisch':
+                self.englisch = 'Englisch'
+
+            elif i == 'SpanischN':
+                self.spanisch = 'Spanisch'
+
+            if i == 'MathePlus':
+                self.matheplus = 'Mathe Plus'
+
+            if i == 'Wirtschaft':
+                self.matheplus = 'Wirtschaft'
+
+            if i == 'Literatur_Theater':
+                self.lt = 'Literatur und Theater'
+
+            if i == 'Seminarkurs Profilfach':
+                self.seminar = 'Seminarkurs Profilfach'
+
+            if i == 'Seminarkurs GGK':
+                self.seminar = 'Seminarkurs GGK'
 
         print('hello', self.true_faecher)
-        mclass = [f'{self.ean} eAn', f'{self.gan} gAn', 'Profielfach (DB)', 'GGK', 'Englisch', 'Sport',  'Informatik', 'Religion (DB)', 'Mathe plus (DB)', 'Fremdsprache (DB)', self.naturwissenschaft, f'{self.naturwissenschaft} Labor','Wirtaschaft (DB)','Labor (DB)', 'LT (DB)', 'Seminar (DB)']
+        mclass = [f'{self.ean} eAn', f'{self.gan} gAn', 'Profielfach (DB)', 'GGK', 'Sport',  'Informatik', self.religion, self.matheplus, self.spanisch, self.englisch, self.naturwissenschaft, f'{self.naturwissenschaft} Labor', self.wirtschaft, self.lt, self.seminar]
         self.items = ['Bitte Note wählen', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15']
-        #db = DBHelp()
-        #print(db.getArrayAusAllenFaechernAndFaechertypseAndGesamtnoteInBestimmtemHalbJahr(0))
+        if self.englisch == 'Nein':
+            mclass.remove(self.englisch)
+        if self.spanisch == 'Nein':
+            mclass.remove(self.spanisch)
+        if self.matheplus == 'Nein':
+            mclass.remove(self.matheplus)
+        if self.wirtschaft == 'Nein':
+            mclass.remove(self.wirtschaft)
+        if self.lt == 'Nein':
+            mclass.remove(self.lt)
+        if self.seminar == 'Nein':
+            mclass.remove(self.seminar)
+
+        self.l = len(mclass)
         super().__init__()
         
         #Mindestgröße / Titel definieren
@@ -124,27 +165,42 @@ class Noteneingabe12(QMainWindow):
 
         self.cbb11 = QComboBox()
         self.cbb11.addItems(self.items)
-        grid_layout.addWidget(self.cbb11, row, 1,  Qt.AlignmentFlag.AlignLeft)
+        if self.l < 11:
+            pass
+        else:
+            grid_layout.addWidget(self.cbb11, row, 1,  Qt.AlignmentFlag.AlignLeft)
         row += 1
 
         self.cbb12 = QComboBox()
         self.cbb12.addItems(self.items)
-        grid_layout.addWidget(self.cbb12, row, 1,  Qt.AlignmentFlag.AlignLeft)
+        if self.l < 12:
+            pass
+        else:
+            grid_layout.addWidget(self.cbb12, row, 1,  Qt.AlignmentFlag.AlignLeft)
         row += 1
 
         self.cbb13 = QComboBox()
         self.cbb13.addItems(self.items)
-        grid_layout.addWidget(self.cbb13, row, 1,  Qt.AlignmentFlag.AlignLeft)
+        if self.l < 13:
+            pass
+        else:
+            grid_layout.addWidget(self.cbb13, row, 1,  Qt.AlignmentFlag.AlignLeft)
         row += 1
 
         self.cbb14 = QComboBox()
         self.cbb14.addItems(self.items)
-        grid_layout.addWidget(self.cbb14, row, 1,  Qt.AlignmentFlag.AlignLeft)
+        if self.l < 14:
+            pass
+        else:
+            grid_layout.addWidget(self.cbb14, row, 1,  Qt.AlignmentFlag.AlignLeft)
         row += 1
 
         self.cbb15 = QComboBox()
-        self.cbb15.addItems(self.items)
-        grid_layout.addWidget(self.cbb15, row, 1,  Qt.AlignmentFlag.AlignLeft)
+        self.cbb15.addItems(self.items)    
+        if self.l < 15:
+            pass
+        else:
+            grid_layout.addWidget(self.cbb15, row, 1,  Qt.AlignmentFlag.AlignLeft)
         row += 1
             
 
@@ -202,24 +258,51 @@ class Noteneingabe12(QMainWindow):
         if self.cbb10.currentText() == 'Bitte Note wählen':
             QMessageBox.about(self, 'Fehler', f'Bitte Wählen Sie Ihre {mclass[9]} Note')
             return
-        if self.cbb11.currentText() == 'Bitte Note wählen':
-            QMessageBox.about(self, 'Fehler', f'Bitte Wählen Sie Ihre {mclass[10]} Note')
-            return
-        if self.cbb12.currentText() == 'Bitte Note wählen':
-            QMessageBox.about(self, 'Fehler', f'Bitte Wählen Sie Ihre {mclass[11]} Note')
-            return
-        if self.cbb13.currentText() == 'Bitte Note wählen':
-            QMessageBox.about(self, 'Fehler', f'Bitte Wählen Sie Ihre {mclass[12]} Note')
-            return
-        if self.cbb14.currentText() == 'Bitte Note wählen':
-            QMessageBox.about(self, 'Fehler', f'Bitte Wählen Sie Ihre {mclass[13]} Note')
-            return
-        if self.cbb15.currentText() == 'Bitte Note wählen':
-            QMessageBox.about(self, 'Fehler', f'Bitte Wählen Sie Ihre {mclass[14]} Note')
-            return
+        if self.l >= 11:
+            if self.cbb11.currentText() == 'Bitte Note wählen':
+                QMessageBox.about(self, 'Fehler', f'Bitte Wählen Sie Ihre {mclass[10]} Note')
+                return
+        if self.l >= 12:
+            if self.cbb12.currentText() == 'Bitte Note wählen':
+                QMessageBox.about(self, 'Fehler', f'Bitte Wählen Sie Ihre {mclass[11]} Note')
+                return
+        if self.l >= 13:
+            if self.cbb13.currentText() == 'Bitte Note wählen':
+                QMessageBox.about(self, 'Fehler', f'Bitte Wählen Sie Ihre {mclass[12]} Note')
+                return
+        if self.l >= 14:
+            if self.cbb14.currentText() == 'Bitte Note wählen':
+                QMessageBox.about(self, 'Fehler', f'Bitte Wählen Sie Ihre {mclass[13]} Note')
+                return
+        if self.l >= 15:
+            if self.cbb15.currentText() == 'Bitte Note wählen':
+                QMessageBox.about(self, 'Fehler', f'Bitte Wählen Sie Ihre {mclass[14]} Note')
+                return
         
         
         savearr = [mclass, [self.cbb1.currentText(), self.cbb2.currentText(), self.cbb3.currentText(), self.cbb4.currentText(), self.cbb5.currentText(), self.cbb6.currentText(), self.cbb7.currentText(), self.cbb8.currentText(), self.cbb9.currentText(), self.cbb10.currentText(), self.cbb11.currentText(), self.cbb12.currentText(), self.cbb13.currentText(), self.cbb14.currentText(), self.cbb15.currentText()]]  
+        if self.l > 10:
+            savearr.remove(self.cbb11.currentText())
+            savearr.remove(self.cbb12.currentText())
+            savearr.remove(self.cbb13.currentText())
+            savearr.remove(self.cbb14.currentText())
+            savearr.remove(self.cbb15.currentText())
+        if self.l > 11:
+            savearr.remove(self.cbb12.currentText())
+            savearr.remove(self.cbb13.currentText())
+            savearr.remove(self.cbb14.currentText())
+            savearr.remove(self.cbb15.currentText())
+        if self.l > 12:
+            savearr.remove(self.cbb13.currentText())
+            savearr.remove(self.cbb14.currentText())
+            savearr.remove(self.cbb15.currentText())
+        if self.l > 13:
+            savearr.remove(self.cbb14.currentText())
+            savearr.remove(self.cbb15.currentText())
+        if self.l > 14:
+            savearr.remove(self.cbb15.currentText())
+
+        
         print(savearr)
 
         self.cbb1.setCurrentIndex(0)
