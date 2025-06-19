@@ -26,7 +26,7 @@ class Notenberechnung(object):
         self.db.setNoteInDBEsterFreierPlatzMitDemNotentypeDerNichtBelegtIst(self.fach, 7, "gesamt", erg)
 
     def Notendurchschnitt(self):
-        noten = self.db.getAlleGesamstNotenAusHalbjahr(self.HJ)
+        noten = self.db.getAlleGesamtNotenAusHalbjahr(self.HJ)
         a = len(noten)
         znote = 0
         for i in range(0,a):
