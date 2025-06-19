@@ -58,6 +58,35 @@ class Bestanden(object):
         return True
         
     def FachochschulreifeBetanden(self):
+        self.all.clear()
+        HJ = [3, 4]
+        for i in HJ:
+            self.all.append(self.db.getArrayAusHalpjahrMitFachFachartGesamtnote(i))
+        counterkernpunkte = 0
+        counterkernunter = 0
+        counterfachpunkte = 0
+        counterfachunter = 0
+        for u in range (0, len(self.all)):
+            for i in range (0, len(self.all(u))):
+                if self.all(u)(i)(2) == '0':
+                    return False
+                if self.all(u)(i)(1) == 'profil' or self.all(u)(i)(1) == 'eAn':
+                    counterkernpunkte += self.all(u)(i)(2)
+                    if self.all(u)(i)(2) < 5:
+                        counterkernunter += 1
+                
+                else:
+                    counterfachpunkte += self.all(u)(i)(2)
+                    if self.all(u)(i)(2) < 5:
+                        counterfachunter += 1
+        if counterkernpunkte < 20:
+            return False
+        if counterkernunter > 2:
+            return False
+        if counterfachpunkte < 55:
+            return False
+        if counterkernunter < 4:
+            return False
         return True
     
     def AbiPruefungBestanden(self):
