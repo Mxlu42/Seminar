@@ -166,7 +166,8 @@ class Registerpage(QMainWindow):
             txt_data.creationdb(replaced_content)
             print(aus[0])
             db = DBHelp()
-            db.setzeMehrereFaecherBelegtTrue([aus[0]],[1, 2, 3, 4, 5, 6])
+            db.setzeMehrereFaecherBelegtTrue([aus[0]], [1, 2, 3, 4, 5, 6])
+            db.setFachart_by_Fach_and_year(aus[0], [1, 2, 3, 4, 5, 6], 'profil')
 
         for document in collection.find():
             print(document)

@@ -184,7 +184,7 @@ class DBHelp(object):
         students_list = self.students.find({
             "halbjahre.normal_faecher.fachArt": fachart_suche
         })
-
+        
         for student in students_list:
             for halbjahr in student["halbjahre"]:
                 if halbjahr["jahr"] == halbjahr_suche:
@@ -194,6 +194,24 @@ class DBHelp(object):
 
         return list(gefundene_faecher)
     
+    def setFachart_by_Fach_and_year(self, fachname, halbjahre_liste, neue_fachart):
+        students_list = self.students.find()
+
+        for student in students_list:
+            aktualisiert = False
+
+            for halbjahr in student["halbjahre"]:
+                if halbjahr["name"] in [str(hj) for hj in halbjahre_liste]:
+                    for fach in halbjahr["normal_faecher"]:
+                        if fach["fach"] == fachname:
+                            fach["fachArt"] = neue_fachart
+                            aktualisiert = True
+
+            if aktualisiert:
+                self.students.update_one(
+                    {"_id": student["_id"]},
+                    {"$set": {"halbjahre": student["halbjahre"]}}
+                )
 
     def pruefe_halbjahr_angegeben(self, jahr):          
         result = self.students.find_one({
