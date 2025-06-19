@@ -12,7 +12,7 @@ class Noteneingabe12(QMainWindow):
         global mclass
         db = DBHelp()
         self.true_faecher = db.getAlleBelegtenFaechern([3, 4])
-        ean = db.get_faecher_by_fachart(3,4)
+        ean = db.get_faecher_by_fachart('eAn')
         print(ean)
         self.fremdsprache = 'kontrolle'
         #for i in self.true_faecher:
