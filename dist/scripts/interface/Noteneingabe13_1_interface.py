@@ -22,6 +22,7 @@ class Noteneingabe13_1(QMainWindow):
         self.englisch = 'Nein'
         self.spanisch = 'Nein'
         self.wirtschaft = 'Nein'
+        self.religion = 'Nein'
         self.lt = 'Nein'
         for i in self.true_faecher:
             if i == 'Physik' or i == 'Chemie':
@@ -59,6 +60,8 @@ class Noteneingabe13_1(QMainWindow):
             mclass.remove(self.wirtschaft)
         if self.lt == 'Nein':
             mclass.remove(self.lt)
+        if self.religion == 'Nein':
+            mclass.remove(self.religion)
         
 
         
