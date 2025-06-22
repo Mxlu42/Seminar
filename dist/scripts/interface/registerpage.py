@@ -81,12 +81,6 @@ class Registerpage(QMainWindow):
         txts += [txt4]
 
 
-        # WIP Button zum schliesen des Programms
-        cancel = QPushButton('Beenden')
-        cancel.clicked.connect(self.cancel)
-        cancel.resize(cancel.sizeHint())
-        cancel.move(300, 300)
-
         # Button zum Speichern der daten
         save = QPushButton('Speichern')
         save.clicked.connect(self.save)
@@ -117,9 +111,6 @@ class Registerpage(QMainWindow):
 
     def directtologinpage(self):
         pass
-
-    def cancel(self):
-        self.close
 
     # Funktion des 'Speichern' Buttons mit Speicher benachrichtigung / Überprüfung auf Eingabefehler
     def save(self):

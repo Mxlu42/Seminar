@@ -45,12 +45,20 @@ class Ergebnisausgabe(QMainWindow):
         k12.move(self.Center(k12), bmh)
         bmh += 40
 
-        fw12 = QPushButton('Ausgabe der Klasse 12', self)
-        fw12.resize(fw12.sizeHint())
-        fw12.setToolTip('Eine geordnete Übersicht der Klasse 12<br>mit möglichkeit sie als .pdf zu Speichern')
-        fw12.clicked.connect(self.fw12_clicked)
-        fw12.move(self.Center(fw12), bmh)
+        fw12_1 = QPushButton('Ausgabe der Klasse 12/1', self)
+        fw12_1.resize(fw12_1.sizeHint())
+        fw12_1.setToolTip('Eine geordnete Übersicht der Klasse 12/1<br>mit möglichkeit sie als .pdf zu Speichern')
+        fw12_1.clicked.connect(self.fw12_1_clicked)
+        fw12_1.move(self.Center(fw12_1), bmh)
         bmh += 40
+
+        fw12_2 = QPushButton('Ausgabe der Klasse 12/2', self)
+        fw12_2.resize(fw12_2.sizeHint())
+        fw12_2.setToolTip('Eine geordnete Übersicht der Klasse 12/2<br>mit möglichkeit sie als .pdf zu Speichern')
+        fw12_2.clicked.connect(self.fw12_2_clicked)
+        fw12_2.move(self.Center(fw12_2), bmh)
+        bmh += 40
+
 
         k13 = QLabel('<u>Klasse 13 (Jahrgangsstufe 2)</u>', self)
         k13.setFixedWidth(200)
@@ -58,11 +66,25 @@ class Ergebnisausgabe(QMainWindow):
         k13.move(self.Center(k13), bmh)
         bmh += 40
 
-        fw13 = QPushButton('Ausgabe der Klasse 13', self)
-        fw13.resize(fw13.sizeHint())
-        fw13.setToolTip('Eine geordnete Übersicht der Klasse 13<br>mit möglichkeit sie als .pdf zu Speichern')
-        fw13.clicked.connect(self.fw13_clicked)
-        fw13.move(self.Center(fw13), bmh)
+        fw13_1 = QPushButton('Ausgabe der Klasse 13/1', self)
+        fw13_1.resize(fw13_1.sizeHint())
+        fw13_1.setToolTip('Eine geordnete Übersicht der Klasse 13/1/1<br>mit möglichkeit sie als .pdf zu Speichern')
+        fw13_1.clicked.connect(self.fw13_1_clicked)
+        fw13_1.move(self.Center(fw13_1), bmh)
+        bmh += 40
+
+        fw13_2 = QPushButton('Ausgabe der Klasse 13/2', self)
+        fw13_2.resize(fw13_2.sizeHint())
+        fw13_2.setToolTip('Eine geordnete Übersicht der Klasse 13/2<br>mit möglichkeit sie als .pdf zu Speichern')
+        fw13_2.clicked.connect(self.fw13_2_clicked)
+        fw13_2.move(self.Center(fw13_2), bmh)
+        bmh += 40
+
+        fw13_3 = QPushButton('Ausgabe der Prüfungsnoten', self)
+        fw13_3.resize(fw13_2.sizeHint())
+        fw13_3.setToolTip('Eine geordnete Übersicht der Prüfungsnoten<br>mit möglichkeit sie als .pdf zu Speichern')
+        fw13_3.clicked.connect(self.prue_clicked)
+        fw13_3.move(self.Center(fw13_3), bmh)
         bmh += 40
 
         backwid = QWidget(self)
@@ -86,17 +108,32 @@ class Ergebnisausgabe(QMainWindow):
     
 
     def fw11_clicked(self):
-        lnh = Launcher('elfteklassewahl')
+        lnh = Launcher('Ergebnisausgabe11_interface')
         lnh.launch()
 
     
-    def fw12_clicked(self):
+    def fw12_1_clicked(self):
+        print('Weiterleitung zur Seite "Faecherwahl 12"')
+        lnh = Launcher('elfteklassewahl')
+        lnh.launch()
+
+    def fw12_2_clicked(self):
         print('Weiterleitung zur Seite "Faecherwahl 12"')
         lnh = Launcher('elfteklassewahl')
         lnh.launch()
 
     
-    def fw13_clicked(self):
+    def fw13_1_clicked(self):
+        print('Weiterleitung zur Seite "Faecherwahl 13"')
+        lnh = Launcher('pruefae_interface')
+        lnh.launch()
+
+    def fw13_2_clicked(self):
+        print('Weiterleitung zur Seite "Faecherwahl 13"')
+        lnh = Launcher('pruefae_interface')
+        lnh.launch()
+
+    def prue_clicked(self):
         print('Weiterleitung zur Seite "Faecherwahl 13"')
         lnh = Launcher('pruefae_interface')
         lnh.launch()
