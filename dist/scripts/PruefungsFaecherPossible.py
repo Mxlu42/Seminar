@@ -1,232 +1,191 @@
 from pymongo import MongoClient
 from dbhelp import *
-client = MongoClient('localhost', 27017)
-db = client['school']
-collection = db['students']
-
-#Alles Für Felix was mögliche eingabe des Users sind
 
 class PruefungsfaecherPossible(object):
     def __init__(self):
-        self.db = DBHelp()
-        if self.db.pruefe_halbjahr_angegeben(1) == True:
-            if self.db.FachBelegt("Evangelisch", 1) == True and self.db.FachBelegt("Evangelisch", 3) == True:
-                self.a = "Evangelisch"
-                self.aState = True
-            elif self.db.FachBelegt("Katholisch", 1) == True and self.db.FachBelegt("Katholisch", 3) == True:
-                self.a = "Katholisch"
-                self.aState = True
-            elif self.db.FachBelegt("Ethik", 1) == True and self.db.FachBelegt("Ethik", 3) == True:
-                self.a = "Ethik"
-                self.aState = True
-        else:
-            self.a = "Ethik"
-            self.aState = True
-        
-        #if self.db.pruefe_halbjahr_angegeben(3):
-        #    lol = self.db.getArrayAusAllenFaechernAndFaechertypseAndGesamtnoteInBestimmtemHalbJahr(3)
-        #    for i in lol:
-        #        if i(0) == ('Informationstechnik' or 'Gestaltung_Medien' or 'Mechatronik'):
-        #            self.pr1 = i(0)
-        #            break
-        #else:
-        self.pr1 = self.db.get_faecher_by_fachart("profil", '1')
-        self.prp2 = None
+        # Default-Werte
+        self.a = None
+        self.aState = False
 
-        self.pr2 = self.db.get_faecher_by_fachart("ean", '3')
-        self.prp2 = None
+        self.db = DBHelp()
+        # Fach a ermitteln
+        if self.db.pruefe_halbjahr_angegeben(1):
+            if self.db.FachBelegt("Evangelisch", 1) and self.db.FachBelegt("Evangelisch", 3):
+                self.a, self.aState = "Evangelisch", True
+            elif self.db.FachBelegt("Katholisch", 1) and self.db.FachBelegt("Katholisch", 3):
+                self.a, self.aState = "Katholisch", True
+            elif self.db.FachBelegt("Ethik", 1) and self.db.FachBelegt("Ethik", 3):
+                self.a, self.aState = "Ethik", True
+            else:
+                self.a, self.aState = "Ethik", True
+        else:
+            self.a, self.aState = "Ethik", True
+
+        # Prüfungsfach-Optionen laden
+        self.pr1 = self._unique(self.db.get_faecher_by_fachart("profil"))
+        self.pr2 = self._unique(self.db.get_faecher_by_fachart("eAn"))
         self.FachblockPR2 = self.setFachblockPR2()
 
-        self.prp3 = self.setPruefungsfachDrei()
-        self.FachblockPR3 = 0
         self.pr3 = None
+        self.prp3 = self._unique(self.setPruefungsfachDrei())
+        self.FachblockPR3 = 0
 
-        self.prp4 = self.setPruefungsfachVier()
-        self.FachblockPR4 = 0
         self.pr4 = None
+        self.prp4 = self._unique(self.setPruefungsfachVier())
+        self.FachblockPR4 = 0
 
-        self.prp5 = self.setPruefungsfachFuenf()
         self.pr5 = None
+        self.prp5 = self._unique(self.setPruefungsfachFuenf())
         self.FachblockPR5 = 0
 
+    def _unique(self, seq):
+        """Hilfsfunktion: erhält Reihenfolge und entfernt Duplikate"""
+        return list(dict.fromkeys(seq))
+
+    # Setter-Methoden
     def setPF2(self, fach):
         self.pr2 = fach
-    
     def setPF3(self, fach):
         self.pr3 = fach
-
     def setPF4(self, fach):
         self.pr4 = fach
-
-    def setPF5(self,fach):
-        print(fach)
+    def setPF5(self, fach):
         self.pr5 = fach
 
+    # Getter-Methoden mit Fallback
     def getPFP1(self):
-        print(self.pr1)
-        if self.pr1 == []:
-            self.prp1 = self.setPrufungsfachEins()
-        else:
-            self.prp1 = self.pr1
-        return self.prp1
-    
-    def getPFP2(self):
-        if self.pr2 == []:
-            self.prp2 = self.setPrufungsfachZwei()
-        else:
-            self.prp2 = self.pr2
-        return self.prp2
-    
-    def getPFP3(self):
-        self.prp3 = self.setPruefungsfachDrei()
-        return self.prp3
-    
-    def getPFP4(self):
-        self.prp4 = self.setPruefungsfachVier()
-        return self.prp4
-    
-    def getPFP5(self):
-        self.prp5 = self.setPruefungsfachFuenf()
-        return self.prp5
+        if not self.pr1:
+            return self._unique(self.setPrufungsfachEins())
+        return self.pr1
 
+    def getPFP2(self):
+        if not self.pr2:
+            return self._unique(self.setPrufungsfachZwei())
+        return [self.pr2] if isinstance(self.pr2, str) else self.pr2
+
+    def getPFP3(self):
+        return self._unique(self.setPruefungsfachDrei())
+
+    def getPFP4(self):
+        return self._unique(self.setPruefungsfachVier())
+
+    def getPFP5(self):
+        return self._unique(self.setPruefungsfachFuenf())
+
+    # Block-Logik
     def setFachblockPR2(self):
-        if self.pr2 == "Mathe":
-            return 1
-        else:
-            return 2
-        
+        return 1 if self.pr2 == "Mathe" else 2
+
     def setFachblockPR3(self):
         if self.FachblockPR2 == 1 and self.pr3 == "Deutsch":
             return 1
-        elif self.FachblockPR2 == 1 and (self.pr3 == "Englisch" or self.pr3 == "SpanischN"):
+        if self.FachblockPR2 == 1 and self.pr3 in ("Englisch", "SpanischN"):
             return 2
-        elif self.FachblockPR2 == 2 and self.pr3 == "Mathe":
+        if self.FachblockPR2 == 2 and self.pr3 == "Mathe":
             return 3
-        elif self.FachblockPR2 == 2 and (self.pr3 == "Englisch" or self.pr3 == "SpanischN"):
+        if self.FachblockPR2 == 2 and self.pr3 in ("Englisch", "SpanischN"):
             return 4
+        return None
 
     def setFachblockPR4(self):
-        if (self.FachblockPR2 == 1 and (self.FachblockPR3  == 1 or self.FachblockPR3 == 2) or (self.FachblockPR2 == 2 and self.FachblockPR3 == 3)) and (self.pr4 == "GGK" or self.pr4 == self.a or self.pr4 == "Wirtschaft"):
+        # Komplexe Bedingungen, ggf. anpassen
+        if ((self.FachblockPR2 == 1 and self.FachblockPR3 in (1,2)) or
+            (self.FachblockPR2 == 2 and self.FachblockPR3 == 3)) and \
+           self.pr4 in ("GGK", self.a, "Wirtschaft"):
             return 1
-        elif (self.FachblockPR2 == 1 and (self.FachblockPR3  == 1 and (self.pr4 == "Chemie" or self.pr4 == "Physik" or self.pr4 == "Englisch" or self.pr4 == "SpanischN")) or (self.FachblockPR3 == 2 and self.pr3 == "Englisch" and (self.pr4 == "Chemie" or self.pr4 == "Physik" or self.pr4 == "Deutsch" or self.pr4 == "SpanischN")) or (self.FachblockPR3 == 3 and (self.pr4 == "Chemie" or self.pr4 == "Physik" or self.pr4 == "Englisch" or self.pr4 == "SpanischN"))):
+        if ((self.FachblockPR2 == 1 and self.FachblockPR3 == 1 and self.pr4 in ("Chemie","Physik","Englisch","SpanischN")) or
+            (self.FachblockPR3 == 2 and self.pr3 == "Englisch" and self.pr4 in ("Chemie","Physik","Deutsch","SpanischN")) or
+            (self.FachblockPR3 == 3 and self.pr4 in ("Chemie","Physik","Englisch","SpanischN"))):
             return 2
-        elif self.FachblockPR2 == 1 and self.FachblockPR3 == 4 and (self.pr4 == "GGK" or self.pr4 == self.a or self.pr4 == "Wirtschaft"):
+        if self.FachblockPR2 == 1 and self.FachblockPR3 == 4 and self.pr4 in ("GGK", self.a, "Wirtschaft"):
             return 3
-        elif self.FachblockPR2 == 1 and self.FachblockPR3 == 4 and (self.pr4 == "Chemie" or self.pr4 == "Physik" or self.pr4 == "Mathe"):
+        if self.FachblockPR2 == 1 and self.FachblockPR3 == 4 and self.pr4 in ("Chemie","Physik","Mathe"):
             return 4
-
+        return None
 
     def setFachblockPR5(self):
-        if self.FachblockPR4 == 1:
-            return 1
-        elif self.FachblockPR4 == 2:
-            return 2
-        elif self.FachblockPR4 == 3:
-            return 3
-        elif self.FachblockPR4 == 4:
-            return 4
-        
+        return self.FachblockPR4
+
+    # Statische Prüfungsfach-Definitionen
     def setPrufungsfachEins(self):
-        block = ["Informationstechnik", "Mechatronik", "Gestaltung_Medien"]
-        return block
-        
+        return ["Informationstechnik", "Mechatronik", "Gestaltung_Medien"]
+
     def setPrufungsfachZwei(self):
-        block = ["Mathe", "Deutsch"]
-        return block
+        return ["Mathe", "Deutsch"]
 
     def setPruefungsfachDrei(self):
         self.FachblockPR2 = self.setFachblockPR2()
         block = []
         if self.FachblockPR2 == 1:
             block.append("Deutsch")
-            if self.db.pruefe_halbjahr_angegeben(1) == False:                                            #Hier schau dir das mal an noah
+            if not self.db.pruefe_halbjahr_angegeben(1):
+                block.extend(["Englisch","SpanischN"])
+            if self.db.FachBelegt("Englisch",1) and self.db.FachBelegt("Englisch",3):
                 block.append("Englisch")
+            if self.db.FachBelegt("SpanischN",1):
                 block.append("SpanischN")
-            if self.db.FachBelegt("Englisch", 1) == True and self.db.FachBelegt("Englisch", 3) == True:                  #NOAH was das?
-                block.append("Englisch")
-            if self.db.FachBelegt("SpanischN", 1) == True:        #HEY SÜßI
-                block.append("SpanischN")
-
-        elif self.FachblockPR2 == 2:
+        else:
             block.append("Mathe")
-            if self.db.pruefe_halbjahr_angegeben(1) == False:                                                 #Willst du dir das mal anschauen
+            if not self.db.pruefe_halbjahr_angegeben(1):
+                block.extend(["Englisch","SpanischN"])
+            if self.db.FachBelegt("Englisch",1) and self.db.FachBelegt("Englisch",3):
                 block.append("Englisch")
-                block.append("SpanischN")
-            if self.db.FachBelegt("Englisch", 1) == True and self.db.FachBelegt("Englisch", 3) == True:                     #Noah schau, mal db sachen
-                block.append("Englisch")
-            if self.db.FachBelegt("SpanischN", 1) == True:        #Da fehlt was
+            if self.db.FachBelegt("SpanischN",1):
                 block.append("SpanischN")
         return block
-            
 
     def setPruefungsfachVier(self):
         self.FachblockPR3 = self.setFachblockPR3()
         block1 = ["GGK", self.a, "Wirtschaft"]
-        block2 = ["Chemie", "Physik", "Deutsch"]
-        if self.db.pruefe_halbjahr_angegeben(1) == False:                                                     #>_<
-            block2.append("Englisch")
-            block2.append("Spanisch")
-        if self.db.FachBelegt("Englisch", 1) == True and self.db.FachBelegt("Englisch", 3) == True:                     #Noah schau, mal db sachen
+        block2 = ["Chemie","Physik","Deutsch"]
+        if not self.db.pruefe_halbjahr_angegeben(1):
+            block2.extend(["Englisch","Spanisch"])
+        if self.db.FachBelegt("Englisch",1) and self.db.FachBelegt("Englisch",3):
             block1.append("Englisch")
-        if self.db.FachBelegt("SpanischN", 1) == True:      #Bitti mach ganz <OoO>
+        if self.db.FachBelegt("SpanischN",1):
             block2.append("Spanisch")
-        if self.pr3 == "Deutsch":
+        # Entfernen bereits gewählter Fächer
+        for f in (self.pr3,):
+            if f in block2:
+                block2.remove(f)
+        if self.FachblockPR2 == 2 and "Deutsch" in block2:
             block2.remove("Deutsch")
-        if self.pr3 == "Englich":
-            block2.remove("Englisch")
-        if self.pr3 == "Spanisch":
-            block2.remove("Spanisch")
-        if self.FachblockPR2 == 2:
-            block2.remove("Deutsch")
-        
-        block3 = block1
-        block4 = ["Chemie", "Physik", "Mathe"]
-        if (self.FachblockPR2 == 1 or self.FachblockPR2 == 2) and (self.FachblockPR3 == 1 or self.FachblockPR3 == 2 or self.FachblockPR3 == 3):
-            print("block 1 und 2")
+        # Zusammenführen
+        if self.FachblockPR3 in (1,2,3):
             return block1 + block2
-        else:
-            return block3 + block4
+        return block1 + ["Chemie","Physik","Mathe"]
 
     def setPruefungsfachFuenf(self):
         self.FachblockPR4 = self.setFachblockPR4()
-        block2 = ["GGK", "Wirtschaft", "SeminarGGK"]
-        block3 = ["Chemie", "Physik", "Mathe"]
-        block4 = block2
-        block1 = ["SeminarGGK", "SeminarProfil", "GGK", "Wirtschaft", "Chemie", "Physik", "Inforkatik", "Deutsch", "Sport"]
-        if self.aState == True:
-            block2.append(self.a)
+        block1 = ["SeminarGGK","SeminarProfil","GGK","Wirtschaft","Chemie","Physik","Informatik","Deutsch","Sport"]
+        block2 = ["GGK","Wirtschaft","SeminarGGK"]
+        block3 = ["Chemie","Physik","Mathe"]
+        # a-Fach hinzufügen
+        if self.aState:
             block1.append(self.a)
-            if self.pr4 == self.a:
+            block2.append(self.a)
+            if self.pr4 == self.a and self.a in block1:
                 block1.remove(self.a)
-        if self.db.pruefe_halbjahr_angegeben(3) == False:
-            if self.db.FachBelegt("SeminarProfil", 3):
-                block1.remove("SeminarProfil")
-        if self.db.pruefe_halbjahr_angegeben(1) == False:
+        # Halbjahr-Checks
+        if not self.db.pruefe_halbjahr_angegeben(3) and self.db.FachBelegt("SeminarProfil",3):
+            block1.remove("SeminarProfil")
+        if not self.db.pruefe_halbjahr_angegeben(1):
+            block1.extend(["Englisch","Spanisch"])
+        elif self.db.FachBelegt("Englisch",1) and self.db.FachBelegt("Englisch",3):
             block1.append("Englisch")
+        if self.db.FachBelegt("SpanischN",1) or self.db.FachBelegt("SpanischF",1):
             block1.append("Spanisch")
-        elif self.db.FachBelegt("Englisch", 1) == True and self.db.FachBelegt("Englisch", 3) == True:                     #Noah schau, mal db sachen
-            block1.append("Englisch")
-        if self.db.FachBelegt("SpanischN", 1) == True or self.db.FachBelegt("SpanischF", 1) == True:      #Letzter ich schwöre
-            block1.append("Spanisch")
-        if self.pr2 == "Deutsch" or self.pr3 == "Deutsch":
-            block1.remove("Deutsch")
-        if self.pr3 == "Englisch":
-            block1.remove("Englisch")
-        if self.pr3 == "Spanisch":
-            block1.remove("Spanisch")
-        if self.pr4 == "GGK":
-            block1.remove("GGK")
-        if self.pr4 == "Wirtschaft":
-            block1.remove("Wirtschaft")
-        
+        # Entfernen bereits gewählter Fächer
+        for f in (self.pr2, self.pr3, self.pr4):
+            if f in block1:
+                block1.remove(f)
+        # Auswahl nach Block
         if self.FachblockPR4 == 1:
             return block1
-        elif self.FachblockPR4 == 2:
+        if self.FachblockPR4 == 2:
             return block2
-        elif self.FachblockPR4 == 3:
+        if self.FachblockPR4 == 3:
             return block3
-        elif self.FachblockPR4 == 4:
-            return block4
-        else:
-            return block1 + block2 + block3 + block4
-        
+        if self.FachblockPR4 == 4:
+            return block2
+        return block1 + block2 + block3

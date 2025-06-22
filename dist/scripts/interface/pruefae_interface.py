@@ -12,8 +12,8 @@ class Pruefungsfaecherwahl(QMainWindow):
     def __init__(self):
         self.pfc = PruefungsfaecherPossible()
         db = DBHelp()
-        profil = db.get_faecher_by_fachart('profil', '1')
-        pf2 = db.get_faecher_by_fachart('ean', '3')
+        profil = db.get_faecher_by_fachart('profil')
+        pf2 = db.get_faecher_by_fachart('ean')
         self.savearr = []
         super().__init__()
         #Mindestgröße / Titel definieren
@@ -178,11 +178,6 @@ class Pruefungsfaecherwahl(QMainWindow):
     def back(self):
         pipi = Launcher('homepage')
         pipi.launch()
-
-
-
-
-
 
 app = QtWidgets.QApplication(sys.argv)
 win = Pruefungsfaecherwahl()
