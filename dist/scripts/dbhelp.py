@@ -143,16 +143,16 @@ class DBHelp(object):
                         result[jahr].append({"fach": fach.get("fach"), "gesamtnote": gesamtnote})
         return result
     
-    def FachBelegt(self, fachname, halbjahr_seartch, state):
+    def FachBelegt(self, fachname, halbjahr_search, state=True):
         student = self.students.find_one({"_id": self.current_user_id})
         if not student:
             return False
 
         for halbjahr in student.get("halbjahre", []):
-            if halbjahr["jahr"] == halbjahr_seartch:
+            if halbjahr["jahr"] == halbjahr_search:
                 for fach in halbjahr["normal_faecher"]:
                     if fach["fach"] == fachname:
-                        return fach["belegt"] == state
+                        return fach.get("belegt", False) == state
         return False
 
     def checkobpwkorrekt(self, arr):
