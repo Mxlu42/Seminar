@@ -80,7 +80,7 @@ class Ergebnisausgabe(QMainWindow):
         fw13_2.move(self.Center(fw13_2), bmh)
         bmh += 40
 
-        fw13_3 = QPushButton('Ausgabe der Prüfungsnoten', self)
+        fw13_3 = QPushButton('Prüfungsnoten', self)
         fw13_3.resize(fw13_2.sizeHint())
         fw13_3.setToolTip('Eine geordnete Übersicht der Prüfungsnoten<br>mit möglichkeit sie als .pdf zu Speichern')
         fw13_3.clicked.connect(self.prue_clicked)
@@ -114,28 +114,28 @@ class Ergebnisausgabe(QMainWindow):
     
     def fw12_1_clicked(self):
         print('Weiterleitung zur Seite "Faecherwahl 12"')
-        lnh = Launcher('elfteklassewahl')
+        lnh = Launcher('Ergebnisausgabe12_1_interface')
         lnh.launch()
 
     def fw12_2_clicked(self):
         print('Weiterleitung zur Seite "Faecherwahl 12"')
-        lnh = Launcher('elfteklassewahl')
+        lnh = Launcher('Ergebnisausgabe12_2_interface')
         lnh.launch()
 
     
     def fw13_1_clicked(self):
         print('Weiterleitung zur Seite "Faecherwahl 13"')
-        lnh = Launcher('pruefae_interface')
+        lnh = Launcher('Ergebnisausgabe13_1_interface')
         lnh.launch()
 
     def fw13_2_clicked(self):
         print('Weiterleitung zur Seite "Faecherwahl 13"')
-        lnh = Launcher('pruefae_interface')
+        lnh = Launcher('Ergebnisausgabe13_2_interface')
         lnh.launch()
 
     def prue_clicked(self):
         print('Weiterleitung zur Seite "Faecherwahl 13"')
-        lnh = Launcher('pruefae_interface')
+        lnh = Launcher('Ergebnisausgabe_pruefungsfaecher_interface')
         lnh.launch()
 
     def back(self):

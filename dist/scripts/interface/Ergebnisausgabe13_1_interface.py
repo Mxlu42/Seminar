@@ -10,7 +10,7 @@ from dbhelp import DBHelp
 class Noteneingabe11(QMainWindow):
     def __init__(self):
         db = DBHelp()
-        #self.true_faecher = db.getAlleBelegtenFaechern([1,2])
+        #self.true_faecher = db.getAlleBelegtenFaechern([4])
         self.true_faecher = ['platzhalterfach 1', 'platzhalterfach 2', 'platzhalterfach 3', 'platzhalterfach 4', 'platzhalterfach 5', 'platzhalterfach 6', 'platzhalternote 7', 'platzhalterfach 8', 'platzhalterfach 9', 'platzhalternote 10']
         self.true_faecher.append('Schnitt')
         self.true_faecher.append('Bestanden')
@@ -28,12 +28,12 @@ class Noteneingabe11(QMainWindow):
         self.setCentralWidget(QWidget(self))
         self.setMinimumSize(QSize(500, 600))
         self.setMaximumSize(QSize(500, 600))
-        self.setWindowTitle('Ergebnisausgabe der Klasse 11')
+        self.setWindowTitle('Ergebnisausgabe der Klasse 13/1')
 
         main_widget = QWidget()
         main_layout = QVBoxLayout()
 
-        lbl = QLabel('Dies ist Eine geordnete Übersicht aller belegten Fächer, und Noten der Klasse 11.<br>Außerdem eine information über den Notenschnitt und die Versätzung.')
+        lbl = QLabel('Dies ist Eine geordnete Übersicht aller belegten Fächer, und Noten der<br>Klasse 13/1. Außerdem eine information über den Notenschnitt und die Versätzung.')
         lbl.resize(lbl.sizeHint())
         lbl.setAlignment(Qt.AlignmentFlag.AlignHCenter)
         lbl.setMargin(30)
