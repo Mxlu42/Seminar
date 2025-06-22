@@ -10,7 +10,7 @@ from dbhelp import DBHelp
 class Noteneingabe11(QMainWindow):
     def __init__(self):
         db = DBHelp()
-        #self.true_faecher = db.getAlleBelegtenFaechern([5])
+        #self.true_faecher = db.getAlleBelegtenFaechern([6])
         self.true_faecher = ['platzhalterfach 1', 'platzhalterfach 2', 'platzhalterfach 3', 'platzhalterfach 4', 'platzhalterfach 5', 'platzhalterfach 6', 'platzhalternote 7', 'platzhalterfach 8', 'platzhalterfach 9', 'platzhalternote 10']
         self.true_faecher.append('Schnitt')
         self.true_faecher.append('Bestanden')

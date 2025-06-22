@@ -71,7 +71,7 @@ class Noteneingabe13_1(QMainWindow):
         self.setCentralWidget(QWidget(self))
         self.setMinimumSize(QSize(500, 600))
         self.setMaximumSize(QSize(500, 600))
-        self.setWindowTitle('Noteneingabe der Klasse 13')
+        self.setWindowTitle('Noteneingabe der Klasse 13/1')
 
         main_widget = QWidget()
         main_layout = QVBoxLayout()
@@ -165,22 +165,34 @@ class Noteneingabe13_1(QMainWindow):
 
         self.cbb11 = QComboBox()
         self.cbb11.addItems(self.items)
-        grid_layout.addWidget(self.cbb11, row, 1,  Qt.AlignmentFlag.AlignLeft)
+        if self.l < 11:
+            pass
+        else:
+            grid_layout.addWidget(self.cbb11, row, 1,  Qt.AlignmentFlag.AlignLeft)
         row += 1
 
         self.cbb12 = QComboBox()
         self.cbb12.addItems(self.items)
-        grid_layout.addWidget(self.cbb12, row, 1,  Qt.AlignmentFlag.AlignLeft)
+        if self.l < 12:
+            pass
+        else:
+            grid_layout.addWidget(self.cbb12, row, 1,  Qt.AlignmentFlag.AlignLeft)
         row += 1
 
         self.cbb13 = QComboBox()
         self.cbb13.addItems(self.items)
-        grid_layout.addWidget(self.cbb13, row, 1,  Qt.AlignmentFlag.AlignLeft)
+        if self.l < 13:
+            pass
+        else:
+            grid_layout.addWidget(self.cbb13, row, 1,  Qt.AlignmentFlag.AlignLeft)
         row += 1
 
         self.cbb14 = QComboBox()
         self.cbb14.addItems(self.items)
-        grid_layout.addWidget(self.cbb14, row, 1,  Qt.AlignmentFlag.AlignLeft)
+        if self.l < 14:
+            pass
+        else:
+            grid_layout.addWidget(self.cbb14, row, 1,  Qt.AlignmentFlag.AlignLeft)
         row += 1
             
 
@@ -238,22 +250,41 @@ class Noteneingabe13_1(QMainWindow):
         if self.cbb10.currentText() == 'Bitte Note wählen':
             QMessageBox.about(self, 'Fehler', f'Bitte Wählen Sie Ihre {mclass[9]} Note')
             return
-        if self.cbb11.currentText() == 'Bitte Note wählen':
-            QMessageBox.about(self, 'Fehler', f'Bitte Wählen Sie Ihre {mclass[10]} Note')
-            return
-        if self.cbb12.currentText() == 'Bitte Note wählen':
-            QMessageBox.about(self, 'Fehler', f'Bitte Wählen Sie Ihre {mclass[11]} Note')
-            return
-        if self.cbb13.currentText() == 'Bitte Note wählen':
-            QMessageBox.about(self, 'Fehler', f'Bitte Wählen Sie Ihre {mclass[12]} Note')
-            return
-        if self.cbb14.currentText() == 'Bitte Note wählen':
-            QMessageBox.about(self, 'Fehler', f'Bitte Wählen Sie Ihre {mclass[13]} Note')
-            return
+        if self.l >= 11:
+            if self.cbb11.currentText() == 'Bitte Note wählen':
+                QMessageBox.about(self, 'Fehler', f'Bitte Wählen Sie Ihre {mclass[10]} Note')
+                return
+        if self.l >= 12:    
+            if self.cbb12.currentText() == 'Bitte Note wählen':
+                QMessageBox.about(self, 'Fehler', f'Bitte Wählen Sie Ihre {mclass[11]} Note')
+                return
+        if self.l >= 13:    
+            if self.cbb13.currentText() == 'Bitte Note wählen':
+                QMessageBox.about(self, 'Fehler', f'Bitte Wählen Sie Ihre {mclass[12]} Note')
+                return
+        if self.l >= 14:    
+            if self.cbb14.currentText() == 'Bitte Note wählen':
+                QMessageBox.about(self, 'Fehler', f'Bitte Wählen Sie Ihre {mclass[13]} Note')
+                return
         
         
         savearr = [mclass, [self.cbb1.currentText(), self.cbb2.currentText(), self.cbb3.currentText(), self.cbb4.currentText(), self.cbb5.currentText(), self.cbb6.currentText(), self.cbb7.currentText(), self.cbb8.currentText(), self.cbb9.currentText(), self.cbb10.currentText(), self.cbb11.currentText(), self.cbb12.currentText(), self.cbb13.currentText(), self.cbb14.currentText()]]  
         print(savearr)
+
+        if self.l > 13:
+            savearr[1].pop()
+        elif self.l > 12:
+            savearr[1].pop()
+            savearr[1].pop()
+        elif self.l > 11:
+            savearr[1].pop()
+            savearr[1].pop()
+            savearr[1].pop()
+        elif self.l > 10:
+            savearr[1].pop()
+            savearr[1].pop()
+            savearr[1].pop()
+            savearr[1].pop()
 
         self.cbb1.setCurrentIndex(0)
         self.cbb2.setCurrentIndex(0)
