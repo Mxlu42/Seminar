@@ -79,14 +79,14 @@ class Noteneingabe13(QMainWindow):
 
     
     def fw12_clicked(self):
-        print('Weiterleitung zur Seite "Faecherwahl 12"')
-        lnh = Launcher('elfteklassewahl')
+        print('Weiterleitung zur Seite "Noteneingabe 13/2"')
+        lnh = Launcher('Noteneingabe13_2_interface')
         lnh.launch()
 
     
     def fw13_clicked(self):
         print('Weiterleitung zur Seite "Faecherwahl 13"')
-        lnh = Launcher('pruefae_interface')
+        lnh = Launcher('Noteneingabe_pruefungsfaecher_interface')
         lnh.launch()
 
     def back(self):
