@@ -23,7 +23,7 @@ class PruefungsfaecherPossible(object):
 
         # Prüfungsfach-Optionen laden
         self.pr1 = self._unique(self.db.get_faecher_by_fachart("profil"))
-        self.pr2 = self._unique(self.db.get_faecher_by_fachart("ean"))
+        self.pr2 = self._unique(self.db.get_faecher_by_fachart("eAn"))
         self.FachblockPR2 = self.setFachblockPR2()
 
         self.pr3 = None
